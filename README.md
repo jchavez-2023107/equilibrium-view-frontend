@@ -1,0 +1,2 @@
+# equilibrium-view-frontend
+Aplicación frontend de EQUILIBRIUM. Interfaz desarrollada en React para brindar acompañamiento emocional anónimo. Incluye chat en tiempo real, recursos educativos, pruebas de autoevaluación y navegación intuitiva.
