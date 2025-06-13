@@ -1,42 +1,31 @@
-/* const API_BASE_URL = 'http://localhost:2636/api/v1'; //Puerto */
-
-export const testConnection = async () => {
-  try {
-    const res = await fetch(`${API_BASE_URL}/health`);
-    const data = await res.json();
-    return data;
-  } catch (error) {
-    console.error('Error de conexión:', error);
-    return null;
-  }
-}; 
-
+// src/services/api.js
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:2636/api/v1';
 
-/**
- * Lanza una petición fetch con JSON y token guardado.
- */
 export async function apiFetch(path, options = {}) {
   const token = localStorage.getItem('token');
-  const headers = {
-    'Content-Type': 'application/json',
-    ...(token ? { Authorization: token } : {})
-  };
-
   const res = await fetch(`${API_BASE_URL}${path}`, {
     ...options,
     headers: {
-      ...headers,
+      'Content-Type': 'application/json',
+      ...(token && { Authorization: token }),
       ...(options.headers || {})
     }
   });
 
-  // Opcional: interceptar 401 y forzar logout
-  if (res.status === 401) {
-    localStorage.removeItem('token');
-    window.location.href = '/login';
+  let data;
+  try {
+    data = await res.json();
+  } catch {
+    throw new Error('No se pudo interpretar la respuesta JSON');
   }
 
-  return res.json();
-}
+  if (!res.ok) {
+    // Construyo un Error y le acoplo toda la respuesta
+    const err = new Error(data.message || `Error ${res.status}`);
+    err.status = res.status;
+    err.payload = data;
+    throw err;
+  }
 
+  return data;
+}
