@@ -1,115 +1,131 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { apiFetch } from '../services/api.js';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { apiFetch } from "../services/api.js";
 
 export default function RegisterVolunteer() {
   const [form, setForm] = useState({
-    username: '',
-    email: '',
-    password: '',
-    passwordConfirm: '',
+    username: "",
+    email: "",
+    password: "",
+    passwordConfirm: "",
     profile: {
-      displayName: '',
-      displayUsername: '',
-      birthDate: '',
-      bio: '',
-      contactNumber: '',
-      especialidad: ''
+      displayName: "",
+      displayUsername: "",
+      birthDate: "",
+      bio: "",
+      contactNumber: "",
+      especialidad: "",
     },
     volunteerData: {
-      needs: '',
-      schedules: [{ day: '', from: '', to: '' }]
-    }
+      needs: "",
+      schedules: [{ day: "", from: "", to: "" }],
+    },
   });
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  const handleChange = e => {
+  const handleChange = (e) => {
     let { name, value, checked } = e.target;
 
     // schedules fields
     const schedMatch = name.match(/^volunteerData\.schedules\[(\d+)\]\.(\w+)$/);
     if (schedMatch) {
-      const idx = +schedMatch[1];
-      const field = schedMatch[2];
-      setForm(f => {
-        const scheds = [...f.volunteerData.schedules];
-        scheds[idx] = { ...scheds[idx], [field]: value };
+      const idx = +schedMatch[1],
+        field = schedMatch[2];
+      setForm((f) => {
+        const s = [...f.volunteerData.schedules];
+        s[idx] = { ...s[idx], [field]: value };
         return {
           ...f,
-          volunteerData: { ...f.volunteerData, schedules: scheds }
+          volunteerData: { ...f.volunteerData, schedules: s },
         };
       });
       return;
     }
 
     // profile.* fields
-    if (name.startsWith('profile.')) {
-      const key = name.split('.')[1];
-      setForm(f => ({
+    if (name.startsWith("profile.")) {
+      const key = name.split(".")[1];
+      setForm((f) => ({
         ...f,
-        profile: { ...f.profile, [key]: value }
+        profile: { ...f.profile, [key]: value },
       }));
       return;
     }
 
-    // top-level and volunteerData.needs
-    setForm(f => ({
-      ...f,
-      [name]: value,
-      volunteerData: name === 'volunteerData.needs'
-        ? { ...f.volunteerData, needs: value }
-        : f.volunteerData
-    }));
+    // volunteerData.needs
+    if (name === "volunteerData.needs") {
+      setForm((f) => ({
+        ...f,
+        volunteerData: { ...f.volunteerData, needs: value },
+      }));
+      return;
+    }
+
+    // top-level fields: username, email, password, passwordConfirm
+    setForm((f) => ({ ...f, [name]: value }));
   };
 
-  const handleSubmit = async e => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setError('');
+    setError("");
 
-    // client-side checks
+    // cliente: confirma contraseña
     if (form.password !== form.passwordConfirm) {
-      setError('Las contraseñas no coinciden');
+      setError("Las contraseñas no coinciden");
       return;
     }
     if (form.password.length < 5) {
-      setError('La contraseña debe tener al menos 5 caracteres');
+      setError("La contraseña debe tener al menos 5 caracteres");
       return;
     }
     if (!form.volunteerData.needs) {
-      setError('Debes seleccionar al menos una necesidad');
+      setError("Debes seleccionar una necesidad");
       return;
     }
 
+    // incluir passwordConfirm en el payload para pasar la validación del backend
     const payload = {
       username: form.username.trim(),
       email: form.email.trim(),
       password: form.password.trim(),
+      passwordConfirm: form.passwordConfirm.trim(),
       profile: {
         ...form.profile,
-        birthDate: form.profile.birthDate // YYYY-MM-DD from <input type="date">
+        birthDate: form.profile.birthDate, // viene YYYY-MM-DD
       },
       volunteerData: {
         needs: [form.volunteerData.needs],
-        schedules: form.volunteerData.schedules
-      }
+        schedules: form.volunteerData.schedules,
+      },
     };
 
-    console.log('Payload registro voluntario:', payload);
+    console.log("Payload registro voluntario:", payload);
 
     try {
-      const res = await apiFetch('/users/volunteers', {
-        method: 'POST',
-        body: JSON.stringify(payload)
+      const res = await apiFetch("/users/volunteers", {
+        method: "POST",
+        body: JSON.stringify(payload),
       });
-      console.log('Respuesta del servidor:', res);
+      console.log("Respuesta del servidor:", res);
+      // 1) auto-login:
+      const { username, password } = payload;
+      const loginRes = await apiFetch("/auth/login", {
+        method: "POST",
+        body: JSON.stringify({ userlogin: username, password }),
+      });
+      localStorage.setItem("token", loginRes.token);
+      // 2) redirijo a la pantalla de completar datos:
       navigate(`/volunteer/complete/${res.volunteer._id}`);
     } catch (err) {
-      console.error('Error HTTP status:', err.status);
-      console.error('Error payload del backend:', err.payload);
+      console.error("Error HTTP status:", err.status);
+      console.error("Error payload del backend:", err.payload);
       if (err.payload?.errors) {
-        const msgs = err.payload.errors.map(e => `${e.param}: ${e.msg}`).join('\n');
-        setError(msgs);
+        setError(
+          err.payload.errors
+            .map((e) => `${e.param || "confirm"}: ${e.msg}`)
+            .join("\n")
+        );
       } else {
         setError(err.payload?.message || err.message);
       }
@@ -160,20 +176,19 @@ export default function RegisterVolunteer() {
           name="profile.displayName"
           value={form.profile.displayName}
           onChange={handleChange}
-          placeholder="Nombre Completo"
+          placeholder="Nombre completo"
         />
         <input
           name="profile.displayUsername"
           value={form.profile.displayUsername}
           onChange={handleChange}
-          placeholder="Apodo Público"
+          placeholder="Apodo público"
         />
         <input
           name="profile.birthDate"
           type="date"
           value={form.profile.birthDate}
           onChange={handleChange}
-          placeholder="Fecha de Nacimiento"
           required
         />
         <textarea
@@ -232,7 +247,7 @@ export default function RegisterVolunteer() {
         </div>
 
         {error && (
-          <p style={{ color: 'red', whiteSpace: 'pre-wrap' }}>{error}</p>
+          <p style={{ color: "red", whiteSpace: "pre-wrap" }}>{error}</p>
         )}
         <button type="submit">Registrar Voluntario</button>
       </form>
