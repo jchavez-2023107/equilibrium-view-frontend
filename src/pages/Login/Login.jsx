@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { apiFetch } from '../services/api.js';
 import { useAuth } from '../context/AuthContext.jsx';
 
@@ -86,6 +86,7 @@ export default function Login() {
         </div>
         {error && <p style={{ color: 'red' }}>{error}</p>}
         <button type="submit">Iniciar Sesión</button>
+        <Link to="/register" className="">¿No tienes una cuenta? Crea una</Link>
       </form>
     </div>
   );
