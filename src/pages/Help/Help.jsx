@@ -1,14 +1,13 @@
 import { Link } from "react-router-dom";
-import userImage from '../../assets/img/user.png';
+import userImage from '../../assets/img/user.png'
 
 
 function Help() {
   return (
     <div>
-      {/* ENCABEZADO */}
       <header className="user-header">
         <div className="left-section">
-        <Link to='/main-user'>
+        <Link to='/main-volunteer'>
           <img src="/logo.png" alt="Logo" className="logo" />
           <h1 className="title">Equilibrium</h1>
         </Link>
@@ -80,4 +79,4 @@ function Help() {
   );
 }
 
-export default Help;
+export default Help

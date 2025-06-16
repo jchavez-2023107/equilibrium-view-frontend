@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { apiFetch } from '../services/api.js';
-import { useAuth } from '../context/AuthContext.jsx';
+import { apiFetch } from '../../services/api.js';
+import { useAuth } from '../../context/AuthContext.jsx'
 
 function parseJwt(token) {
   try {
