@@ -1,0 +1,240 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap');
+
+.vol-register-container {
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  min-height: 100vh;
+  padding: 2rem 0;
+  background: linear-gradient(180deg, #4A90E2, #A8E6CF, #BAA0D2);
+  font-family: Arial, sans-serif;
+}
+
+.vol-register-wrapper {
+  display: flex;
+  align-items: stretch;
+  gap: 0.5rem;
+  max-width: 960px;
+  padding: 0 1rem;
+  box-sizing: border-box;
+}
+
+.vol-left-panel, .vol-right-panel {
+  width: 360px;
+  flex: none;
+  border-radius: 20px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.1);
+}
+
+.vol-left-panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  background: transparent;
+  box-shadow: none;
+  border-radius: 0;
+}
+
+.logo {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2.8rem;
+  margin-bottom: 1rem;
+}
+
+.vol-register-logo {
+  width: 300px;
+  margin-bottom: 1rem;
+}
+
+.welcome-message {
+  font-size: 2rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.vol-right-panel {
+  background: rgba(105,105,105,0.34);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.vol-right-panel h2 {
+  color: white;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.vol-register-form .input-group {
+  display: flex;
+  align-items: center;
+  background: white;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  margin-bottom: 0.75rem;
+  border: 1px solid #ccc;
+}
+
+.input-group span {
+  margin-right: 10px;
+}
+
+.vol-register-form input,
+.vol-register-form textarea,
+.vol-register-form select {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  background: transparent;
+}
+
+/* 🕒 Horarios */
+.schedule-group {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin: 1rem 0;
+}
+
+.schedule-group .input-group {
+  flex: 1;
+  min-width: 140px;
+}
+
+.datepicker-input {
+  width: 100%;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  background-color: white;
+  color: #333;
+  outline: none;
+  cursor: pointer;
+  box-sizing: border-box;
+  transition: border 0.2s;
+}
+
+.datepicker-input:focus {
+  border-color: #007bff;
+}
+
+/* 🟥 Error */
+.error {
+  color: red;
+  text-align: center;
+  margin-bottom: 0.5rem;
+  white-space: pre-wrap;
+}
+
+/* ✅ Botón */
+.register-button {
+  background: #f44336;
+  color: #fff;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  width: auto;
+  display: block;
+  margin: 0 auto 0;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.register-button:hover {
+  background: #d32f2f;
+}
+
+.login-link {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.login-link a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.login-link a:hover {
+  text-decoration: underline;
+}
+
+/* 📱 Responsive */
+@media (max-width: 768px) {
+  .vol-register-wrapper {
+    flex-direction: column;
+  }
+
+  .vol-left-panel, .vol-right-panel {
+    width: 100%;
+    max-width: 90%;
+  }
+
+  .schedule-group {
+    flex-direction: column;
+  }
+}
+
+/* ✅ Checkboxes por día */
+.day-checkboxes {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.checkbox-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-left: 0.5rem;
+}
+
+.checkbox-list label {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #333;
+}
+
+.checkbox-list input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+}
+
+.time-input {
+  appearance: none;
+  -webkit-appearance: none;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background: #fff;
+  cursor: pointer;
+}
+
+/* ✅ NUEVO: Centrado visual de select de horarios */
+.schedule-select {
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.schedule-select span {
+  display: inline-block;
+  min-width: 70px; /* aumenta un poco el ancho */
+  text-align: left;
+}
+
+
+.schedule-select select {
+  width: 80px;
+  text-align: center;
+  text-align-last: center;
+}
