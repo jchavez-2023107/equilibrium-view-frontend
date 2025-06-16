@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { apiFetch } from '../../services/api'; 
+import { useNavigate } from 'react-router-dom';
+import { apiFetch } from '../../services/api.js';
+import './../RegisterUser/RegisterUs.css';
+import logo from "../../img/Logo.png";
 
 export default function RegisterUser() {
   const [form, setForm] = useState({
@@ -17,7 +19,10 @@ export default function RegisterUser() {
       especialidad: ''
     }
   });
+
   const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleChange = e => {
@@ -39,10 +44,12 @@ export default function RegisterUser() {
   const handleSubmit = async e => {
     e.preventDefault();
     setError('');
+    setSuccess('');
+    setLoading(true);
 
-    // simple client-side check
     if (form.password !== form.passwordConfirm) {
       setError('Las contraseñas no coinciden');
+      setLoading(false);
       return;
     }
 
@@ -51,123 +58,73 @@ export default function RegisterUser() {
         method: 'POST',
         body: JSON.stringify(form)
       });
-      alert('¡Usuario registrado con éxito!');
-      navigate('/login');
+      setSuccess('¡Usuario registrado con éxito!');
+      setTimeout(() => navigate('/login'), 1500);
     } catch (err) {
       console.error(err);
       setError(err.message || 'Error al registrar usuario');
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div>
-      <h2>Registro de Usuario</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Username</label>
-          <input
-            name="username"
-            value={form.username}
-            onChange={handleChange}
-            placeholder="Nombre de usuario"
-            required
-          />
+    <div className="register-container">
+      <div className="register-wrapper">
+        <div className="left-panel">
+          <h1 className="logo">EQUILIBRIUM</h1>
+          <img src={logo} alt="Logo" className="register-logo" />
+          <p className="welcome-message">Aquí empieza tu<br />momento de paz.</p>
         </div>
-        <div>
-          <label>Email</label>
-          <input
-            name="email"
-            type="email"
-            value={form.email}
-            onChange={handleChange}
-            placeholder="Correo electrónico"
-            required
-          />
+
+        <div className="right-panel">
+          <h2>REGÍSTRATE</h2>
+          <form onSubmit={handleSubmit} className="register-form">
+            <Input name="email" type="email" placeholder="Correo Electrónico" value={form.email} onChange={handleChange} icon="📧" required />
+            <Input name="username" placeholder="Nombre de Usuario" value={form.username} onChange={handleChange} icon="👤" required />
+            <Input name="profile.displayName" placeholder="Nombre Completo" value={form.profile.displayName} onChange={handleChange} icon="👤" />
+            <Input name="profile.displayUsername" placeholder="Nombre Público" value={form.profile.displayUsername} onChange={handleChange} icon="🆔" />
+            <Input name="profile.birthDate" type="date" placeholder="Fecha de Nacimiento" value={form.profile.birthDate} onChange={handleChange} icon="📅" />
+            <Input name="profile.contactNumber" placeholder="No. Teléfono" value={form.profile.contactNumber} onChange={handleChange} icon="📱" />
+            <Input name="profile.especialidad" placeholder="Especialidad" value={form.profile.especialidad} onChange={handleChange} icon="🎓" />
+            <textarea name="profile.bio" placeholder="Biografía" value={form.profile.bio} onChange={handleChange} className="input-textarea" />
+
+            <Input name="password" type="password" placeholder="Contraseña" value={form.password} onChange={handleChange} icon="🔒" minLength={5} required />
+            <Input name="passwordConfirm" type="password" placeholder="Confirmar Contraseña" value={form.passwordConfirm} onChange={handleChange} icon="🔒" minLength={5} required />
+
+            {error && <p className="error">{error}</p>}
+            {success && <p className="success">{success}</p>}
+
+            <button type="submit" className="register-button" disabled={loading}>
+              {loading ? 'Registrando...' : 'Registrate'}
+            </button>
+          </form>
+
+          <div className="login-link">
+            <a href="/login">
+              ¿Ya tienes una cuenta?<br />
+              <strong>Inicia Sesión</strong>
+            </a>
+          </div>
         </div>
-        <div>
-          <label>Contraseña</label>
-          <input
-            name="password"
-            type="password"
-            value={form.password}
-            onChange={handleChange}
-            placeholder="Contraseña (mínimo 5 caracteres)"
-            minLength={5}
-            required
-          />
-        </div>
-        <div>
-          <label>Confirmar Contraseña</label>
-          <input
-            name="passwordConfirm"
-            type="password"
-            value={form.passwordConfirm}
-            onChange={handleChange}
-            placeholder="Reingresa la contraseña"
-            minLength={5}
-            required
-          />
-        </div>
-        <hr />
-        <div>
-          <label>Nombre completo</label>
-          <input
-            name="profile.displayName"
-            value={form.profile.displayName}
-            onChange={handleChange}
-            placeholder="Tu nombre completo"
-          />
-        </div>
-        <div>
-          <label>Apodo público</label>
-          <input
-            name="profile.displayUsername"
-            value={form.profile.displayUsername}
-            onChange={handleChange}
-            placeholder="Cómo te verán otros usuarios"
-          />
-        </div>
-        <div>
-          <label>Fecha de nacimiento</label>
-          <input
-            name="profile.birthDate"
-            type="date"
-            value={form.profile.birthDate}
-            onChange={handleChange}
-          />
-        </div>
-        <div>
-          <label>Biografía</label>
-          <textarea
-            name="profile.bio"
-            value={form.profile.bio}
-            onChange={handleChange}
-            placeholder="Cuéntanos sobre ti"
-          />
-        </div>
-        <div>
-          <label>Teléfono</label>
-          <input
-            name="profile.contactNumber"
-            value={form.profile.contactNumber}
-            onChange={handleChange}
-            placeholder="1234-5678"
-            maxLength={12}
-          />
-        </div>
-        <div>
-          <label>Especialidad</label>
-          <input
-            name="profile.especialidad"
-            value={form.profile.especialidad}
-            onChange={handleChange}
-            placeholder="¿En qué eres experto?"
-          />
-        </div>
-        {error && <p style={{ color: 'red' }}>{error}</p>}
-        <button type="submit">Registrarme</button>
-        <Link to="/login" className="">¿Ya tienes una cuenta? Inica Secion</Link>
-      </form>
+      </div>
+    </div>
+  );
+}
+
+// Componente auxiliar Input para limpiar el JSX
+function Input({ name, type = "text", placeholder, value, onChange, icon, ...rest }) {
+  return (
+    <div className="input-group">
+      <span className="input-icon">{icon}</span>
+      <input
+        name={name}
+        type={type}
+        placeholder={placeholder}
+        value={value}
+        onChange={onChange}
+        {...rest}
+      />
     </div>
   );
 }

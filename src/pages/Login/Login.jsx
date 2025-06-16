@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { apiFetch } from '../services/api.js';
-import { useAuth } from '../context/AuthContext.jsx';
+import { useNavigate } from 'react-router-dom';
+import { apiFetch } from '../../services/api.js';
+import { useAuth } from '../../context/AuthContext.jsx';
+import './../Login/Login.css';
+import logo from "../../img/Logo.png";
 
 function parseJwt(token) {
   try {
@@ -35,16 +37,12 @@ export default function Login() {
         body: JSON.stringify({ userlogin, password })
       });
 
-      // Guardar token y usuario en contexto
       login(token);
-
-      // Decodificar rol
       const payload = parseJwt(token);
       const role = payload?.role;
 
       if (role === 'ADMIN') {
         alert('Usted es admin, puede hacer lo que quiera. ¡Lindo día!');
-        // opcional: navigate a un dashboard de admin o simplemente quedarse
         return;
       }
 
@@ -60,34 +58,49 @@ export default function Login() {
   };
 
   return (
-    <div>
-      <h2>Iniciar Sesión</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Usuario o Correo</label>
-          <input
-            name="userlogin"
-            value={userlogin}
-            onChange={e => setUserlogin(e.target.value)}
-            placeholder="Usuario o correo"
-            required
-          />
+  <div className="login-container">
+    <div className="login-wrapper">{/* 👈 Nuevo contenedor agregado */}
+      <div className="left-panel">
+        <h1 className="logo">EQUILIBRIUM</h1>
+        <img src={logo} alt="Logo" className="login-logo" />
+        <p className="thanks-message">¡Gracias por elegir<br />cuidar de ti!</p>
+      </div>
+
+      <div className="right-panel">
+        <h2>INICIA SESIÓN</h2>
+        <form onSubmit={handleSubmit} className="login-form">
+          <div className="input-group">
+            <span className="input-icon">👤</span>
+            <input
+              name="userlogin"
+              value={userlogin}
+              onChange={e => setUserlogin(e.target.value)}
+              placeholder="Nombre de Usuario / Correo"
+              required
+            />
+          </div>
+          <div className="input-group">
+            <span className="input-icon">🔒</span>
+            <input
+              type="password"
+              name="password"
+              value={password}
+              onChange={e => setPassword(e.target.value)}
+              placeholder="Contraseña"
+              required
+            />
+          </div>
+          {error && <p className="error">{error}</p>}
+          <button type="submit" className="login-button">Iniciar Sesión</button>
+        </form>
+          <div className="signup-container">
+          <a href="/register" className="signup-link-combined">
+            ¿No tienes una cuenta?<br />
+            <strong>Crea una</strong>
+          </a>
         </div>
-        <div>
-          <label>Contraseña</label>
-          <input
-            type="password"
-            name="password"
-            value={password}
-            onChange={e => setPassword(e.target.value)}
-            placeholder="Contraseña"
-            required
-          />
-        </div>
-        {error && <p style={{ color: 'red' }}>{error}</p>}
-        <button type="submit">Iniciar Sesión</button>
-        <Link to="/register" className="">¿No tienes una cuenta? Crea una</Link>
-      </form>
+      </div>
     </div>
-  );
+  </div>
+);
 }

@@ -1,0 +1,154 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap');
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #e9e9e9;
+  font-family: 'Arial', sans-serif;
+}
+
+.help-page {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #e0e0e0;
+}
+
+/* Header */
+.user-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #C18CE8;
+  padding: 0.8rem 1.5rem;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.logo-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+}
+
+.logo {
+  width: 50px;
+}
+
+.title {
+  color: black;
+  font-size: 1.8rem;
+  font-weight: 800;
+}
+
+.right-section {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: black;
+  font-weight: 600;
+  font-size: 1rem;
+  text-transform: uppercase;
+}
+
+.nav-link.red {
+  color: red;
+}
+
+.username {
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.user-image {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+/* Main Section */
+.help-container {
+  padding: 3rem 2rem 5rem;
+  max-width: 1300px;
+  margin: auto;
+  text-align: center;
+  background-color: #e0e0e0;
+  min-height: calc(100vh - 80px); /* para asegurar que baje más */
+}
+
+.help-title {
+  font-size: 3rem;
+  font-weight: 800;
+  color: black;
+  margin-bottom: 3rem;
+}
+
+/* Grid de 2 columnas exactas */
+.help-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 3rem;
+  justify-content: center;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* Responsive para móvil */
+@media (max-width: 768px) {
+  .help-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .help-title {
+    font-size: 2rem;
+  }
+}
+
+/* Tarjetas */
+.help-card {
+  background: white;
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  text-align: left;
+  transition: transform 0.2s;
+}
+
+.help-card:hover {
+  transform: translateY(-6px);
+}
+
+.help-card h3 {
+  margin-top: 0;
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: #222;
+  margin-bottom: 1rem;
+}
+
+.help-card p {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #444;
+  margin-bottom: 1.2rem;
+}
+
+.learn-more {
+  display: inline-block;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 1rem;
+  color: #4A90E2;
+  text-decoration: none;
+  margin-top: 1rem;
+  transition: color 0.3s;
+}
+
+.learn-more:hover {
+  color: #357ABD;
+}
