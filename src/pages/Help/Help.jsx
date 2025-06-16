@@ -75,4 +75,4 @@ function Help() {
   );
 }
 
-export default Help;
+export default Help
