@@ -1,0 +1,216 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap');
+
+
+
+.login-container {
+  display: flex;
+  justify-content: center;     /* 👈 centra horizontalmente */
+  align-items: center;         /* 👈 centra verticalmente */
+  height: 100vh;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(180deg, #4A90E2, #A8E6CF, #BAA0D2);
+  color: #333;
+}
+
+
+.left-panel {
+  flex: 1;
+  text-align: center;
+  padding: 0.5rem;         /* ⬅️ menos padding */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;             /* ⬅️ elementos más cerca */
+}
+
+
+.logo {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2.8rem;
+  font-weight: 700;
+  color: #1f1f1f;
+   text-align: center;
+   margin-top: 4rem; /* 👈 esto lo baja un poco */
+}
+
+.login-logo {
+  width: 320px;         /* 📏 más ancho */
+  height: auto;
+  margin: 0.5rem auto;
+}
+
+
+.thanks-message {
+  font-size: 2.3rem;       /* 🆙 Aumentamos tamaño */
+  color: #1c1c1c;
+  line-height: 1.6;
+  font-weight: 700;
+  margin-top: 0.8rem;
+  text-align: center;      /* 🧠 por si acaso */
+}
+
+
+.right-panel {
+  flex: none; /* fijamos tamaño */
+  width: 380px; /* 🆕 ligeramente más grande que los 320px */
+  min-height: 350px;  
+  background-color: rgba(105, 105, 105, 0.34);
+  border-radius: 20px;
+  padding: 1.5rem; /* más espacio interno para no apretar */
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+
+.right-panel h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: white;
+  font-size: 2.5rem;         /* 🆙 Tamaño más grande */
+  font-weight: 700;        /* 💪 Más presencia */
+  letter-spacing: 2px;     /* ✨ Un poco más estilizado */
+}
+
+
+.login-form .input-group {
+  display: flex;
+  align-items: center;
+  background: white;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  padding: 0.6rem 1.2rem;
+  border: 1px solid #ccc;
+  width: 100%;
+  max-width: 320px;       /* 🆙 más ancho visualmente */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.input-icon {
+  margin-right: 10px;
+  font-size: 1.5rem;    /* 🆙 Agrandamos el ícono */
+  line-height: 1;
+}
+
+.login-form input {
+  border: none;
+  outline: none;
+  flex: 1;
+  font-size: 1rem;
+  background: transparent;
+}
+
+.login-button {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  padding: 0.8rem 1.8rem;     /* 🆙 más alto y más ancho */
+  font-size: 1.05rem;         /* 🆙 más grande la letra */
+  width: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1.5rem auto 0 auto;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  text-align: center;
+}
+
+.login-button:hover {
+  background-color: #d32f2f;
+}
+
+
+.error {
+  color: red;
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.signup-container {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.signup-text {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.signup-text a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.signup-text a:hover {
+  text-decoration: underline;
+}
+
+.signup-link-combined {
+  display: block;
+  text-align: center;
+  margin-top: 0.5rem;
+  font-size: 1.2rem;          /* 🆙 más grande que antes */
+  color: #007bff;
+  text-decoration: none;
+  line-height: 1.5;
+}
+
+
+.signup-link-combined:hover {
+  text-decoration: underline;
+}
+
+.signup-link a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.signup-link a:hover {
+  text-decoration: underline;
+}
+
+/* ✅ RESPONSIVE DESIGN */
+@media (max-width: 768px) {
+  .login-container {
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 1rem;
+  }
+
+  .left-panel {
+    align-items: center;
+    padding: 1rem;
+  }
+
+.right-panel {
+  flex: none;                           /* 🔁 fija el tamaño */
+  width: 360px;                         /* 🆕 igual al register */
+  background-color: rgba(105, 105, 105, 0.34);
+  border-radius: 20px;
+  padding: 1.5rem;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+
+  .login-button {
+    width: 100%;
+  }
+}
+
+.login-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 4rem;               /* 🟢 ¡Sin espacio entre paneles! */
+  width: 100%;
+  max-width: 900px;        /* ⬅️ más compacto en ancho general */
+  padding: 0 1rem;         /* ⬅️ menos margen lateral */
+  box-sizing: border-box;
+}

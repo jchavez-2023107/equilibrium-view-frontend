@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { apiFetch } from '../../services/api.js';
+import './../RegisterVol/CompleteVol.css';
+import logo from "../../img/Logo.png";
 
 export default function CompleteVolunteer() {
   const { id } = useParams();
@@ -35,22 +37,15 @@ export default function CompleteVolunteer() {
 
   const handleChange = e => {
     let { name, value } = e.target;
-
     if (name === 'hasVolunteered') {
-      // viene como string "true" o "false"
       value = value === 'true';
     }
-
-    setVolunteerData(prev => ({
-      ...prev,
-      [name]: value
-    }));
+    setVolunteerData(prev => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async e => {
     e.preventDefault();
     setError('');
-
     try {
       await apiFetch(`/users/${id}`, {
         method: 'PUT',
@@ -60,71 +55,63 @@ export default function CompleteVolunteer() {
       navigate('/login');
     } catch (err) {
       console.error('Error handleSubmit:', err);
-      if (err.payload?.errors) {
-        setError(err.payload.errors.map(e => `${e.param}: ${e.msg}`).join('\n'));
-      } else {
-        setError(err.payload?.message || err.message);
-      }
+      setError(err.payload?.errors
+        ? err.payload.errors.map(e => `${e.param}: ${e.msg}`).join('\n')
+        : err.payload?.message || err.message);
     }
   };
 
   return (
-    <div>
-      <h2>Completar Registro de Voluntario</h2>
-      <form onSubmit={handleSubmit}>
-        <input
-          name="university"
-          value={volunteerData.university}
-          onChange={handleChange}
-          placeholder="Universidad"
-          required
-        />
+    <div className="complete-vol-container">
+      <div className="complete-vol-wrapper">
+        <div className="complete-vol-left">
+          <h1 className="complete-vol-logo-text">EQUILIBRIUM</h1>
+          <img src={logo} alt="Logo" className="complete-vol-logo" />
+          <p className="complete-vol-message">¡Completa tus<br />datos de voluntario!</p>
+        </div>
 
-        <input
-          name="graduateTerm"
-          value={volunteerData.graduateTerm}
-          onChange={handleChange}
-          placeholder="Semestre / Año de graduación"
-          required
-        />
+        <div className="complete-vol-right">
+          <h2>Registro Voluntario</h2>
+          <form onSubmit={handleSubmit} className="complete-vol-form">
+            <div className="input-group">
+              <span>🎓</span>
+              <input name="university" value={volunteerData.university} onChange={handleChange} placeholder="Universidad" required />
+            </div>
 
-        <select
-          name="hasVolunteered"
-          value={String(volunteerData.hasVolunteered)}
-          onChange={handleChange}
-        >
-          <option value="false">No he sido voluntario</option>
-          <option value="true">Sí he sido voluntario</option>
-        </select>
+            <div className="input-group">
+              <span>📚</span>
+              <input name="graduateTerm" value={volunteerData.graduateTerm} onChange={handleChange} placeholder="Semestre / Año de graduación" required />
+            </div>
 
-        <textarea
-          name="motivation"
-          value={volunteerData.motivation}
-          onChange={handleChange}
-          placeholder="¿Qué te motiva?"
-          required
-        />
+            <div className="input-group">
+              <span>✔️</span>
+              <select name="hasVolunteered" value={String(volunteerData.hasVolunteered)} onChange={handleChange}>
+                <option value="false">No he sido voluntario</option>
+                <option value="true">Sí he sido voluntario</option>
+              </select>
+            </div>
 
-        <input
-          name="availability"
-          value={volunteerData.availability}
-          onChange={handleChange}
-          placeholder="Disponibilidad horaria"
-          required
-        />
+            <div className="input-group">
+              <span>💬</span>
+              <textarea name="motivation" value={volunteerData.motivation} onChange={handleChange} placeholder="¿Qué te motiva?" required />
+            </div>
 
-        <input
-          name="linkedIn"
-          value={volunteerData.linkedIn}
-          onChange={handleChange}
-          placeholder="URL de LinkedIn"
-        />
+            <div className="input-group">
+              <span>⏱️</span>
+              <input name="availability" value={volunteerData.availability} onChange={handleChange} placeholder="Disponibilidad horaria" required />
+            </div>
 
-        {error && <p style={{ color: 'red', whiteSpace: 'pre-wrap' }}>{error}</p>}
+            <div className="input-group">
+              <span>🔗</span>
+              <input name="linkedIn" value={volunteerData.linkedIn} onChange={handleChange} placeholder="URL de LinkedIn" />
+            </div>
 
-        <button type="submit">Enviar Solicitud</button>
-        <p>Su solicitud esta siendo revisada</p>
-      </form>
+            {error && <p className="complete-vol-error">{error}</p>}
+
+            <button type="submit" className="complete-vol-button">Enviar Solicitud</button>
+          </form>
+        </div>
+      </div>
     </div>
   );
 }
