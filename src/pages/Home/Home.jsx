@@ -1,51 +1,91 @@
 import { Link } from 'react-router-dom';
-import './Home'; // Aquí se importa el archivo externo de estilos
+import { FaInstagram, FaFacebook, FaTwitter } from 'react-icons/fa';
+import './../Home/Home.css';
+
+import calendar from '../../assets/img/calendar.png';
+import chatimg from '../../assets/img/chat.png';
+import privacidadimg from '../../assets/img/privacidad.png';
+import usuariosimg from '../../assets/img/usuarios.png';
+import comunidadimg from '../../assets/img/comunidad.png';
+import logo from "../../img/Logo.png";
 
 function Home() {
   return (
     <div className="home-container">
+      {/* HEADER */}
       <header className="header">
         <div className="header-left">
-          <span className="logo">🧘‍♂️ Equilibrium</span>
+          <div className="logo-container"></div>
+            <img src={logo} alt="Logo" className="logo-img" />
+            <span className="logo-text">EQUILIBRIUM</span>
         </div>
+        
         <div className="header-right">
-          <Link to="/login" className="header-link">Iniciar Sesión</Link>
-          <Link to="/volunteer" className="header-link">Únete al equipo</Link>
+          <Link to="/volunteer" className="header-link">ÚNETE AL EQUIPO</Link>
+          <Link to="/login" className="header-link">INICIAR SESIÓN</Link>
         </div>
       </header>
 
+      {/* MAIN */}
       <main className="main-content">
         <h1 className="main-title">A un paso de la estabilidad mental que mereces</h1>
         <h2 className="main-subtitle">Conecta con más de 30 voluntarios comprometidos con tu bienestar</h2>
-        
+
         <p className="emergency-text">¿Tienes una emergencia?</p>
         <Link to='/chat-emergencia'>
           <button className="emergency-button">EMERGENCIA</button>
         </Link>
-        
 
+        {/* FEATURES */}
         <section className="features">
           <div className="feature-box">
-            <img src="" alt="" className="feature-icon" />
+            <img src={calendar} alt="calendar" className="feature-icon" />
             <h4>Disponibilidad 24/7</h4>
           </div>
           <div className="feature-box">
-            <img src="" alt="" className="feature-icon" />
+            <img src={chatimg} alt="chat" className="feature-icon" />
             <h4>Chats en tiempo real</h4>
           </div>
           <div className="feature-box">
-            <img src="" alt="" className="feature-icon" />
+            <img src={privacidadimg} alt="privacidad" className="feature-icon" />
             <h4>Total privacidad</h4>
           </div>
           <div className="feature-box">
-            <img src="" alt="" className="feature-icon" />
+            <img src={usuariosimg} alt="usuarios" className="feature-icon" />
             <h4>+50 usuarios activos</h4>
           </div>
           <div className="feature-box">
-            <img src="" alt="" className="feature-icon" />
+            <img src={comunidadimg} alt="comunidad" className="feature-icon" />
             <h4>+30 voluntarios certificados activos</h4>
           </div>
         </section>
+
+        {/* FOOTER EXTENDIDO */}
+        <div className="footer-full">
+          <div className="footer-columns">
+            <div className="footer-section">
+              <h4>Acerca de</h4>
+              <p>Nosotros</p>
+              <p>Misión</p>
+              <p>Visión</p>
+            </div>
+            <div className="footer-section">
+              <h4>Soporte</h4>
+              <p>Contacto</p>
+              <p>Preguntas Frecuentes</p>
+              <p>Centro de ayuda</p>
+            </div>
+            <div className="footer-section">
+              <h4>Redes</h4>
+              <p><FaInstagram /> Instagram</p>
+              <p><FaFacebook /> Facebook</p>
+              <p><FaTwitter /> Twitter</p>
+            </div>
+          </div>
+          <div className="footer-bottom">
+            © 2025 Equilibrium. Todos los derechos reservados.
+          </div>
+        </div>
       </main>
     </div>
   );

@@ -33,9 +33,9 @@ function Help() {
           <div className="help-card">
             <h3>Depresion</h3>
             <p>
-              Trastorno del estado de ánimo caracterizado por una tristeza persistente,
-              pérdida de interés en actividades, fatiga, cambios en el apetito y el sueño,
-              y pensamientos negativos o suicidas.
+             Se manifiesta como una tristeza intensa e incontrolable ante situaciones cotidianas, 
+             acompañada de síntomas físicos como fatiga constante, aislamiento social, 
+             dificultad para concentrarse y problemas para dormir.
             </p>
             <Link to="/trastornos/depresion" className="learn-more">APRENDE MÁS</Link>
           </div>
@@ -53,9 +53,7 @@ function Help() {
           <div className="help-card">
             <h3>Esquizofrenia</h3>
             <p>
-              Trastorno mental grave que afecta la forma en que una persona piensa, siente y
-              se comporta. Puede incluir alucinaciones, delirios, pensamiento desorganizado y
-              deterioro del funcionamiento social o laboral.
+              Trastorno mental grave que altera la percepción de la realidad y afecta pensamientos, emociones y comportamientos. Puede incluir alucinaciones, delirios, pensamiento desorganizado y deterioro del funcionamiento social o laboral.
             </p>
             <Link to="/trastornos/esquizofrenia" className="learn-more">APRENDE MÁS</Link>
           </div>

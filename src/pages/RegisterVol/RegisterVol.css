@@ -35,16 +35,19 @@
   background: transparent;
   box-shadow: none;
   border-radius: 0;
+  text-align: center;
 }
 
 .logo {
   font-family: 'Montserrat', sans-serif;
-  font-size: 2.8rem;
+  font-size: 2.5rem;
+  font-weight: 800;
   margin-bottom: 1rem;
+  color: #1f1f1f;
 }
 
 .vol-register-logo {
-  width: 300px;
+  width: 250px;
   margin-bottom: 1rem;
 }
 
@@ -55,7 +58,7 @@
 }
 
 .vol-right-panel {
-  background: rgba(105,105,105,0.34);
+  background: rgba(85, 85, 85, 0.6); /* más oscuro */
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
