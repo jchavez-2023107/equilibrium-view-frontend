@@ -1,10 +1,10 @@
-import Header from "./Header";
+import HeaderVol from "./Header.Vol";
 import { Outlet } from "react-router-dom";
 
-function Layout() {
+function LayoutVol() {
   return (
     <>
-      <Header />
+      <HeaderVol />
       <main className="main-content">
         <Outlet />
       </main>
@@ -12,4 +12,4 @@ function Layout() {
   )
 }
 
-export default Layout
+export default LayoutVol

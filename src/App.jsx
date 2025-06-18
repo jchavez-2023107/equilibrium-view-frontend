@@ -1,23 +1,31 @@
 import { BrowserRouter as Router, Routes, Route, Link,useLocation } from "react-router-dom";
 import { Suspense, lazy } from "react";
 
-import MainUser from "./pages/MainUser/MainUser";
-import RegisterUser from "./pages/RegisterUser/RegisterUser";
-import Notification from "./pages/Notification/Notification";
-import MainVolunteer from "./pages/MainVolunteer/MainVolunteer";
-import RegisterVolunteer from "./pages/RegisterVol/RegisterVolunteer";
-import CompleteVolunteer from "./pages/RegisterVol/CompleteVolunteer";
-import CalendarView from "./pages/Calendar/Calendar";
-import AppointmentList from "./pages/Appointment/AppointmentList";
-import AppointmentForm from './pages/Appointment/AppointmentForm'
-import TrashView from './pages/Appointment/TrashView'
-import Layout from "./pages/Appointment/Layout";
-import Help from "./pages/Help/Help";
-import Emergenci from "./pages/Chat/Emergenci";
-import ChatRoom from "./pages/Chat/ChatRoom";
-import Profile from "./pages/Profile/Profile";
-import Home from './pages/Home/Home'
-import Login from "./pages/Login/Login";
+
+const Home = lazy(() => import('./pages/Home/Home'))
+const Login = lazy(() => import("./pages/Login/Login"))
+
+{/*USER */}
+const RegisterUser = lazy(() => import("./pages/User/RegisterUser/RegisterUser"))
+const MainUser = lazy(() => import("./pages/User/MainUser/MainUser"))
+const ProfileUs = lazy(() => import("./pages/User/Profile/ProfileUs"))
+const HelpUs = lazy(() => import('./pages/User/Help/Help.User'))
+
+{/*VOLUNTEER */}
+const RegisterVolunteer = lazy(() => import("./pages/Volunteer/RegisterVol/RegisterVolunteer"))
+const CompleteVolunteer = lazy(() => import("./pages/Volunteer/RegisterVol/CompleteVolunteer"))
+const MainVolunteer = lazy(() => import("./pages/Volunteer/MainVolunteer/MainVolunteer"))
+const CalendarViewVol = lazy(() => import("./pages/Volunteer/Calendar/Calendar.Vol"))
+const AppointmentFormVol = lazy(() => import('./pages/Volunteer/Appointment/AppointmentForm.Vol'))
+const AppointmentListVol = lazy(() => import("./pages/Volunteer/Appointment/AppointmentList.Vol"))
+const TrashViewVol = lazy(() => import('./pages/Volunteer/Appointment/TrashView.Vol'))
+const LayoutVol = lazy(() => import("./pages/Volunteer/Appointment/Layout.Vol"))
+
+const HelpVol = lazy(() => import("./pages/Volunteer/Help/Help.Vol"))
+const ChatRoom = lazy(() => import("./pages/Chat/ChatRoom"))
+const ProfileVol = lazy(() => import("./pages/Volunteer/Profile/ProfileVol"))
+const Notification = lazy(() => import("./pages/Notification/Notification"))
+
 
 function App() {
   return (
@@ -26,30 +34,32 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/profile" element={<Profile/>}/>
-
+          
+          
 
           {/*USER */}
           <Route path="/register-user" element={<RegisterUser />} />
           <Route path="/main-user" element={<MainUser />} />
+          <Route path="/profile-user" element={<ProfileUs/>}></Route>
+          <Route path="/help-user" element={<HelpUs />} />
 
           <Route path="/chat" element={<ChatRoom />} />
-          <Route path="/chat-emergencia" element={<Emergenci/>}/>
 
 
           <Route path="/notificacion" element={<Notification/>}/>
           
 
           {/*VOLUNTEER */}
-            <Route path="/help" element={<Help />} />
+            <Route path="/help-vol" element={<HelpVol />} />
+            <Route path="/profile-vol" element={<ProfileVol/>}/>
             <Route path="/volunteer" element={<RegisterVolunteer />} />
             <Route path="/volunteer/complete/:id" element={<CompleteVolunteer />} />
             <Route path="/main-volunteer" element={<MainVolunteer />} />
-          <Route element={<Layout />}>
-            <Route path="/calendar" element={<CalendarView />} />
-            <Route path="/citas-lista" element={<AppointmentList />} />
-            <Route path="/citas-new" element={<AppointmentForm />} />
-            <Route path="/citas-trash" element={<TrashView />} />
+          <Route element={<LayoutVol />}>
+            <Route path="/calendar-vol" element={<CalendarViewVol />} />
+            <Route path="/citas-lista-vol" element={<AppointmentListVol />} />
+            <Route path="/citas-new-vol" element={<AppointmentFormVol />} />
+            <Route path="/citas-trash-vol" element={<TrashViewVol />} />
           </Route>
 
         </Routes>

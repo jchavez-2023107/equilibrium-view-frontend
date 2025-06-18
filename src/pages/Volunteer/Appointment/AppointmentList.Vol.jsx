@@ -1,8 +1,8 @@
 import React from "react";
-import { useAppointments } from "./AppointmentContext";
+import { useAppointments } from "../../../context/AppointmentContext";
 
 
-export default function AppointmentList() {
+export default function AppointmentListVol() {
   const { appointments, dispatch } = useAppointments();
 
   return (

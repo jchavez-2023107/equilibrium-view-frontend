@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { apiFetch } from '../../services/api.js';
-import './../RegisterUser/RegisterUs.css';
-import logo from "../../img/Logo.png";
+import { apiFetch } from '../../../services/api.js';
+import './RegisterUs.css';
+import logo from '../../../assets/img/Logo.png';
 
 export default function RegisterUser() {
   const [form, setForm] = useState({
