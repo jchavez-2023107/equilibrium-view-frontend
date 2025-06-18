@@ -1,0 +1,207 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap');
+
+.home-container {
+  font-family: 'Montserrat', sans-serif;
+  background: #f0f0f0;
+  color: #222;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* === HEADER === */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #B97BF1;
+  padding: 1rem 2rem;
+  width: 100vw; /* ✅ se extiende al borde completo */
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  box-sizing: border-box;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #111;
+}
+
+.header-link {
+  margin-left: 1rem;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #111;
+  transition: color 0.2s;
+}
+
+.header-link:hover {
+  color: #555;
+}
+
+/* === MAIN === */
+.main-content {
+  flex: 1;
+  text-align: center;
+  padding: 3rem 1rem 0;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.main-title {
+  font-size: 2.4rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: #111;
+}
+
+.main-subtitle {
+  font-size: 1.4rem;
+  margin-bottom: 2.5rem;
+  font-weight: 500;
+  color: #333;
+}
+
+.emergency-text {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.emergency-button {
+  background: red;
+  color: rgb(10, 10, 10);
+  font-size: 1.6rem; /* más grande */
+  font-weight: 800;
+  padding: 1rem 3rem; /* más alto y ancho */
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* efecto de elevación */
+}
+
+.emergency-button:hover {
+  background: darkred;
+}
+
+/* === FEATURES === */
+.features {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  margin: 3rem auto;
+  max-width: 1200px; /* ancho mayor para más espacio */
+  padding: 0 1rem;
+}
+
+
+.feature-box {
+  background: #ffb6c1;
+  border-radius: 12px;
+  padding: 2.5rem;          /* padding aumentado */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  width: 280px;             /* ancho aumentado */
+  flex-shrink: 0;
+  transition: transform 0.2s;
+}
+
+
+.feature-box:hover {
+  transform: translateY(-5px);
+}
+
+.feature-icon {
+  width: 100px;             /* ícono más grande */
+  height: 100px;
+  margin-bottom: 1.2rem;    /* espacio aumentado debajo del ícono */
+}
+
+.feature-box h4 {
+  font-size: 1.2rem;        /* texto más grande */
+  font-weight: 700;         /* más grueso */
+  color: #222;
+  margin: 0;
+}
+
+
+
+
+.footer-columns {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start; /* ✅ importante para que los títulos estén alineados */
+  width: 100%;
+  max-width: 1200px;
+  padding: 0 2rem;
+  box-sizing: border-box;
+  gap: 2rem;
+}
+
+
+.footer-section {
+  flex: 1;
+  min-width: 180px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* ✅ alineación izquierda de todo el contenido */
+  gap: 0.4rem;
+}
+
+
+.footer-section h4 {
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.footer-section p {
+  margin: 4px 0;
+  font-size: 0.9rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.footer-section p:hover {
+  text-decoration: underline;
+}
+
+.footer-bottom {
+  margin-top: 2rem;
+  font-size: 0.95rem;
+  font-weight: bold;
+  text-align: center;
+  width: 100%;
+  display: flex;
+  justify-content: center; /* ✅ centra el contenido horizontalmente */
+}
+
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.logo-img {
+  height: 36px;
+  width: auto;
+}
+
+.logo-text {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #111;
+}

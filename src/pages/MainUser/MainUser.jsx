@@ -25,53 +25,51 @@ export default function MainUser() {
   const fraseDelDia = frases[new Date().getDay()];
   const today = new Date().toLocaleDateString();
 
-  const [selectedEmotion, setSelectedEmotion] = useState(null);
+  const [selected, setSelected] = useState({});
   const [emotionsData, setEmotionsData] = useState({ triste: 0, serio: 0, feliz: 0 });
 
   useEffect(() => {
     const stored = JSON.parse(localStorage.getItem('emociones')) || {};
     setEmotionsData(stored);
+    const todayState = JSON.parse(localStorage.getItem('emocionesHoy')) || {};
+    setSelected(todayState);
   }, []);
 
   const handleEmotionClick = (emotion) => {
     const stored = JSON.parse(localStorage.getItem('emociones')) || {};
-    if (!stored[emotion]) stored[emotion] = 0;
+    const todayState = JSON.parse(localStorage.getItem('emocionesHoy')) || {};
 
-    const lastEntry = localStorage.getItem('emocionHoy');
-    if (lastEntry === today) return alert('Ya registraste tu emoción hoy');
+    if (todayState[emotion] === today) {
+      return alert(`Ya registraste "${emotion}" hoy`);
+    }
 
-    stored[emotion] += 1;
+    const newCount = (stored[emotion] || 0) + 1;
+    stored[emotion] = newCount;
+    todayState[emotion] = today;
+
     localStorage.setItem('emociones', JSON.stringify(stored));
-    localStorage.setItem('emocionHoy', today);
+    localStorage.setItem('emocionesHoy', JSON.stringify(todayState));
+
     setEmotionsData(stored);
-    setSelectedEmotion(emotion);
+    setSelected(todayState);
   };
 
   const total = Object.values(emotionsData).reduce((a, b) => a + b, 0);
-  const mostFrequent = Object.entries(emotionsData).sort((a, b) => b[1] - a[1])[0]?.[0] || '';
+  const mostFrequent = Object.entries(emotionsData)
+    .sort((a, b) => b[1] - a[1])[0]?.[0] || '';
 
   const chartData = {
     labels: ['Triste', 'Serio', 'Feliz'],
-    datasets: [
-      {
-        data: [emotionsData.triste, emotionsData.serio, emotionsData.feliz],
-        backgroundColor: ['#6BAED6', '#FFD54F', '#81C784'],
-        borderWidth: 1
-      }
-    ]
+    datasets: [{ data: [emotionsData.triste, emotionsData.serio, emotionsData.feliz],
+      backgroundColor: ['#6BAED6', '#FFD54F', '#81C784'],
+      borderWidth: 1
+    }]
   };
 
   const chartOptions = {
     plugins: {
-      legend: {
-        display: true,
-        position: 'top',
-        labels: {
-          font: {
-            size: 16,
-            weight: 'bold'
-          }
-        }
+      legend: { display: true, position: 'top',
+        labels: { font: { size: 16, weight: 'bold' } }
       }
     }
   };
@@ -81,23 +79,21 @@ export default function MainUser() {
       <header className="encabezado">
         <div className="encabezado-izquierda">
           <Link to="/"><img src={logo} alt="Logo Equilibrium" className="logo" /></Link>
-          <h1 className="titulo">Equilibrium</h1>
+          <h1 className="titulo">EQUILIBRIUM</h1>
         </div>
         <div className="encabezado-derecha">
           <Link to="/chat" className="nav">Chats</Link>
           <Link to="/help" className="nav">Ayuda</Link>
           <Link to="/notificacion" className="campana">🔔</Link>
           <span className="usuario">Nombre del Usuario</span>
-          <Link to="/profile">
-            <img src={userImage} alt="Usuario" className="imagen-usuario" />
-          </Link>
+          <Link to="/profile"><img src={userImage} alt="Usuario" className="imagen-usuario" /></Link>
         </div>
       </header>
 
       <main className="contenido">
         <h2 className="saludo">
           ¡Hola, Nombre del Usuario! Estamos felices de verte de nuevo.<br />
-          ¿Listo para continuar ayudando a personas para que tengan equilibrio mental?
+          ¿Listo para ayudar a equilibrar mentes?
         </h2>
 
         <div className="tarjetas">
@@ -119,11 +115,17 @@ export default function MainUser() {
         </div>
 
         <div className="encuesta">
-          <h3>¿Cómo te encuentras el día de hoy?</h3>
+          <h3>¿Cómo te sientes hoy?</h3>
           <div className="emojis">
-            <button onClick={() => handleEmotionClick('triste')} className={selectedEmotion === 'triste' ? 'selected' : ''}>😢</button>
-            <button onClick={() => handleEmotionClick('serio')} className={selectedEmotion === 'serio' ? 'selected' : ''}>😐</button>
-            <button onClick={() => handleEmotionClick('feliz')} className={selectedEmotion === 'feliz' ? 'selected' : ''}>😊</button>
+            {['triste', 'serio', 'feliz'].map(e => (
+              <button
+                key={e}
+                onClick={() => handleEmotionClick(e)}
+                className={selected[e] === today ? 'selected' : ''}
+              >
+                {e === 'triste' ? '😢' : e === 'serio' ? '😐' : '😊'}
+              </button>
+            ))}
           </div>
         </div>
 
@@ -132,9 +134,9 @@ export default function MainUser() {
             <h3>Estadística Emocional</h3>
             <Doughnut data={chartData} options={chartOptions} />
             <p className="mensaje-emocional">
-              {mostFrequent === 'feliz' && "¡Tu constancia emocional es admirable! Sigue así 😊"}
-              {mostFrequent === 'serio' && "Te invitamos a reflexionar y abrir espacio al cambio 🧘"}
-              {mostFrequent === 'triste' && "Recuerda que siempre hay apoyo para los días difíciles 💙"}
+              {mostFrequent === 'feliz' && "¡Tu constancia emocional es admirable! 😊"}
+              {mostFrequent === 'serio' && "Te invitamos a reflexionar 🧘"}
+              {mostFrequent === 'triste' && "Recuerda que siempre hay apoyo 💙"}
             </p>
           </div>
         )}
@@ -145,16 +147,14 @@ export default function MainUser() {
             <p>Contacta con un Administrador</p>
             <button>Contactar</button>
           </div>
-
           <div className="tarjeta-contacto">
             <img src={userImage} alt="Usuario" />
             <p>Contacta con un usuario necesitado</p>
             <Link to="/chat"><button>Chat</button></Link>
           </div>
-
           <div className="tarjeta-contacto">
             <img src={calendarImg} alt="Agenda" />
-            <p>Agenda una cita con un usuario</p>
+            <p>Agenda una cita</p>
             <Link to="/citas"><button>Agendar</button></Link>
           </div>
         </div>
