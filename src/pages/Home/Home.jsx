@@ -15,11 +15,13 @@ function Home() {
       {/* HEADER */}
       <header className="header">
         <div className="header-left">
-          <div className="logo-container"></div>
+          {/* ✅ CORRECCIÓN: envolver imagen y texto en logo-container */}
+          <div className="logo-container">
             <img src={logo} alt="Logo" className="logo-img" />
             <span className="logo-text">EQUILIBRIUM</span>
+          </div>
         </div>
-        
+
         <div className="header-right">
           <Link to="/volunteer" className="header-link">ÚNETE AL EQUIPO</Link>
           <Link to="/login" className="header-link">INICIAR SESIÓN</Link>
@@ -59,34 +61,7 @@ function Home() {
             <h4>+30 voluntarios certificados activos</h4>
           </div>
         </section>
-
-        {/* FOOTER EXTENDIDO */}
-        <div className="footer-full">
-          <div className="footer-columns">
-            <div className="footer-section">
-              <h4>Acerca de</h4>
-              <p>Nosotros</p>
-              <p>Misión</p>
-              <p>Visión</p>
-            </div>
-            <div className="footer-section">
-              <h4>Soporte</h4>
-              <p>Contacto</p>
-              <p>Preguntas Frecuentes</p>
-              <p>Centro de ayuda</p>
-            </div>
-            <div className="footer-section">
-              <h4>Redes</h4>
-              <p><FaInstagram /> Instagram</p>
-              <p><FaFacebook /> Facebook</p>
-              <p><FaTwitter /> Twitter</p>
-            </div>
-          </div>
-          <div className="footer-bottom">
-            © 2025 Equilibrium. Todos los derechos reservados.
-          </div>
-        </div>
-      </main>
+       </main>
     </div>
   );
 }

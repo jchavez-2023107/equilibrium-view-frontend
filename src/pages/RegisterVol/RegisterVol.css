@@ -5,19 +5,20 @@
   justify-content: center;
   align-items: start;
   min-height: 100vh;
-  padding: 2rem 0;
+  padding: 5rem 0 2rem; /* 🔧 antes: 2rem 0 — ahora más espacio arriba */
   background: linear-gradient(180deg, #4A90E2, #A8E6CF, #BAA0D2);
   font-family: Arial, sans-serif;
 }
 
 .vol-register-wrapper {
   display: flex;
-  align-items: stretch;
-  gap: 0.5rem;
+  align-items: flex-start; /* 🔧 que el panel derecho crezca según contenido */
+  gap: 1rem;
   max-width: 960px;
   padding: 0 1rem;
   box-sizing: border-box;
 }
+
 
 .vol-left-panel, .vol-right-panel {
   width: 360px;
@@ -30,39 +31,47 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: left;
   padding: 2rem;
   background: transparent;
   box-shadow: none;
   border-radius: 0;
   text-align: center;
+  gap: 1rem; /* 🔧 espacio uniforme entre elementos */
 }
 
 .logo {
   font-family: 'Montserrat', sans-serif;
   font-size: 2.5rem;
   font-weight: 800;
-  margin-bottom: 1rem;
   color: #1f1f1f;
+  margin: 0; /* 🔧 eliminar espacio excesivo */
 }
-
 .vol-register-logo {
-  width: 250px;
-  margin-bottom: 1rem;
+  width: 260px;
+  margin: 0 auto; /* 🔧 centrado horizontal si no está */
 }
 
 .welcome-message {
-  font-size: 2rem;
+  font-size: 2.2rem; /* 🔧 más grande */
   font-weight: 700;
-  text-align: center;
+  margin: 0; /* 🔧 elimina espacios extra arriba o abajo */
 }
 
+
 .vol-right-panel {
-  background: rgba(85, 85, 85, 0.6); /* más oscuro */
+  width: 320px;
+  max-width: 90%;
+  background: rgba(85, 85, 85, 0.6);
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
+  border-radius: 20px;
+
+  margin-top: 9rem; /* ⬅️ Este es el cambio CLAVE para bajarlo */
 }
+
+
 
 .vol-right-panel h2 {
   color: white;
@@ -240,4 +249,76 @@
   width: 80px;
   text-align: center;
   text-align-last: center;
+}
+
+.section-header {
+  background: #fffeff;
+  color: rgb(126, 122, 122);
+  padding: 0.6rem 1rem;
+  margin: 1rem 0 0.5rem;
+  cursor: pointer;
+  border-radius: 6px;
+  font-weight: bold;
+  text-align: left;
+  user-select: none;
+}
+
+.section-header:hover {
+  background: #ffffff;
+}
+
+
+.dropdown-toggle {
+  background: white;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  border: none;
+  font-size: 1rem;
+  font-weight: bold;
+  width: 100%;
+  text-align: left;
+  position: relative;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+.dropdown-toggle::after {
+  content: '▼';
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.9rem;
+  color: #555;
+  pointer-events: none;
+}
+.dropdown-toggle:hover {
+  background: #f0f0f0;
+}
+
+/* Flechas estilo acordeón en el header de sección */
+.section-header {
+  background: #f7f7f7; /* ó el color que prefieras */
+  color: #333;
+  padding: 0.6rem 1rem;
+  margin: 1rem 0 0.5rem;
+  cursor: pointer;
+  border-radius: 6px;
+  font-weight: bold;
+  position: relative;
+  user-select: none;
+}
+
+/* Icono flecha a la derecha */
+.section-header::after {
+  content: "▼";
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: transform 0.3s ease;
+}
+
+/* Gira la flecha hacia arriba cuando la sección está abierta */
+.section-header.open::after {
+  transform: translateY(-50%) rotate(180deg);
 }

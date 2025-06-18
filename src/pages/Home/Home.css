@@ -97,10 +97,10 @@
 .features {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center; /* ✅ esto centra horizontalmente las tarjetas */
+  justify-content: center;
   gap: 2rem;
-  max-width: 1000px;
   margin: 3rem auto;
+  max-width: 1200px; /* ancho mayor para más espacio */
   padding: 0 1rem;
 }
 
@@ -108,11 +108,12 @@
 .feature-box {
   background: #ffb6c1;
   border-radius: 12px;
-  padding: 2rem;
+  padding: 2.5rem;          /* padding aumentado */
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   text-align: center;
-  width: 240px; /* ✅ fuerza tamaño igual para todas */
+  width: 280px;             /* ancho aumentado */
   flex-shrink: 0;
+  transition: transform 0.2s;
 }
 
 
@@ -121,34 +122,19 @@
 }
 
 .feature-icon {
-  width: 70px;
-  height: 70px;
-  margin-bottom: 1rem;
+  width: 100px;             /* ícono más grande */
+  height: 100px;
+  margin-bottom: 1.2rem;    /* espacio aumentado debajo del ícono */
 }
 
 .feature-box h4 {
-  font-size: 1.05rem;
-  font-weight: 600;
+  font-size: 1.2rem;        /* texto más grande */
+  font-weight: 700;         /* más grueso */
   color: #222;
   margin: 0;
 }
 
-/* === FOOTER === */
-.footer-full {
-  background: #B97BF1;
-  color: black;
-  padding: 1rem 1rem 0.5rem;
-  width: 100vw; /* ✅ hace que se extienda al 100% de la pantalla */
-  position: relative;
-  left: 50%;
-  right: 50%;
-  margin-left: -50vw;
-  margin-right: -50vw;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  box-sizing: border-box;
-}
+
 
 
 .footer-columns {
@@ -202,41 +188,6 @@
   justify-content: center; /* ✅ centra el contenido horizontalmente */
 }
 
-
-/* === RESPONSIVE === */
-@media (max-width: 768px) {
-  .main-title {
-    font-size: 1.8rem;
-  }
-
-  .main-subtitle {
-    font-size: 1.1rem;
-  }
-
-  .emergency-button {
-    font-size: 1.1rem;
-  }
-
-  .footer-columns {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-
-  .footer-section {
-    min-width: unset;
-    margin-bottom: 1.5rem;
-  }
-
-  .feature-icon {
-    width: 50px;
-    height: 50px;
-  }
-
-  .feature-box h4 {
-    font-size: 1rem;
-  }
-}
 
 .logo-container {
   display: flex;
