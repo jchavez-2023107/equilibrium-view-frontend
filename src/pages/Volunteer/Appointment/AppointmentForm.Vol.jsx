@@ -1,24 +1,19 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAppointments } from './AppointmentContext';
-import { useAuth } from '../../context/AuthContext'
+import { useAppointments } from '../../../context/AppointmentContext';
 
-export default function AppointmentForm() {
+export default function AppointmentFormVol() {
   const today = new Date().toISOString().substring(0, 10);
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [user, setUser] = useState('');
   const [date, setDate] = useState(today);
   const [error, setError] = useState('');
-  const [success, setSuccess] = useState('');
   const navigate = useNavigate();
   const { dispatch } = useAppointments();
-  const { user: currentUser } = useAuth(); 
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setError('');
-    setSuccess('');
 
     if (!title.trim() || !user.trim()) {
       setError('El título y el usuario son obligatorios.');
@@ -30,23 +25,19 @@ export default function AppointmentForm() {
       return;
     }
 
-    if (currentUser?.role === 'volunteer') {
-      dispatch({
-        type: 'ADD_APPOINTMENT',
-        payload: { title, description, user, date },
-      });
-      navigate('/calendar');
-    } else {
-      // Si es usuario, mostramos mensaje sin navegar
-      setSuccess('Su solicitud fue enviada. Un voluntario la revisará pronto.');
-    }
+    dispatch({
+      type: 'ADD_APPOINTMENT',
+      payload: { title, description, user, date },
+    });
+
+    setError('');
+    navigate('/calendar-vol');
   };
 
   return (
     <div className="appointment-form-container">
       <h2 className="form-heading">Nueva Cita</h2>
       {error && <p className="error-message">{error}</p>}
-      {success && <p className="success-message">{success}</p>}
 
       <form onSubmit={handleSubmit} className="appointment-form">
         <div className="form-control required">
@@ -89,14 +80,14 @@ export default function AppointmentForm() {
             id="date"
             type="date"
             value={date}
-            min={today}
+            min={today} 
             onChange={e => setDate(e.target.value)}
             required
           />
         </div>
 
         <button type="submit" className="btn-submit">
-          {currentUser?.role === 'volunteer' ? 'Agregar Cita' : 'Solicitar Cita'}
+          Agregar Cita
         </button>
       </form>
     </div>

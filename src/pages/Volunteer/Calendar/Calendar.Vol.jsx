@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
-import { useAppointments } from "../Appointment/AppointmentContext"
+import { useAppointments } from "../../../context/AppointmentContext"
 
 
-export default function CalendarView() {
+export default function CalendarViewVol() {
   const { appointments } = useAppointments();
   const [date, setDate] = useState(new Date());
 

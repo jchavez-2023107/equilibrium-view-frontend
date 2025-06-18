@@ -1,15 +1,35 @@
 import { Link } from "react-router-dom";
-import userImage from '../../assets/img/user.png';
-import logo from "../../img/Logo.png";
-import './../Help/Help.css';
+import userImage from '../../../assets/img/user.png';
+import logo from '../../../assets/img/Logo.png';
+import './Help.css';
+import { useAuth } from '../../../context/AuthContext'
+import ModalProfile from "../../ModalProfile/ModalProfile"; 
+import { useState } from "react";
 
-function Help() {
+function HelpVol() {
+  const { user } = useAuth()
+
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [profile, setProfile] = useState(
+    {
+      username:'',
+      email: '',
+      telefono: '',
+      bio: ''
+    }
+  )
+
+  const [birthDate, setBirthDate] = useState(null)
+
+  const openModal = () => setIsModalOpen(true)
+  const closeModal = () => setIsModalOpen(false)
+
   return (
     <div className="help-page">
       {/* ENCABEZADO */}
       <header className="user-header">
         <div className="left-section">
-          <Link to="/main-user" className="logo-title">
+          <Link to="/main-volunteer" className="logo-title">
             <img src={logo} alt="Logo" className="logo" />
             <h1 className="title">EQUILIBRIUM</h1>
           </Link>
@@ -17,12 +37,16 @@ function Help() {
         <div className="right-section">
           <Link to="/chat-emergencia" className="nav-link red">Emergencia</Link>
           <Link to="/chat" className="nav-link">Historial</Link>
-          <Link to="/help" className="nav-link">Ayuda</Link>
+          <Link to="/help-vol" className="nav-link">Ayuda</Link>
           <Link to="/notificacion" className="notification-icon">🔔</Link>
-          <span className="username">NOMBRE DE USUARIO</span>
-          <Link to="/profile">
-            <img src={userImage} alt="Usuario" className="user-image" />
-          </Link>
+          <Link to="/profile-vol" className="volu-user">{user?.username || 'Usuario'}</Link>
+          <img
+            src={userImage}
+            alt="Usuario"
+            className="user-image"
+            onClick={openModal}
+            style={{ cursor: 'pointer' }}
+          />
         </div>
       </header>
 
@@ -71,8 +95,16 @@ function Help() {
           </div>
         </div>
       </main>
+      <ModalProfile
+        isOpen={isModalOpen}
+        onClose={closeModal}
+        profile={profile}
+        setProfile={setProfile}
+        birthDate={birthDate}
+        setBirthDate={setBirthDate}
+      />
     </div>
   );
 }
 
-export default Help
+export default HelpVol

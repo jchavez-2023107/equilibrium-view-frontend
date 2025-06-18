@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { apiFetch } from '../../services/api.js';
-import './../RegisterVol/RegisterVol.css';
-import logo from "../../img/Logo.png";
+import { apiFetch } from '../../../services/api.js';
+import './RegisterVol.css';
+import logo from '../../../assets/img/Logo.png';
 
 export default function RegisterVolunteer() {
   const [form, setForm] = useState({

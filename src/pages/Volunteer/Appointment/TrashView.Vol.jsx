@@ -1,8 +1,8 @@
 import React from "react";
-import { useAppointments } from "./AppointmentContext";
+import { useAppointments } from "../../../context/AppointmentContext";
 
 
-export default function TrashView() {
+export default function TrashViewVol() {
   const { deletedAppointments, dispatch } = useAppointments();
 
   return (

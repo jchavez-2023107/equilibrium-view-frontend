@@ -2,15 +2,19 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Doughnut } from 'react-chartjs-2';
 import { Chart, ArcElement, Tooltip, Legend } from 'chart.js';
-import logo from '../../img/Logo.png';
-import userImage from '../../assets/img/user.png';
-import volunteerImg from '../../assets/img/volunteer.png';
-import calendarImg from '../../assets/img/calendar.png';
-import './../MainVolunteer/MainVol.css';
+import logo from '../../../assets/img/Logo.png';
+import userImage from '../../../assets/img/user.png';
+import volunteerImg from '../../../assets/img/volunteer.png';
+import calendarImg from '../../../assets/img/calendar.png';
+import './MainVol.css';
+import ModalProfile from '../../ModalProfile/ModalProfile';
+import { fetchMyProfile } from '../../../services/api';
+import { useAuth } from '../../../context/AuthContext'; 
 
 Chart.register(ArcElement, Tooltip, Legend);
 
-export default function MainUser() {
+export default function MainVolunteer() {
+  const { user } = useAuth()
   const frases = [
     "Confía en ti, incluso cuando dudes.",
     "Cada día es una nueva oportunidad.",
@@ -26,11 +30,68 @@ export default function MainUser() {
 
   const [selectedEmotion, setSelectedEmotion] = useState(null);
   const [emotionsData, setEmotionsData] = useState({ triste: 0, serio: 0, feliz: 0 });
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
+
+  const [profile, setProfile] = useState({
+    username: '',
+    email: '',
+    telefono: '',
+    bio: ''
+  });
+  const [birthDate, setBirthDate] = useState(null)
 
   useEffect(() => {
     const stored = JSON.parse(localStorage.getItem('emociones')) || {};
     setEmotionsData(stored);
   }, []);
+
+  useEffect(() => {
+    const cargarPerfil = async () => {
+      try {
+        const userData = await fetchMyProfile();
+        setProfile({
+          username: userData.username || '',
+          email: userData.email || '',
+          telefono: userData.profile?.phone || '',
+          bio: userData.profile?.bio || ''
+        });
+        if (userData.profile?.birthDate) {
+          setBirthDate(new Date(userData.profile.birthDate));
+        } else {
+          setBirthDate(null);
+        }
+      } catch (err) {
+        console.error('Error al cargar perfil del voluntario:', err);
+      }
+    }
+
+    cargarPerfil();
+  }, []);
+
+  useEffect(() => {
+    if (isProfileOpen) {
+      const cargarPerfil = async () => {
+        try {
+          const userData = await fetchMyProfile();
+          setProfile({
+            username: userData.username || '',
+            email: userData.email || '',
+            telefono: userData.profile?.phone || '',
+            bio: userData.profile?.bio || ''
+          });
+          if (userData.profile?.birthDate) {
+            setBirthDate(new Date(userData.profile.birthDate));
+          } else {
+            setBirthDate(null);
+          }
+        } catch (err) {
+          console.error('Error al cargar perfil del voluntario (modal):', err);
+        }
+      };
+
+      cargarPerfil();
+    }
+  }, [isProfileOpen]);
 
   const handleEmotionClick = (emotion) => {
     const stored = JSON.parse(localStorage.getItem('emociones')) || {};
@@ -70,18 +131,22 @@ export default function MainUser() {
         </div>
         <div className="volu-right">
           <Link to="/chat" className="volu-nav">Chats</Link>
-          <Link to="/help" className="volu-nav">Ayuda</Link>
+          <Link to="/help-vol" className="volu-nav">Ayuda</Link>
           <Link to="/notificacion" className="volu-notif">🔔</Link>
-          <span className="volu-user">Nombre del Usuario</span>
-          <Link to="/profile">
-            <img src={userImage} alt="Usuario" className="volu-user-img" />
-          </Link>
+          <Link to="/profile-vol" className="volu-user">{user?.username || 'Usuario'}</Link>
+          <img
+            src={userImage}
+            alt="Usuario"
+            className="volu-user-img"
+            style={{ cursor: 'pointer' }}
+            onClick={() => setIsProfileOpen(true)}
+          />
         </div>
       </header>
 
       <main className="volu-main">
         <h2 className="volu-saludo">
-          ¡Hola, Nombre del Usuario! Estamos felices de verte de nuevo.<br />
+          ¡Hola, {user?.username || 'Usuario'}! Estamos felices de verte de nuevo.<br />
           ¿Listo para continuar ayudando a personas para que tengan equilibrio mental?
         </h2>
 
@@ -99,7 +164,7 @@ export default function MainUser() {
             <p>Fecha: 05/06/2025</p>
             <p>Duración: 40 minutos</p>
             <p>Usuario: Luis Rodríguez</p>
-            <Link to="/calendar"><button>Ver</button></Link>
+            <Link to="/calendar-vol"><button>Ver</button></Link>
           </div>
         </div>
 
@@ -140,7 +205,7 @@ export default function MainUser() {
           <div className="volu-card-contact">
             <img src={calendarImg} alt="Agenda" />
             <p>Agenda una cita con un usuario</p>
-            <Link to="/citas"><button>Agendar</button></Link>
+            <Link to="/citas-new-vol"><button>Agendar</button></Link>
           </div>
         </div>
       </main>
@@ -149,6 +214,17 @@ export default function MainUser() {
         <p><strong>FRASE DEL DÍA ❤️</strong></p>
         <p className="volu-frase-dia">{fraseDelDia}</p>
       </footer>
+
+        {isProfileOpen && (
+          <ModalProfile
+            profile={profile}
+            setProfile={setProfile}
+            birthDate={birthDate}
+            setBirthDate={setBirthDate}
+            isOpen={isProfileOpen}
+            onClose={() => setIsProfileOpen(false)}
+          />
+        )}
     </div>
   );
 }

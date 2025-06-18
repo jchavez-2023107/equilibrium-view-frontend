@@ -1,38 +1,97 @@
-import { FaUserCircle, FaCalendarAlt } from 'react-icons/fa';
+import { FaCalendarAlt } from 'react-icons/fa';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import { useState } from 'react';
-import userImage from '../../assets/img/user.png';
-import './../Profile/Profile.css';
+import { useEffect, useState } from 'react';
+import userImage from '../../../assets/img/user.png';
+import './../Profile/ProfileUs.css';
+import { Link } from 'react-router-dom';
+import { fetchMyProfile, updateProfile } from '../../../services/api.js';
 
-
-
-function Profile() {
-  const [birthDate, setBirthDate] = useState(new Date());
+function ProfileUs() {
+  const [birthDate, setBirthDate] = useState(null);
   const [calendarOpen, setCalendarOpen] = useState(false);
   const [editMode, setEditMode] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const [profile, setProfile] = useState({
-    username: "ppalacios-2023029",
-    email: "ppalacios-2023029@kinal.edu.gt",
-    telefono: "4210-2425",
-    bio: "Voluntario con certificado nivel medio.\nCuento con tres meses de experiencia"
+    username: '',
+    email: '',
+    telefono: '',
+    bio: ''
   });
+
+  // ✅ Cargar datos del usuario al montar
+  useEffect(() => {
+    const loadProfile = async () => {
+      try {
+        const user = await fetchMyProfile();
+        setProfile({
+          username: user.username || '',
+          email: user.email || '',
+          telefono: user.profile?.contactNumber || '',
+          bio: user.profile?.bio || ''
+        });
+
+        if (user.profile?.birthDate) {
+          setBirthDate(new Date(user.profile.birthDate));
+        }
+      } catch (error) {
+        console.error('Error al cargar el perfil:', error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadProfile();
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setProfile(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleToggleEdit = () => {
+  const handleToggleEdit = async () => {
     if (editMode) {
-      alert("Perfil actualizado ✅");
+      try {
+        const updated = await updateProfile({
+          bio: profile.bio,
+          contactNumber: profile.telefono,
+          birthDate: birthDate ? birthDate.toISOString() : null
+        });
+
+        alert("Perfil actualizado correctamente ✅");
+
+        setProfile(prev => ({
+          ...prev,
+          telefono: updated.profile?.contactNumber || '',
+          bio: updated.profile?.bio || ''
+        }));
+
+        if (updated.profile?.birthDate) {
+          setBirthDate(new Date(updated.profile.birthDate));
+        }
+      } catch (err) {
+        console.error('Error al actualizar perfil:', err);
+        alert("Ocurrió un error al guardar los cambios ❌");
+      }
     }
+
     setEditMode(prev => !prev);
   };
 
+  if (loading) return <p className="profile-loading">Cargando perfil...</p>;
+
   return (
     <div className="profile-container">
+      <header>
+        <div className="header-left">
+          <Link to={'/main-user'}>
+            <img src="/logo.png" alt="Logo" className="logo" />
+            <h1 className="title">Equilibrium</h1>
+          </Link>
+        </div>
+      </header>
+
       <div className="profile-card">
         <h1 className="profile-title">Perfil</h1>
         <img src={userImage} alt="Usuario" className="user-image" />
@@ -43,8 +102,7 @@ function Profile() {
             type="text"
             name="username"
             value={profile.username}
-            onChange={handleChange}
-            readOnly={!editMode}
+            readOnly
           />
         </div>
 
@@ -54,8 +112,7 @@ function Profile() {
             type="email"
             name="email"
             value={profile.email}
-            onChange={handleChange}
-            readOnly={!editMode}
+            readOnly
           />
         </div>
 
@@ -109,4 +166,4 @@ function Profile() {
   );
 }
 
-export default Profile;
+export default ProfileUs

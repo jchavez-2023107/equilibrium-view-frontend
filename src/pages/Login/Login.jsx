@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { apiFetch } from '../../services/api.js';
 import { useAuth } from '../../context/AuthContext.jsx';
 import './../Login/Login.css';
-import logo from "../../img/Logo.png";
+import logo from '../../assets/img/Logo.png';
 
 function parseJwt(token) {
   try {
@@ -39,6 +39,13 @@ export default function Login() {
 
       login(token);
       const payload = parseJwt(token);
+
+      localStorage.setItem('userData', JSON.stringify({
+        username: payload.username,
+        email: payload.email,
+        role: payload.role
+      }))
+
       const role = payload?.role;
 
       if (role === 'ADMIN') {
