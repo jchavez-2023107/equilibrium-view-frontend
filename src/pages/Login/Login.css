@@ -30,8 +30,10 @@
   font-size: 2.8rem;
   font-weight: 700;
   color: #1f1f1f;
-   text-align: center;
-   margin-top: 4rem; /* 👈 esto lo baja un poco */
+  text-align: center; /* ✅ CENTRADO */
+  margin-top: 4rem;  /* Opcional: ajusta si está muy despegado */
+  margin-left: 2rem; /* 👈 lo mueve un poco a la izquierda */
+  align-self: flex-start; /* 👈 asegura que esté alineado a la izquierda */
 }
 
 .login-logo {
