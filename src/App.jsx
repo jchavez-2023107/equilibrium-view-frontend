@@ -32,6 +32,8 @@ function App() {
   useEffect(() => {
     // Conecta socket después de cargar la app si hay token en localStorage
     const token = localStorage.getItem("token");
+      console.log("[Socket.IO] Token con el que conecto:", token); // <--- AQUÍ
+
     if (token) {
       connectSocket(token);
     }

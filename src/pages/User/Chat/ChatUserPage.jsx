@@ -1,15 +1,15 @@
-import { useState, useEffect } from 'react';
-import { useAuth } from '../../../context/AuthContext.jsx';
+import { useState, useEffect } from "react";
+import { useAuth } from "../../../context/AuthContext.jsx";
 import {
   fetchMyChats,
   fetchUsers,
   createChat,
-  fetchChatById
-} from '../../../services/api.js';
-import { getSocket } from '../../../services/socket'; // <<--- Agrega esto
-import ChatSidebarUser from './ChatUserSidebar.jsx';
-import ChatWindowUser from './ChatUserWindow.jsx';
-import './Css/ChatPage.css';
+  fetchChatById,
+} from "../../../services/api.js";
+import { getSocket } from "../../../services/socket"; // <<--- Agrega esto
+import ChatSidebarUser from "./ChatUserSidebar.jsx";
+import ChatWindowUser from "./ChatUserWindow.jsx";
+import "./Css/ChatPage.css";
 
 export default function ChatUserPage() {
   const { user } = useAuth();
@@ -24,9 +24,7 @@ export default function ChatUserPage() {
       const allUsers = await fetchUsers();
       setChats(chatList);
       setVolunteers(
-        allUsers.filter(u =>
-          u.role === 'VOLUNTEER' && u.status === 'ACTIVE'
-        )
+        allUsers.filter((u) => u.role === "VOLUNTEER" && u.status === "ACTIVE")
       );
     };
     load();
@@ -38,16 +36,18 @@ export default function ChatUserPage() {
     if (!socket) return;
 
     function handleNewMessage({ chatId, message }) {
-      // Si el chat abierto es el que recibe el mensaje, actualizar ventana
-      if (selectedChat && selectedChat._id === chatId) {
-        setSelectedChat(prev => ({
+      // Actualiza el chat abierto si corresponde
+      setSelectedChat((prev) => {
+        if (!prev || prev._id !== chatId) return prev;
+        return {
           ...prev,
-          messages: [...prev.messages, message]
-        }));
-      }
-      // Opcional: actualizar la lista de chats si quieres mostrar el último mensaje en el listado
-      setChats(prev =>
-        prev.map(c =>
+          messages: [...(prev.messages || []), message],
+        };
+      });
+
+      // Actualiza la lista de chats (último mensaje)
+      setChats((prev) =>
+        prev.map((c) =>
           c._id === chatId
             ? { ...c, messages: [...(c.messages || []), message] }
             : c
@@ -55,9 +55,8 @@ export default function ChatUserPage() {
       );
     }
 
-    // Nuevo chat creado en otro cliente
     function handleNewChat(chat) {
-      setChats(prev => [...prev, chat]);
+      setChats((prev) => [...prev, chat]);
     }
 
     socket.on("chat:message", handleNewMessage);
@@ -67,7 +66,7 @@ export default function ChatUserPage() {
       socket.off("chat:message", handleNewMessage);
       socket.off("chat:new", handleNewChat);
     };
-  }, [selectedChat]);
+  }, [setSelectedChat]);
 
   const handleSelectChat = async (chat) => {
     try {
@@ -84,7 +83,7 @@ export default function ChatUserPage() {
       const volunteerId = vol._id || vol.id;
       const newChat = await createChat({
         userId: user.uid,
-        volunteerId
+        volunteerId,
       });
 
       if (!newChat || !newChat._id) {
