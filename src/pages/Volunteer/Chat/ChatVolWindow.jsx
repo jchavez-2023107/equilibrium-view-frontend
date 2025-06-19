@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { useAuth } from '../../../context/AuthContext.jsx';
-import { sendMessage } from '../../../services/api.js';
+import { sendMessage, fetchChatById } from '../../../services/api.js';
 import { getSocket } from '../../../services/socket';
 import './Css/ChatWindow.css';
 
@@ -14,19 +14,18 @@ export default function ChatWindowVol({ chat, onClose }) {
     setMessages(chat?.messages || []);
   }, [chat]);
 
-  // Escucha mensajes en tiempo real
   useEffect(() => {
     const socket = getSocket();
     if (!socket || !chat?._id) return;
 
-    function handleNewMessage({ chatId, message }) {
+    async function handleNewMessage({ chatId, message }) {
       if (chatId === chat._id) {
-        setMessages(prev => [...prev, message]);
+        const fullChat = await fetchChatById(chatId);
+        setMessages(fullChat.messages);
       }
     }
 
     socket.on("chat:message", handleNewMessage);
-
     return () => {
       socket.off("chat:message", handleNewMessage);
     };
@@ -46,7 +45,9 @@ export default function ChatWindowVol({ chat, onClose }) {
     try {
       await sendMessage(chat._id, { text });
       setText('');
-      // No agregues el mensaje aquí, el backend lo mandará por socket
+      // Refresca la lista completa de mensajes después de enviar
+      const fullChat = await fetchChatById(chat._id);
+      setMessages(fullChat.messages);
     } catch (err) {
       console.error("❌ Error enviando mensaje:", err);
     }

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useAuth } from "../../../context/AuthContext.jsx";
 import {
   fetchMyChats,
@@ -6,13 +6,14 @@ import {
   createChat,
   fetchChatById,
 } from "../../../services/api.js";
-import { getSocket } from "../../../services/socket"; // <<--- Agrega esto
+import { useSocket } from "../../../context/SocketContext"; // <-- Usa el contexto global
 import ChatSidebarUser from "./ChatUserSidebar.jsx";
 import ChatWindowUser from "./ChatUserWindow.jsx";
 import "./Css/ChatPage.css";
 
 export default function ChatUserPage() {
   const { user } = useAuth();
+  const { socket } = useSocket();
   const [chats, setChats] = useState([]);
   const [volunteers, setVolunteers] = useState([]);
   const [selectedChat, setSelectedChat] = useState(null);
@@ -30,45 +31,8 @@ export default function ChatUserPage() {
     load();
   }, []);
 
-  // Escuchar mensajes nuevos en tiempo real
-  useEffect(() => {
-    const socket = getSocket();
-    if (!socket) return;
-
-    function handleNewMessage({ chatId, message }) {
-      // Actualiza el chat abierto si corresponde
-      setSelectedChat((prev) => {
-        if (!prev || prev._id !== chatId) return prev;
-        return {
-          ...prev,
-          messages: [...(prev.messages || []), message],
-        };
-      });
-
-      // Actualiza la lista de chats (último mensaje)
-      setChats((prev) =>
-        prev.map((c) =>
-          c._id === chatId
-            ? { ...c, messages: [...(c.messages || []), message] }
-            : c
-        )
-      );
-    }
-
-    function handleNewChat(chat) {
-      setChats((prev) => [...prev, chat]);
-    }
-
-    socket.on("chat:message", handleNewMessage);
-    socket.on("chat:new", handleNewChat);
-
-    return () => {
-      socket.off("chat:message", handleNewMessage);
-      socket.off("chat:new", handleNewChat);
-    };
-  }, [setSelectedChat]);
-
-  const handleSelectChat = async (chat) => {
+  // Seleccionar chat y cargar sus mensajes completos
+  const handleSelectChat = useCallback(async (chat) => {
     try {
       const fullChat = await fetchChatById(chat._id);
       setSelectedChat(fullChat);
@@ -76,9 +40,10 @@ export default function ChatUserPage() {
       console.error("❌ Error cargando chat:", err.message);
       alert("No tienes acceso a este chat.");
     }
-  };
+  }, []);
 
-  const handleStartChat = async (vol) => {
+  // Comenzar nuevo chat con un voluntario
+  const handleStartChat = useCallback(async (vol) => {
     try {
       const volunteerId = vol._id || vol.id;
       const newChat = await createChat({
@@ -97,7 +62,45 @@ export default function ChatUserPage() {
       console.error("❌ Error creando el chat:", err.message);
       alert("No se pudo crear el chat.");
     }
-  };
+  }, [user]);
+
+  // Listeners en tiempo real (socket global)
+  useEffect(() => {
+    if (!socket) return;
+
+    const handleNewMessage = ({ chatId, message }) => {
+      setSelectedChat((prev) => {
+        if (!prev || prev._id !== chatId) return prev;
+        return {
+          ...prev,
+          messages: [...(prev.messages || []), message],
+        };
+      });
+
+      setChats((prev) =>
+        prev.map((c) =>
+          c._id === chatId
+            ? { ...c, messages: [...(c.messages || []), message] }
+            : c
+        )
+      );
+    };
+
+    const handleNewChat = (chat) => {
+      setChats((prev) => {
+        if (prev.some((c) => c._id === chat._id)) return prev;
+        return [...prev, chat];
+      });
+    };
+
+    socket.on("chat:message", handleNewMessage);
+    socket.on("chat:new", handleNewChat);
+
+    return () => {
+      socket.off("chat:message", handleNewMessage);
+      socket.off("chat:new", handleNewChat);
+    };
+  }, [socket]);
 
   return (
     <div className="chat-page">
@@ -110,7 +113,7 @@ export default function ChatUserPage() {
       <ChatWindowUser
         chat={selectedChat}
         onClose={() => setSelectedChat(null)}
-        setSelectedChat={setSelectedChat} // Pásalo para actualizar desde adentro si quieres
+        setSelectedChat={setSelectedChat}
       />
     </div>
   );
