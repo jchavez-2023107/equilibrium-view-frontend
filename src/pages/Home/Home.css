@@ -205,3 +205,34 @@
   font-weight: bold;
   color: #111;
 }
+
+.footer-thanks {
+  background-color: #B97BF1; /* tono morado, cámbialo si usas otro */
+  color: #fff;
+  text-align: center;
+  padding: 1.5rem 0;
+  font-size: 0.95rem;
+}
+
+.footer-thanks p {
+  margin: 0;
+  line-height: 1.4;
+}
+
+.footer-thanks strong {
+  font-weight: 600;
+}
+
+.footer-copy {
+  background-color: #4b0082; /* morado oscuro */
+  color: #fff;
+  text-align: center;
+  padding: 0.75rem 0;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.footer-copy p {
+  margin: 0;
+  line-height: 1.3;
+}
