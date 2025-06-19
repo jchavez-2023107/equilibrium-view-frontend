@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import userImage from '../../assets/img/user.png';
-import logo from "../../img/Logo.png";
+import logo from '../../assets/img/logo.png';
 import './../Help/Help.css';
 
 function Help() {

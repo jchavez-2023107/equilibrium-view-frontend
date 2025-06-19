@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Doughnut } from 'react-chartjs-2';
 import { Chart, ArcElement, Tooltip, Legend } from 'chart.js';
-import logo from '../../img/Logo.png';
+import logo from '../../assets/img/logo.png';
 import userImage from '../../assets/img/user.png';
 import volunteerImg from '../../assets/img/volunteer.png';
 import calendarImg from '../../assets/img/calendar.png';

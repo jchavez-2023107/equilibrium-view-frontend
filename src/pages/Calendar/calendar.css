@@ -1,0 +1,138 @@
+/* header violeta con logo + navegación */
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #b97bf1;
+  padding: 0.5rem 1rem;
+  width: 100vw;
+  position: relative;
+  left: 50%; right: 50%;
+  margin-left: -50vw; margin-right: -50vw;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  z-index: 10;
+}
+
+.logo-combo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.logo-img {
+  width: 36px;
+  height: auto;
+}
+
+.logo-text {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #111;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.calendar-nav .nav-link {
+  margin-left: 1rem;
+  text-decoration: none;
+  color: #111;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.calendar-nav .nav-link:hover {
+  text-decoration: underline;
+}
+
+/* cuerpo del calendario y citas */
+.calendar-container {
+  max-width: 900px;
+  margin: 1rem auto;
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.calendar-body {
+  padding: 1rem;
+}
+
+.calendar-title {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.react-calendar {
+  width: 100%;
+  max-width: 100%;
+  border: none;
+  font-family: inherit;
+  box-shadow: none;
+}
+
+.react-calendar__tile--now { background: #e0f7fa !important; }
+.react-calendar__tile--active { background: #4fc3f7 !important; color: white !important; }
+
+.dots-container {
+  display: flex;
+  justify-content: center;
+  gap: 2px;
+  margin-top: 4px;
+}
+
+.dot {
+  width: 6px; height: 6px;
+  background: #ff5252;
+  border-radius: 50%;
+}
+
+.extra-count {
+  font-size: 0.7rem;
+  color: #ff1744;
+  margin-left: 2px;
+}
+
+.appointments-list {
+  margin-top: 1.5rem;
+}
+
+.appointment-card {
+  background: #fafafa;
+  border-left: 4px solid #4fc3f7;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+  border-radius: 4px;
+}
+
+.appointment-title {
+  font-size: 1.1rem;
+  color: #0077b6;
+  margin-bottom: 0.25rem;
+}
+
+.appointment-description { font-size: 0.95rem; margin-bottom: 0.25rem; color: #555; }
+.appointment-user, .appointment-date { font-size: 0.85rem; color: #777; }
+.no-appointments { text-align: center; font-style: italic; color: #888; margin: 1rem 0; }
+
+
+.logo-combo {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.logo-img {
+  width: 50px;
+  height: auto;
+  display: block;
+}
+
+
+.logo-text {
+  font-size: 1.6rem;     /* letra más grande */
+  font-weight: 700;
+  color: #111;
+  font-family: 'Montserrat', sans-serif;
+}

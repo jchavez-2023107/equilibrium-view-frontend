@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { apiFetch } from '../../services/api.js';
 import './../RegisterVol/CompleteVol.css';
-import logo from "../../img/Logo.png";
+import logo from '../../assets/img/logo.png';
 
 export default function CompleteVolunteer() {
   const { id } = useParams();

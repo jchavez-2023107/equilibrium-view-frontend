@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { apiFetch } from '../../services/api.js';
 import { useAuth } from '../../context/AuthContext.jsx';
 import './../Login/Login.css';
-import logo from "../../img/Logo.png";
+import logo from '../../assets/img/logo.png';
 
 function parseJwt(token) {
   try {
