@@ -1,4 +1,3 @@
-// src/pages/Volunteer/ChatVolPage.jsx
 import { useState, useEffect } from 'react';
 import { useAuth } from '../../../context/AuthContext.jsx';
 import {
@@ -7,6 +6,7 @@ import {
   createChat,
   fetchChatById
 } from '../../../services/api.js';
+import { getSocket } from '../../../services/socket'; // <<--- IMPORTANTE
 import ChatSidebarVol from './ChatVolSidebar.jsx';
 import ChatWindowVol from './ChatVolWindow.jsx';
 import './Css/ChatPage.css';
@@ -17,6 +17,7 @@ export default function ChatVolPage() {
   const [users, setUsers] = useState([]);
   const [selectedChat, setSelectedChat] = useState(null);
 
+  // Cargar chats y usuarios al iniciar
   useEffect(() => {
     const load = async () => {
       const chatList = await fetchMyChats();
@@ -26,6 +27,42 @@ export default function ChatVolPage() {
     };
     load();
   }, []);
+
+  // Escuchar eventos en tiempo real por socket.io
+  useEffect(() => {
+    const socket = getSocket();
+    if (!socket) return;
+
+    function handleNewMessage({ chatId, message }) {
+      // Si el chat abierto es el que recibe el mensaje, actualizar ventana
+      if (selectedChat && selectedChat._id === chatId) {
+        setSelectedChat(prev => ({
+          ...prev,
+          messages: [...prev.messages, message]
+        }));
+      }
+      // Actualizar la lista de chats (si quieres mostrar último mensaje)
+      setChats(prev =>
+        prev.map(c =>
+          c._id === chatId
+            ? { ...c, messages: [...(c.messages || []), message] }
+            : c
+        )
+      );
+    }
+
+    function handleNewChat(chat) {
+      setChats(prev => [...prev, chat]);
+    }
+
+    socket.on("chat:message", handleNewMessage);
+    socket.on("chat:new", handleNewChat);
+
+    return () => {
+      socket.off("chat:message", handleNewMessage);
+      socket.off("chat:new", handleNewChat);
+    };
+  }, [selectedChat]);
 
   const handleSelectChat = async (chat) => {
     try {
@@ -40,11 +77,6 @@ export default function ChatVolPage() {
   const handleStartChat = async (usr) => {
     try {
       const userId = usr._id || usr.id;
-      console.log("📤 Enviando createChat body:", {
-        userId,
-        volunteerId: user.uid
-      });
-
       if (!userId) throw new Error("Usuario sin ID válido");
 
       const newChat = await createChat({

@@ -1,8 +1,7 @@
-// src/components/User/ChatUserWindow.jsx
-// ✅ Es idéntico a ChatWindowVol pero mantenido para rol USER
 import { useState, useEffect, useRef } from 'react';
 import { useAuth } from '../../../context/AuthContext.jsx';
-import { sendMessage, fetchChatById } from '../../../services/api.js';
+import { sendMessage } from '../../../services/api.js';
+import { getSocket } from '../../../services/socket';
 import './Css/ChatWindow.css';
 
 export default function ChatWindowUser({ chat, onClose }) {
@@ -11,26 +10,27 @@ export default function ChatWindowUser({ chat, onClose }) {
   const [messages, setMessages] = useState([]);
   const scrollRef = useRef();
 
-  const loadMessages = async () => {
-    if (!chat?._id) return;
-    try {
-      const fresh = await fetchChatById(chat._id);
-      if (fresh.messages.length > messages.length) {
-        setMessages(fresh.messages);
-      }
-    } catch (err) {
-      console.error("❌ Error recargando mensajes:", err);
-    }
-  };
-
   useEffect(() => {
     setMessages(chat?.messages || []);
   }, [chat]);
 
+  // Escuchar mensajes de Socket.IO en esta ventana
   useEffect(() => {
-    const interval = setInterval(loadMessages, 5000);
-    return () => clearInterval(interval);
-  }, [chat, messages]);
+    const socket = getSocket();
+    if (!socket || !chat?._id) return;
+
+    function handleNewMessage({ chatId, message }) {
+      if (chatId === chat._id) {
+        setMessages(prev => [...prev, message]);
+      }
+    }
+
+    socket.on("chat:message", handleNewMessage);
+
+    return () => {
+      socket.off("chat:message", handleNewMessage);
+    };
+  }, [chat?._id]);
 
   useEffect(() => {
     scrollRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -44,9 +44,10 @@ export default function ChatWindowUser({ chat, onClose }) {
   const handleSend = async () => {
     if (!text.trim()) return;
     try {
-      const updated = await sendMessage(chat._id, { text });
-      setMessages(updated.messages);
+      // Solo manda el mensaje, el backend lo emite por socket para ambos clientes
+      await sendMessage(chat._id, { text });
       setText('');
+      // El mensaje llegará automáticamente por socket, no necesitas agregarlo aquí
     } catch (err) {
       console.error("❌ Error enviando mensaje:", err);
     }

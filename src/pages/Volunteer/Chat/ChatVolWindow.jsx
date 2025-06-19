@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useAuth } from '../../../context/AuthContext.jsx';
-import { sendMessage, closeChat, fetchChatById } from '../../../services/api.js';
+import { sendMessage } from '../../../services/api.js';
+import { getSocket } from '../../../services/socket';
 import './Css/ChatWindow.css';
 
 export default function ChatWindowVol({ chat, onClose }) {
@@ -9,26 +10,27 @@ export default function ChatWindowVol({ chat, onClose }) {
   const [messages, setMessages] = useState([]);
   const scrollRef = useRef();
 
-    const loadMessages = async () => {
-    if (!chat?._id) return;
-    try {
-      const fresh = await fetchChatById(chat._id);
-      if (fresh.messages.length > messages.length) {
-        setMessages(fresh.messages);
-      }
-    } catch (err) {
-      console.error("❌ Error recargando mensajes:", err);
-    }
-  };
-
   useEffect(() => {
     setMessages(chat?.messages || []);
   }, [chat]);
 
+  // Escucha mensajes en tiempo real
   useEffect(() => {
-    const interval = setInterval(loadMessages, 5000);
-    return () => clearInterval(interval);
-  }, [chat, messages]);
+    const socket = getSocket();
+    if (!socket || !chat?._id) return;
+
+    function handleNewMessage({ chatId, message }) {
+      if (chatId === chat._id) {
+        setMessages(prev => [...prev, message]);
+      }
+    }
+
+    socket.on("chat:message", handleNewMessage);
+
+    return () => {
+      socket.off("chat:message", handleNewMessage);
+    };
+  }, [chat?._id]);
 
   useEffect(() => {
     scrollRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -42,9 +44,9 @@ export default function ChatWindowVol({ chat, onClose }) {
   const handleSend = async () => {
     if (!text.trim()) return;
     try {
-      const updated = await sendMessage(chat._id, { text });
-      setMessages(updated.messages);
+      await sendMessage(chat._id, { text });
       setText('');
+      // No agregues el mensaje aquí, el backend lo mandará por socket
     } catch (err) {
       console.error("❌ Error enviando mensaje:", err);
     }
