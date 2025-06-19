@@ -38,3 +38,9 @@ export function disconnectSocket() {
     socket = null;
   }
 }
+
+export function onSocketEvent(eventName, callback) {
+  if (!socket) return;
+  socket.on(eventName, callback);
+}
+
