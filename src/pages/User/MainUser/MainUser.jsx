@@ -163,7 +163,7 @@ export default function MainUser() {
             <p>Fecha: 05/06/2025</p>
             <p>Duración: 40 minutos</p>
             <p>Usuario: Luis Rodríguez</p>
-            <Link to="/calendar"><button>Ver</button></Link>
+            <Link to="/calendar-user"><button>Ver</button></Link>
           </div>
         </div>
 

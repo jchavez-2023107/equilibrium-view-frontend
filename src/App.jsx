@@ -12,6 +12,11 @@ const MainUser = lazy(() => import("./pages/User/MainUser/MainUser"))
 const ProfileUs = lazy(() => import("./pages/User/Profile/ProfileUs"))
 const HelpUs = lazy(() => import('./pages/User/Help/Help.User'))
 const ChatUserPage = lazy(() => import('./pages/User/Chat/ChatUserPage'))
+const LayoutUs = lazy(() => import("./pages/User/Appointment/Layout.User"))
+const CalendarViewUs = lazy(() => import("./pages/User/Calendar/Calendar.User"))
+const AppointmentListUs = lazy(() => import("./pages/User/Appointment/AppointmentList.User"))
+const AppointmentFormUser = lazy(() => import("./pages/User/Appointment/AppointmentForm.User"))
+const TrashViewUs = lazy(() => import("./pages/User/Appointment/TrashView.User"))
 
 {/*VOLUNTEER */}
 const RegisterVolunteer = lazy(() => import("./pages/Volunteer/RegisterVol/RegisterVolunteer"))
@@ -45,6 +50,12 @@ function App() {
           <Route path="/profile-user" element={<ProfileUs/>}></Route>
           <Route path="/help-user" element={<HelpUs />} />
           <Route path="/chat-user" element={<ChatUserPage/>}></Route>
+        <Route element={<LayoutUs/>}>
+          <Route path="/calendar-user" element={<CalendarViewUs/>}></Route>
+          <Route path="/citas-lista-user" element={<AppointmentListUs/>}></Route>
+          <Route path="/citas-new-user" element={<AppointmentFormUser/>}></Route>
+          <Route path="/citas-trash-user" element={<TrashViewUs/>}></Route>
+        </Route>
           
 
 

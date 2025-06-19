@@ -1,7 +1,7 @@
 import React from 'react';
 import { useAppointments } from '../../../context/AppointmentContext';
 
-export default function TrashViewVol() {
+export default function TrashViewUs() {
   const { deletedAppointments } = useAppointments();
 
   return (
@@ -14,7 +14,7 @@ export default function TrashViewVol() {
             <div key={appt._id} className="trash-card">
               <p className="trash-title">{appt.reason}</p>
               {appt.notes && <p className="trash-description">{appt.notes}</p>}
-              <p className="trash-user">Usuario: {appt.userId?.username || 'N/A'}</p>
+              <p className="trash-user">Voluntario: {appt.volunteerId?.username || 'N/A'}</p>
               <p className="trash-date">Fecha: {new Date(appt.scheduledAt).toLocaleString()}</p>
             </div>
           ))}

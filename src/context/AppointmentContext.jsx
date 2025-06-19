@@ -1,68 +1,65 @@
-import { createContext, useContext, useReducer, useEffect } from 'react';
+// src/context/AppointmentContext.jsx
+import { createContext, useContext, useEffect, useState } from 'react';
+import { apiFetch } from '../services/api';
 
 const AppointmentContext = createContext();
 
-const local = JSON.parse(localStorage.getItem('appointmentsState'));
-
-const initialState = local || {
-  appointments: [],
-  deleted: []
-};
-
-function appointmentReducer(state, action) {
-  switch (action.type) {
-    case 'ADD_APPOINTMENT':
-      return {
-        ...state,
-        appointments: [
-          ...state.appointments,
-          {
-            id: Date.now().toString(),
-            title: action.payload.title.trim(),
-            description: action.payload.description.trim(),
-            user: action.payload.user.trim(),
-            date: action.payload.date,
-            createdAt: new Date().toISOString()
-          }
-        ]
-      };
-
-    case 'DELETE_APPOINTMENT': {
-      const toDelete = state.appointments.find(a => a.id === action.payload.id);
-      return {
-        ...state,
-        appointments: state.appointments.filter(a => a.id !== action.payload.id),
-        deleted: [...state.deleted, toDelete]
-      };
-    }
-
-    case 'RESTORE_APPOINTMENT': {
-      const toRestore = state.deleted.find(a => a.id === action.payload.id);
-      return {
-        ...state,
-        appointments: [...state.appointments, toRestore],
-        deleted: state.deleted.filter(a => a.id !== action.payload.id)
-      };
-    }
-
-    default:
-      return state;
-  }
-}
-
 export function AppointmentProvider({ children }) {
-  const [state, dispatch] = useReducer(appointmentReducer, initialState);
+  const [appointments, setAppointments] = useState([]);
+  const [deletedAppointments, setDeletedAppointments] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  const fetchAppointments = async () => {
+    try {
+      setLoading(true);
+      const res = await apiFetch('/appointments');
+      setAppointments(res.appointments || []);
+    } catch (error) {
+      console.error('Error al cargar citas:', error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const createAppointment = async (data) => {
+    const res = await apiFetch('/appointments', {
+      method: 'POST',
+      body: JSON.stringify({
+        volunteerId: data.volunteerId,
+        userId: data.userId,
+        scheduledAt: data.scheduledAt, // ya viene bien formateado
+        reason: data.title,
+        notes: data.description
+      })
+    });
+
+    setAppointments(prev => [...prev, res.appointment]);
+  };
+
+  const deleteAppointment = async (id) => {
+    try {
+      const res = await apiFetch(`/appointments/${id}`, {
+        method: 'DELETE'
+      });
+      setAppointments(prev => prev.filter(a => a._id !== id));
+      setDeletedAppointments(prev => [...prev, res.appointment]);
+    } catch (error) {
+      console.error('Error al eliminar cita:', error.message);
+    }
+  };
 
   useEffect(() => {
-    localStorage.setItem('appointmentsState', JSON.stringify(state));
-  }, [state]);
+    fetchAppointments();
+  }, []);
 
   return (
     <AppointmentContext.Provider
       value={{
-        appointments: state.appointments,
-        deletedAppointments: state.deleted,  // cambio de nombre para claridad
-        dispatch
+        appointments,
+        deletedAppointments,
+        loading,
+        createAppointment,
+        deleteAppointment
       }}
     >
       {children}

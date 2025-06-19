@@ -1,7 +1,7 @@
 import React from 'react';
 import { useAppointments } from '../../../context/AppointmentContext';
 
-export default function AppointmentListVol() {
+export default function AppointmentListUs() {
   const { appointments, deleteAppointment, loading } = useAppointments();
 
   if (loading) return <p>Cargando citas...</p>;
@@ -30,7 +30,7 @@ export default function AppointmentListVol() {
               {appt.notes && <p className="appointment-description">{appt.notes}</p>}
 
               <div className="card-footer">
-                <p className="appointment-user">Usuario: {appt.userId?.username || 'N/A'}</p>
+                <p className="appointment-user">Voluntario: {appt.volunteerId?.username || 'N/A'}</p>
                 <p className="appointment-date">Fecha: {new Date(appt.scheduledAt).toLocaleString()}</p>
               </div>
             </div>

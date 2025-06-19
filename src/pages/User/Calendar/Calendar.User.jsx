@@ -4,7 +4,7 @@ import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import { useAppointments } from "../../../context/AppointmentContext";
 
-export default function CalendarViewVol() {
+export default function CalendarViewUs() {
   const { appointments } = useAppointments();
   const [date, setDate] = useState(new Date());
 
@@ -55,16 +55,17 @@ export default function CalendarViewVol() {
                   {appt.notes || "Sin notas"}
                 </p>
 
-                <p className="appointment-user">
-                  <strong>Usuario asignado:</strong> {appt.userId?.username || "Desconocido"}
+                <p className="appointment-volunteer">
+                  <strong>Voluntario asignado:</strong> {appt.volunteerId?.username || "Desconocido"}
                 </p>
+
 
                 <p className="appointment-date">
                   <strong>Fecha:</strong> {dateStr} — <strong>Hora:</strong> {timeStr}
                 </p>
 
-                <p className="appointment-volunteer">
-                  <strong>Voluntario:</strong> {appt.volunteerId?.username || "Desconocido"}
+                <p className="appointment-user">
+                  <strong>Usuario:</strong> {appt.userId?.username || "Desconocido"}
                 </p>
 
                 {appt.status && (
