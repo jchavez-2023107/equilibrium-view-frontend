@@ -7,7 +7,7 @@ import chatimg from '../../assets/img/chat.png';
 import privacidadimg from '../../assets/img/privacidad.png';
 import usuariosimg from '../../assets/img/usuarios.png';
 import comunidadimg from '../../assets/img/comunidad.png';
-import logo from "../../img/Logo.png";
+import logo from "../../assets/img/Logo.png";
 
 function Home() {
   return (

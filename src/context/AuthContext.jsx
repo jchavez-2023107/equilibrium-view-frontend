@@ -30,9 +30,12 @@ const AuthContext = createContext();
  */
 export function AuthProvider({ children }) {
   const [token, setToken] = useState(() => localStorage.getItem('token'));
-  const [user, setUser] = useState(() =>
-    token ? parseJwt(token) : null
-  );
+  const [user, setUser] = useState(() => {
+    const token = localStorage.getItem('token');
+    const parsed = token ? parseJwt(token) : null;
+    if (parsed) console.log("🔐 JWT payload:", parsed);
+    return parsed;
+  });
 
   const login = newToken => {
     localStorage.setItem('token', newToken);

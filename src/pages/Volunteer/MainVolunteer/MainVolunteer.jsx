@@ -130,7 +130,7 @@ export default function MainVolunteer() {
           <h1 className="volu-title">Equilibrium</h1>
         </div>
         <div className="volu-right">
-          <Link to="/chat" className="volu-nav">Chats</Link>
+          <Link to="/chat-vol" className="volu-nav">Chats</Link>
           <Link to="/help-vol" className="volu-nav">Ayuda</Link>
           <Link to="/notificacion" className="volu-notif">🔔</Link>
           <Link to="/profile-vol" className="volu-user">{user?.username || 'Usuario'}</Link>
