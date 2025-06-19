@@ -1,20 +1,21 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { Doughnut } from 'react-chartjs-2';
-import { Chart, ArcElement, Tooltip, Legend } from 'chart.js';
-import logo from '../../../assets/img/Logo.png';
-import userImage from '../../../assets/img/user.png';
-import volunteerImg from '../../../assets/img/volunteer.png';
-import calendarImg from '../../../assets/img/calendar.png';
-import './MainVol.css';
-import ModalProfile from '../../ModalProfile/ModalProfile';
-import { fetchMyProfile } from '../../../services/api';
-import { useAuth } from '../../../context/AuthContext'; 
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { Doughnut } from "react-chartjs-2";
+import { Chart, ArcElement, Tooltip, Legend } from "chart.js";
+import logo from "../../../assets/img/Logo.png";
+import userImage from "../../../assets/img/user.png";
+import volunteerImg from "../../../assets/img/volunteer.png";
+import calendarImg from "../../../assets/img/calendar.png";
+import "./MainVol.css";
+import ModalProfile from "../../ModalProfile/ModalProfile";
+import { fetchMyProfile } from "../../../services/api";
+import { useAuth } from "../../../context/AuthContext";
+import ChatVolPage from "../Chat/ChatVolPage";
 
 Chart.register(ArcElement, Tooltip, Legend);
 
 export default function MainVolunteer() {
-  const { user } = useAuth()
+  const { user } = useAuth();
   const frases = [
     "Confía en ti, incluso cuando dudes.",
     "Cada día es una nueva oportunidad.",
@@ -22,26 +23,30 @@ export default function MainVolunteer() {
     "Tu valor no cambia por tus errores.",
     "La calma llega, solo sé paciente.",
     "Estás más cerca de lo que crees.",
-    "Sé amable contigo mismo hoy."
+    "Sé amable contigo mismo hoy.",
   ];
 
   const fraseDelDia = frases[new Date().getDay()];
   const today = new Date().toLocaleDateString();
 
   const [selectedEmotion, setSelectedEmotion] = useState(null);
-  const [emotionsData, setEmotionsData] = useState({ triste: 0, serio: 0, feliz: 0 });
+  const [emotionsData, setEmotionsData] = useState({
+    triste: 0,
+    serio: 0,
+    feliz: 0,
+  });
   const [isProfileOpen, setIsProfileOpen] = useState(false);
 
   const [profile, setProfile] = useState({
-    username: '',
-    email: '',
-    telefono: '',
-    bio: ''
+    username: "",
+    email: "",
+    telefono: "",
+    bio: "",
   });
-  const [birthDate, setBirthDate] = useState(null)
+  const [birthDate, setBirthDate] = useState(null);
 
   useEffect(() => {
-    const stored = JSON.parse(localStorage.getItem('emociones')) || {};
+    const stored = JSON.parse(localStorage.getItem("emociones")) || {};
     setEmotionsData(stored);
   }, []);
 
@@ -50,10 +55,10 @@ export default function MainVolunteer() {
       try {
         const userData = await fetchMyProfile();
         setProfile({
-          username: userData.username || '',
-          email: userData.email || '',
-          telefono: userData.profile?.phone || '',
-          bio: userData.profile?.bio || ''
+          username: userData.username || "",
+          email: userData.email || "",
+          telefono: userData.profile?.phone || "",
+          bio: userData.profile?.bio || "",
         });
         if (userData.profile?.birthDate) {
           setBirthDate(new Date(userData.profile.birthDate));
@@ -61,9 +66,9 @@ export default function MainVolunteer() {
           setBirthDate(null);
         }
       } catch (err) {
-        console.error('Error al cargar perfil del voluntario:', err);
+        console.error("Error al cargar perfil del voluntario:", err);
       }
-    }
+    };
 
     cargarPerfil();
   }, []);
@@ -74,10 +79,10 @@ export default function MainVolunteer() {
         try {
           const userData = await fetchMyProfile();
           setProfile({
-            username: userData.username || '',
-            email: userData.email || '',
-            telefono: userData.profile?.phone || '',
-            bio: userData.profile?.bio || ''
+            username: userData.username || "",
+            email: userData.email || "",
+            telefono: userData.profile?.phone || "",
+            bio: userData.profile?.bio || "",
           });
           if (userData.profile?.birthDate) {
             setBirthDate(new Date(userData.profile.birthDate));
@@ -85,7 +90,7 @@ export default function MainVolunteer() {
             setBirthDate(null);
           }
         } catch (err) {
-          console.error('Error al cargar perfil del voluntario (modal):', err);
+          console.error("Error al cargar perfil del voluntario (modal):", err);
         }
       };
 
@@ -94,32 +99,32 @@ export default function MainVolunteer() {
   }, [isProfileOpen]);
 
   const handleEmotionClick = (emotion) => {
-    const stored = JSON.parse(localStorage.getItem('emociones')) || {};
+    const stored = JSON.parse(localStorage.getItem("emociones")) || {};
     if (!stored[emotion]) stored[emotion] = 0;
 
-    const lastEntry = localStorage.getItem('emocionHoy');
-    if (lastEntry === today) return alert('Ya registraste tu emoción hoy');
+    const lastEntry = localStorage.getItem("emocionHoy");
+    if (lastEntry === today) return alert("Ya registraste tu emoción hoy");
 
     stored[emotion] += 1;
-    localStorage.setItem('emociones', JSON.stringify(stored));
-    localStorage.setItem('emocionHoy', today);
+    localStorage.setItem("emociones", JSON.stringify(stored));
+    localStorage.setItem("emocionHoy", today);
     setEmotionsData(stored);
     setSelectedEmotion(emotion);
   };
 
   const total = Object.values(emotionsData).reduce((a, b) => a + b, 0);
-  const mostFrequent = Object.entries(emotionsData)
-    .sort((a, b) => b[1] - a[1])[0]?.[0] || '';
+  const mostFrequent =
+    Object.entries(emotionsData).sort((a, b) => b[1] - a[1])[0]?.[0] || "";
 
   const chartData = {
-    labels: ['Triste', 'Serio', 'Feliz'],
+    labels: ["Triste", "Serio", "Feliz"],
     datasets: [
       {
         data: [emotionsData.triste, emotionsData.serio, emotionsData.feliz],
-        backgroundColor: ['#6BAED6', '#FFD54F', '#81C784'],
-        borderWidth: 1
-      }
-    ]
+        backgroundColor: ["#6BAED6", "#FFD54F", "#81C784"],
+        borderWidth: 1,
+      },
+    ],
   };
 
   return (
@@ -130,15 +135,23 @@ export default function MainVolunteer() {
           <h1 className="volu-title">Equilibrium</h1>
         </div>
         <div className="volu-right">
-          <Link to="/chat-vol" className="volu-nav">Chats</Link>
-          <Link to="/help-vol" className="volu-nav">Ayuda</Link>
-          <Link to="/notificacion" className="volu-notif">🔔</Link>
-          <Link to="/profile-vol" className="volu-user">{user?.username || 'Usuario'}</Link>
+          <Link to="/chat-vol" className="volu-nav">
+            Chats
+          </Link>
+          <Link to="/help-vol" className="volu-nav">
+            Ayuda
+          </Link>
+          <Link to="/notificacion" className="volu-notif">
+            🔔
+          </Link>
+          <Link to="/profile-vol" className="volu-user">
+            {user?.username || "Usuario"}
+          </Link>
           <img
             src={userImage}
             alt="Usuario"
             className="volu-user-img"
-            style={{ cursor: 'pointer' }}
+            style={{ cursor: "pointer" }}
             onClick={() => setIsProfileOpen(true)}
           />
         </div>
@@ -146,8 +159,11 @@ export default function MainVolunteer() {
 
       <main className="volu-main">
         <h2 className="volu-saludo">
-          ¡Hola, {user?.username || 'Usuario'}! Estamos felices de verte de nuevo.<br />
-          ¿Listo para continuar ayudando a personas para que tengan equilibrio mental?
+          ¡Hola, {user?.username || "Usuario"}! Estamos felices de verte de
+          nuevo.
+          <br />
+          ¿Listo para continuar ayudando a personas para que tengan equilibrio
+          mental?
         </h2>
 
         <div className="volu-cards">
@@ -156,7 +172,9 @@ export default function MainVolunteer() {
             <p>Fecha: 10/06/2025</p>
             <p>Duración: 45 minutos</p>
             <p>Usuario: Ana Morales</p>
-            <Link to="/chat"><button>Chat</button></Link>
+            <Link to="/chat-vol">
+              <button>Chat</button>
+            </Link>
           </div>
 
           <div className="volu-card">
@@ -164,16 +182,33 @@ export default function MainVolunteer() {
             <p>Fecha: 05/06/2025</p>
             <p>Duración: 40 minutos</p>
             <p>Usuario: Luis Rodríguez</p>
-            <Link to="/calendar-vol"><button>Ver</button></Link>
+            <Link to="/calendar-vol">
+              <button>Ver</button>
+            </Link>
           </div>
         </div>
 
         <div className="volu-encuesta">
           <h3>¿Cómo te encuentras el día de hoy?</h3>
           <div className="volu-emojis">
-            <button onClick={() => handleEmotionClick('triste')} className={selectedEmotion === 'triste' ? 'selected' : ''}>😢</button>
-            <button onClick={() => handleEmotionClick('serio')} className={selectedEmotion === 'serio' ? 'selected' : ''}>😐</button>
-            <button onClick={() => handleEmotionClick('feliz')} className={selectedEmotion === 'feliz' ? 'selected' : ''}>😊</button>
+            <button
+              onClick={() => handleEmotionClick("triste")}
+              className={selectedEmotion === "triste" ? "selected" : ""}
+            >
+              😢
+            </button>
+            <button
+              onClick={() => handleEmotionClick("serio")}
+              className={selectedEmotion === "serio" ? "selected" : ""}
+            >
+              😐
+            </button>
+            <button
+              onClick={() => handleEmotionClick("feliz")}
+              className={selectedEmotion === "feliz" ? "selected" : ""}
+            >
+              😊
+            </button>
           </div>
         </div>
 
@@ -182,9 +217,10 @@ export default function MainVolunteer() {
             <h3>Estadística Emocional</h3>
             <Doughnut data={chartData} />
             <p className="volu-mensaje-emocional">
-              {mostFrequent === 'feliz' && "¡Tu constancia emocional es admirable 😊"}
-              {mostFrequent === 'serio' && "Te invitamos a reflexionar 🧘"}
-              {mostFrequent === 'triste' && "Recuerda que siempre hay apoyo 💙"}
+              {mostFrequent === "feliz" &&
+                "¡Tu constancia emocional es admirable 😊"}
+              {mostFrequent === "serio" && "Te invitamos a reflexionar 🧘"}
+              {mostFrequent === "triste" && "Recuerda que siempre hay apoyo 💙"}
             </p>
           </div>
         )}
@@ -199,32 +235,38 @@ export default function MainVolunteer() {
           <div className="volu-card-contact">
             <img src={userImage} alt="Voluntario" />
             <p>Contacta con un usuario necesitado</p>
-            <Link to="/chat"><button>Chat</button></Link>
+            <Link to="/chat-vol">
+              <button>Chat</button>
+            </Link>
           </div>
 
           <div className="volu-card-contact">
             <img src={calendarImg} alt="Agenda" />
             <p>Agenda una cita con un usuario</p>
-            <Link to="/citas-new-vol"><button>Agendar</button></Link>
+            <Link to="/citas-new-vol">
+              <button>Agendar</button>
+            </Link>
           </div>
         </div>
       </main>
 
       <footer className="volu-footer">
-        <p><strong>FRASE DEL DÍA ❤️</strong></p>
+        <p>
+          <strong>FRASE DEL DÍA ❤️</strong>
+        </p>
         <p className="volu-frase-dia">{fraseDelDia}</p>
       </footer>
 
-        {isProfileOpen && (
-          <ModalProfile
-            profile={profile}
-            setProfile={setProfile}
-            birthDate={birthDate}
-            setBirthDate={setBirthDate}
-            isOpen={isProfileOpen}
-            onClose={() => setIsProfileOpen(false)}
-          />
-        )}
+      {isProfileOpen && (
+        <ModalProfile
+          profile={profile}
+          setProfile={setProfile}
+          birthDate={birthDate}
+          setBirthDate={setBirthDate}
+          isOpen={isProfileOpen}
+          onClose={() => setIsProfileOpen(false)}
+        />
+      )}
     </div>
   );
 }

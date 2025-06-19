@@ -32,37 +32,42 @@ export default function ChatSidebarUser({ chats, volunteers, onChatSelect, onSta
         />
       </div>
 
+      {/* --- Historial (chats) --- */}
       <div className="sidebar-section">
         <h4 className="sidebar-subtitle">Historial</h4>
-        <ul className="sidebar-list">
-          {chats
-            .filter(c =>
-              chatPartnerName(c)?.toLowerCase().includes(search.toLowerCase())
-            )
-            .map(c => (
-              <li key={c._id} onClick={() => onChatSelect(c)}>
-                <img className="sidebar-avatar" src="/assets/img/user.png" alt="avatar" />
-                <span>{chatPartnerName(c)}</span>
-              </li>
-            ))}
-        </ul>
+        <div className="sidebar-list-scroll">
+          <ul className="sidebar-list">
+            {chats
+              .filter(c =>
+                chatPartnerName(c)?.toLowerCase().includes(search.toLowerCase())
+              )
+              .map(c => (
+                <li key={c._id} onClick={() => onChatSelect(c)}>
+                  <img className="sidebar-avatar" src="/assets/img/user.png" alt="avatar" />
+                  <span>{chatPartnerName(c)}</span>
+                </li>
+              ))}
+          </ul>
+        </div>
       </div>
 
+      {/* --- Voluntarios disponibles --- */}
       <div className="sidebar-section">
         <h4 className="sidebar-subtitle">Voluntarios disponibles</h4>
-        <ul className="sidebar-list">
-          {filtered.map(v => {
-            const alreadyChatted = chats.some(c => c.volunteerId?._id === v._id);
-            if (alreadyChatted) return null;
-
-            return (
-              <li key={v._id} onClick={() => onStartChat(v)}>
-                <img className="sidebar-avatar" src="/assets/img/user.png" alt="avatar" />
-                <span>{v.username}</span>
-              </li>
-            );
-          })}
-        </ul>
+        <div className="sidebar-list-scroll">
+          <ul className="sidebar-list">
+            {filtered.map(v => {
+              const alreadyChatted = chats.some(c => c.volunteerId?._id === v._id);
+              if (alreadyChatted) return null;
+              return (
+                <li key={v._id} onClick={() => onStartChat(v)}>
+                  <img className="sidebar-avatar" src="/assets/img/user.png" alt="avatar" />
+                  <span>{v.username}</span>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
       </div>
     </aside>
   );
