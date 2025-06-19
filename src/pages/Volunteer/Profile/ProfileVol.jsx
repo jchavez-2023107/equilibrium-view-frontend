@@ -6,6 +6,7 @@ import userImage from '../../../assets/img/user.png';
 import './../Profile/ProfileVol.css';
 import { Link } from 'react-router-dom';
 import { fetchMyProfile, updateProfile } from '../../../services/api.js';
+import logo from '../../../assets/img/Logo.png';
 
 function ProfileVol() {
   const [birthDate, setBirthDate] = useState(null);
@@ -84,9 +85,9 @@ function ProfileVol() {
   return (
     <div className="profile-container">
       <header>
-        <div className="header-left">
-          <Link to={'/main-volunteer'}>
-            <img src="/logo.png" alt="Logo" className="logo" />
+        <div className="logo-wrapper">
+          <Link to="/main-volunteer" className="logo-link">
+            <img src={logo} alt="Logo" className="logo" />
             <h1 className="title">Equilibrium</h1>
           </Link>
         </div>

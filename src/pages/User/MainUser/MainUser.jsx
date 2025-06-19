@@ -197,8 +197,8 @@ export default function MainUser() {
 
           <div className="tarjeta-contacto">
             <img src={userImage} alt="Usuario" />
-            <p>Contacta con un usuario necesitado</p>
-            <Link to="/chat"><button>Chat</button></Link>
+            <p>Contacta con un voluntario para ayudarte</p>
+            <Link to="/chat-vol"><button>Chat</button></Link>
           </div>
 
           <div className="tarjeta-contacto">

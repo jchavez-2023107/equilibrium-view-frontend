@@ -2,20 +2,53 @@
 
 .profile-container {
   display: flex;
-  justify-content: center;
+  flex-direction: column; /* ⬅️ importante para apilar logo y card */
   align-items: center;
+  justify-content: flex-start;
   min-height: 100vh;
   background: linear-gradient(to bottom right, #a1c4fd, #c2e9fb);
-  padding: 2rem;
+  padding: 2rem 1rem;
   box-sizing: border-box;
 }
 
+/* HEADER LOGO + TÍTULO centrado */
+header {
+  display: flex;
+  justify-content: center;  /* ⬅️ CENTRA horizontalmente */
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.logo-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  text-decoration: none;
+}
+
+.logo {
+  width: 40px;
+  height: 40px;            /* ⬅️ le damos altura fija */
+  object-fit: contain;     /* ⬅️ mantiene proporción */
+  display: block;
+}
+
+.title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #4A90E2;
+  margin: 0;
+  line-height: 1;          
+}
+
+/* CARD de perfil */
 .profile-card {
   background-color: white;
   padding: 2.5rem;
   border-radius: 15px;
-  max-width: 440px;
   width: 100%;
+  max-width: 440px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   font-family: 'Montserrat', sans-serif;
   display: flex;
@@ -31,7 +64,6 @@
 }
 
 .user-image {
-  display: block;
   width: 120px;
   height: 120px;
   object-fit: cover;
@@ -55,7 +87,7 @@
 
 .profile-field input,
 .profile-field textarea {
-  width: 90%;
+  width: 100%;
   padding: 0.65rem 0.9rem;
   border-radius: 8px;
   border: 1px solid #ccc;
@@ -63,6 +95,7 @@
   background-color: #f9f9f9;
   color: #444;
   resize: none;
+  box-sizing: border-box;
 }
 
 .profile-field textarea {
@@ -114,6 +147,7 @@
   background-color: #357ABD;
 }
 
+/* Responsive para pantallas chicas */
 @media (max-width: 480px) {
   .profile-card {
     padding: 1.5rem;

@@ -199,7 +199,7 @@ export default function MainVolunteer() {
           <div className="volu-card-contact">
             <img src={userImage} alt="Voluntario" />
             <p>Contacta con un usuario necesitado</p>
-            <Link to="/chat"><button>Chat</button></Link>
+            <Link to="/chat-user"><button>Chat</button></Link>
           </div>
 
           <div className="volu-card-contact">
