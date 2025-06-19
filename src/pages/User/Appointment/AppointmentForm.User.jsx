@@ -1,43 +1,38 @@
-// src/components/AppointmentFormVol.jsx
+// src/components/AppointmentFormUser.jsx
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAppointments } from '../../../context/AppointmentContext';
-import { useAuth } from '../../../context/AuthContext';
 import { fetchUsers } from '../../../services/api';
+import { useAuth } from '../../../context/AuthContext';
+import { useAppointments } from '../../../context/AppointmentContext';
 
-export default function AppointmentFormVol() {
+export default function AppointmentFormUser() {
   const today = new Date().toISOString().substring(0, 10);
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
+  const [reason, setReason] = useState('');
+  const [notes, setNotes] = useState('');
   const [date, setDate] = useState(today);
   const [time, setTime] = useState('12:00');
-  const [userId, setUserId] = useState('');
-  const [users, setUsers] = useState([]);
+  const [volunteerId, setVolunteerId] = useState('');
+  const [volunteers, setVolunteers] = useState([]);
   const [error, setError] = useState('');
   const navigate = useNavigate();
+  const { user } = useAuth();
   const { createAppointment } = useAppointments();
-  const { user } = useAuth(); // ← contiene el voluntario logueado
 
   useEffect(() => {
-    async function loadUsers() {
+    async function loadVolunteers() {
       try {
         const result = await fetchUsers();
-        const filtered = result.filter(u => u.role === 'USER');
-        setUsers(filtered);
+        const filtered = result.filter(u => u.role === 'VOLUNTEER');
+        setVolunteers(filtered);
       } catch (err) {
-        console.error('Error al cargar usuarios:', err.message);
+        console.error('Error al cargar voluntarios:', err.message);
       }
     }
-    loadUsers();
+    loadVolunteers();
   }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    if (!title.trim() || !userId) {
-      setError('El título y el usuario son obligatorios.');
-      return;
-    }
 
     const scheduledAt = new Date(`${date}T${time}`);
     if (isNaN(scheduledAt.getTime()) || scheduledAt <= new Date()) {
@@ -46,16 +41,14 @@ export default function AppointmentFormVol() {
     }
 
     try {
+    await createAppointment({
+      volunteerId,
+      scheduledAt: scheduledAt.toISOString(),
+      title: reason,
+      description: notes
+    });
 
-      await createAppointment({
-        title,
-        description,
-        scheduledAt: scheduledAt.toISOString(),
-        userId, // ← usuario seleccionado del formulario
-        volunteerId: user.uid // ← voluntario logueado
-      });
-
-      navigate('/calendar-vol');
+      navigate('/calendar-user');
     } catch (err) {
       setError(err.message || 'No se pudo crear la cita.');
     }
@@ -63,29 +56,29 @@ export default function AppointmentFormVol() {
 
   return (
     <div className="appointment-form-container">
-      <h2 className="form-heading">Nueva Cita</h2>
+      <h2 className="form-heading">Agendar Cita</h2>
       {error && <p className="error-message">{error}</p>}
 
       <form onSubmit={handleSubmit} className="appointment-form">
         <div className="form-control required">
-          <label htmlFor="title">Título</label>
+          <label htmlFor="reason">Motivo</label>
           <input
-            id="title"
+            id="reason"
             type="text"
-            placeholder="Título"
-            value={title}
-            onChange={e => setTitle(e.target.value)}
+            placeholder="Motivo"
+            value={reason}
+            onChange={e => setReason(e.target.value)}
             required
           />
         </div>
 
         <div className="form-control">
-          <label htmlFor="description">Descripción</label>
+          <label htmlFor="notes">Notas</label>
           <textarea
-            id="description"
+            id="notes"
             placeholder="Opcional"
-            value={description}
-            onChange={e => setDescription(e.target.value)}
+            value={notes}
+            onChange={e => setNotes(e.target.value)}
           />
         </div>
 
@@ -113,24 +106,24 @@ export default function AppointmentFormVol() {
         </div>
 
         <div className="form-control required">
-          <label htmlFor="userId">Asignar a usuario</label>
+          <label htmlFor="volunteerId">Seleccionar voluntario</label>
           <select
-            id="userId"
-            value={userId}
-            onChange={e => setUserId(e.target.value)}
+            id="volunteerId"
+            value={volunteerId}
+            onChange={e => setVolunteerId(e.target.value)}
             required
           >
-            <option value="">-- Selecciona un usuario --</option>
-            {users.map(u => (
-              <option key={u._id} value={u._id}>
-                {u.profile?.displayName || u.username}
+            <option value="">-- Selecciona un voluntario --</option>
+            {volunteers.map(v => (
+              <option key={v._id} value={v._id}>
+                {v.profile?.displayName || v.username}
               </option>
             ))}
           </select>
         </div>
 
         <button type="submit" className="btn-submit">
-          Agregar Cita
+          Crear Cita
         </button>
       </form>
     </div>
