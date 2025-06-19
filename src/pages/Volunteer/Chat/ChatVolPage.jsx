@@ -113,6 +113,7 @@ export default function ChatVolPage() {
       <ChatWindowVol
         chat={selectedChat}
         onClose={() => setSelectedChat(null)}
+        setSelectedChat={setSelectedChat} // Pásalo para actualizar desde adentro si quieres
       />
     </div>
   );

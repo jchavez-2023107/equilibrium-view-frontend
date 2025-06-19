@@ -1,8 +1,10 @@
 .chat-window {
-  flex-grow: 1;
   display: flex;
   flex-direction: column;
-  background-color: #fff;
+  flex: 1 1 auto;
+  height: 100%;
+  background: #fff;
+  border-left: 1px solid #ccc;
 }
 
 .chat-window.empty {
@@ -14,11 +16,12 @@
 }
 
 .chat-header {
-  padding: 10px;
-  border-bottom: 1px solid #ccc;
+  padding: 10px 14px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #ececec;
+  min-height: 52px;
 }
 
 .chat-avatar {
@@ -43,10 +46,12 @@
 }
 
 .chat-messages {
-  flex-grow: 1;
+  flex: 1 1 auto;
+  padding: 18px 14px 8px 14px;
   overflow-y: auto;
-  padding: 10px;
-  background-color: #fafafa;
+  min-height: 280px; /* 👈 Asegura espacio aunque no haya mensajes */
+  /* Puedes ajustar este valor a tu preferencia */
+  background: #f7f7f7;
 }
 
 .chat-msg {
@@ -81,22 +86,32 @@
 
 .chat-input-bar {
   display: flex;
-  padding: 10px;
-  border-top: 1px solid #ccc;
-  background-color: #f9f9f9;
+  align-items: center;
+  padding: 12px 14px;
+  border-top: 1px solid #ececec;
+  background: #fff;
 }
 
 .chat-input-bar input {
-  flex-grow: 1;
-  padding: 8px;
-  margin-right: 10px;
+  flex: 1 1 auto;
+  padding: 9px 12px;
+  border: 1px solid #aaa;
+  border-radius: 4px;
+  font-size: 16px;
+  margin-right: 8px;
 }
 
 .chat-input-bar button {
-  padding: 8px 12px;
-  background-color: #007bff;
+  padding: 9px 22px;
+  background: #007bff;
   color: white;
   border: none;
-  cursor: pointer;
   border-radius: 4px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.chat-input-bar button:hover {
+  background: #0056b3;
 }

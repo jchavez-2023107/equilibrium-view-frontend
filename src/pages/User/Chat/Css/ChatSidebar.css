@@ -4,38 +4,73 @@
   border-right: 1px solid #ccc;
   display: flex;
   flex-direction: column;
-  padding: 10px;
+  padding: 10px 0 10px 0;
+  height: 100vh;
+  min-width: 240px;
+}
+
+.logo {
+  width: 70px;
+  display: block;
+  margin: 0 auto 12px auto;
 }
 
 .sidebar-header {
   font-size: 20px;
   font-weight: bold;
   margin-bottom: 10px;
+  text-align: center;
+}
+
+.sidebar-search {
+  padding: 0 16px 10px 16px;
 }
 
 .sidebar-search input {
   width: 100%;
   padding: 8px;
-  margin-bottom: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.sidebar-section {
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 8px;
+}
+
+.sidebar-subtitle {
+  font-weight: bold;
+  margin: 8px 16px 6px 16px;
+  font-size: 16px;
+}
+
+.sidebar-list-scroll {
+  flex: 1 1 0;
+  overflow-y: auto;
+  min-height: 0;
+  max-height: 160px; /* Puedes ajustar este valor según tu preferencia */
+  padding: 0 8px;
 }
 
 .sidebar-list {
   list-style: none;
   padding: 0;
-  overflow-y: auto;
-  flex-grow: 1;
+  margin: 0;
 }
 
 .sidebar-list li {
   display: flex;
   align-items: center;
-  padding: 8px;
+  padding: 8px 6px;
   cursor: pointer;
   border-radius: 4px;
+  transition: background 0.15s;
 }
 
 .sidebar-list li:hover {
-  background-color: #ddd;
+  background-color: #e0e0e0;
 }
 
 .sidebar-avatar {
@@ -43,4 +78,5 @@
   height: 32px;
   border-radius: 50%;
   margin-right: 10px;
+  object-fit: cover;
 }
