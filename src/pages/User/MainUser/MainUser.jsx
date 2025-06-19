@@ -174,7 +174,7 @@ export default function MainUser() {
             <p>Fecha: 10/06/2025</p>
             <p>Duración: 45 minutos</p>
             <p>Usuario: Ana Morales</p>
-            <Link to="/chat">
+            <Link to="/chat-user">
               <button>Chat</button>
             </Link>
           </div>
@@ -245,7 +245,7 @@ export default function MainUser() {
           <div className="tarjeta-contacto">
             <img src={calendarImg} alt="Agenda" />
             <p>Agenda una cita con un voluntario</p>
-            <Link to="/citas">
+            <Link to="/citas-new-user">
               <button>Agendar</button>
             </Link>
           </div>

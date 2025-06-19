@@ -7,15 +7,6 @@ import { connectSocket, disconnectSocket } from "./services/socket";
 const Home = lazy(() => import("./pages/Home/Home"));
 const Login = lazy(() => import("./pages/Login/Login"));
 
-// USER
-const RegisterUser = lazy(() =>
-  import("./pages/User/RegisterUser/RegisterUser")
-);
-const MainUser = lazy(() => import("./pages/User/MainUser/MainUser"));
-const ProfileUs = lazy(() => import("./pages/User/Profile/ProfileUs"));
-const HelpUs = lazy(() => import("./pages/User/Help/Help.User"));
-const ChatUserPage = lazy(() => import("./pages/User/Chat/ChatUserPage"));
-
 // VOLUNTEER
 const RegisterVolunteer = lazy(() =>
   import("./pages/Volunteer/RegisterVol/RegisterVolunteer")
