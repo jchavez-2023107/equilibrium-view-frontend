@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route, Link,useLocation } from "react-
 import { Suspense, lazy } from "react";
 
 
+
 const Home = lazy(() => import('./pages/Home/Home'))
 const Login = lazy(() => import("./pages/Login/Login"))
 
@@ -10,6 +11,7 @@ const RegisterUser = lazy(() => import("./pages/User/RegisterUser/RegisterUser")
 const MainUser = lazy(() => import("./pages/User/MainUser/MainUser"))
 const ProfileUs = lazy(() => import("./pages/User/Profile/ProfileUs"))
 const HelpUs = lazy(() => import('./pages/User/Help/Help.User'))
+const ChatUserPage = lazy(() => import('./pages/User/Chat/ChatUserPage'))
 
 {/*VOLUNTEER */}
 const RegisterVolunteer = lazy(() => import("./pages/Volunteer/RegisterVol/RegisterVolunteer"))
@@ -20,10 +22,10 @@ const AppointmentFormVol = lazy(() => import('./pages/Volunteer/Appointment/Appo
 const AppointmentListVol = lazy(() => import("./pages/Volunteer/Appointment/AppointmentList.Vol"))
 const TrashViewVol = lazy(() => import('./pages/Volunteer/Appointment/TrashView.Vol'))
 const LayoutVol = lazy(() => import("./pages/Volunteer/Appointment/Layout.Vol"))
-
+const ChatVolPage = lazy(() => import("./pages/Volunteer/Chat/ChatVolPage"))
 const HelpVol = lazy(() => import("./pages/Volunteer/Help/Help.Vol"))
-const ChatRoom = lazy(() => import("./pages/Chat/ChatRoom"))
 const ProfileVol = lazy(() => import("./pages/Volunteer/Profile/ProfileVol"))
+
 const Notification = lazy(() => import("./pages/Notification/Notification"))
 
 
@@ -42,14 +44,15 @@ function App() {
           <Route path="/main-user" element={<MainUser />} />
           <Route path="/profile-user" element={<ProfileUs/>}></Route>
           <Route path="/help-user" element={<HelpUs />} />
-
-          <Route path="/chat" element={<ChatRoom />} />
+          <Route path="/chat-user" element={<ChatUserPage/>}></Route>
+          
 
 
           <Route path="/notificacion" element={<Notification/>}/>
           
 
           {/*VOLUNTEER */}
+            <Route path="/chat-vol" element={<ChatVolPage />} />
             <Route path="/help-vol" element={<HelpVol />} />
             <Route path="/profile-vol" element={<ProfileVol/>}/>
             <Route path="/volunteer" element={<RegisterVolunteer />} />

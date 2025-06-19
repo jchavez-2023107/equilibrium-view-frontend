@@ -73,3 +73,46 @@ export const updateProfile = async (updatedProfile) => {
 
   return data.user;
 };
+
+export const fetchMyChats = async () => {
+  const data = await apiFetch('/chats');
+  return data.chats;
+};
+
+export const fetchVolunteers = async () => {
+  const data = await apiFetch('/users/volunteers');
+  return data.volunteers;
+};
+
+export const createChat = async ({ userId, volunteerId }) => {
+  const data = await apiFetch('/chats', {
+    method: 'POST',
+    body: JSON.stringify({ userId, volunteerId })
+  });
+  return data.chat;
+};
+
+export const fetchChatById = async (chatId) => {
+  const data = await apiFetch(`/chats/${chatId}`);
+  return data.chat;
+};
+
+export const sendMessage = async (chatId, { text }) => {
+  const data = await apiFetch(`/chats/${chatId}/message`, {
+    method: 'POST',
+    body: JSON.stringify({ text })
+  });
+  return data.chat;
+};
+
+export const closeChat = async (chatId) => {
+  const data = await apiFetch(`/chats/${chatId}/close`, {
+    method: 'PATCH'
+  });
+  return data.chat;
+};
+
+export const fetchUsers = async () => {
+  const res = await apiFetch('/users');
+  return res.users;
+};

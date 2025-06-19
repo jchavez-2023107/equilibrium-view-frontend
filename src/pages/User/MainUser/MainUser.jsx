@@ -129,7 +129,7 @@ export default function MainUser() {
           <h1 className="titulo">Equilibrium</h1>
         </div>
         <div className="encabezado-derecha">
-          <Link to="/chat" className="nav">Chats</Link>
+          <Link to="/chat-user" className="nav">Chats</Link>
           <Link to="/help-user" className="nav">Ayuda</Link>
           <Link to="/notificacion" className="campana">🔔</Link>
           <Link to="/profile-user" className="volu-user">{user?.username || 'Usuario'}</Link>
