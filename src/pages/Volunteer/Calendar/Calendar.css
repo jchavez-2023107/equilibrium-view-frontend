@@ -1,0 +1,207 @@
+/* General container */
+.calendar-container {
+  width: 100%;
+  max-width: 480px;
+  margin: 2rem auto;
+  padding: 2rem 1.5rem;
+  background-color: #f8f8f8;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  font-family: 'Arial', sans-serif;
+}
+
+/* Título */
+.calendar-title {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #000;
+  margin-bottom: 1.5rem;
+}
+
+/* Calendario */
+.calendar-wrapper {
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  margin: 0 auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  margin-bottom: 2rem;
+  margin-left: auto;
+  margin-right: 0;
+  max-width: 400px; /* puedes ajustar según el ancho deseado */
+}
+
+.react-calendar {
+  border: none;
+  width: 100%;
+  font-family: inherit;
+}
+
+.react-calendar__navigation button {
+  font-weight: bold;
+  color: #111;
+}
+
+.react-calendar__tile--now {
+  background: #ffebee !important;
+  color: #d32f2f !important;
+  font-weight: bold;
+}
+
+.react-calendar__tile--active {
+  background: #b97bf1 !important;
+  color: white !important;
+}
+
+/* Lista de citas */
+.appointments-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Cada cita */
+.appointment-card {
+  background: #ffffff;
+  border-left: 5px solid #b97bf1;
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+.appointment-title {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #4a148c;
+  margin-bottom: 0.3rem;
+}
+
+.appointment-description,
+.appointment-user,
+.appointment-date,
+.appointment-volunteer,
+.appointment-status {
+  font-size: 0.95rem;
+  color: #333;
+  margin-bottom: 0.25rem;
+}
+
+.appointment-status {
+  font-weight: bold;
+  color: #2e7d32;
+}
+
+/* No hay citas */
+.no-appointments {
+  text-align: center;
+  font-style: italic;
+  color: #888;
+  font-size: 1rem;
+  margin-top: 1rem;
+}
+
+
+
+
+/* Estilos base para el header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #b97bf1;
+  padding: 1rem 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+/* Lado izquierdo: logo + título */
+.header-left {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  gap: 0.5rem;
+}
+
+.header-left img.logo {
+  display: flex;
+  flex-direction: column;  /* fuerza uno debajo del otro */
+  align-items: right;
+  gap: 0.4rem;
+}
+
+.header-left .title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: white;
+  font-family: 'Montserrat', sans-serif;
+  margin: 0;
+}
+
+/* Lado derecho: botones de navegación */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.header-right button {
+  background-color: white;
+  color: #4a148c;
+  font-weight: bold;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.25s ease;
+}
+
+.header-right button:hover {
+  background-color: #f3e5f5;
+}
+
+/* Responsive para móvil */
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .header-right {
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .header-left .title {
+    font-size: 1.2rem;
+  }
+
+  .header-right button {
+    flex: 1 1 auto;
+    width: 100%;
+    max-width: 180px;
+    text-align: center;
+  }
+}
+
+.logo {
+  width: 42px;
+  height: auto;
+  object-fit: contain;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  font-family: 'Montserrat', sans-serif;
+  color: white;
+  margin: 0; /* importante para alinear bien */
+}

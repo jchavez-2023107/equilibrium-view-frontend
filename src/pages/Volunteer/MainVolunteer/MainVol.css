@@ -14,8 +14,8 @@ body, html {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #A078C9;
-  padding: 0.4rem 1rem;
+  background: #C18CE8;
+  padding: 1.2rem 1.5rem;
   position: sticky;
   top: 0;
   z-index: 100;
@@ -28,14 +28,14 @@ body, html {
 }
 
 .volu-logo {
-  width: 60px;
+  width: 70px;
   margin-right: 0.5rem;
 }
 
 .volu-title {
   font-family: 'Montserrat', sans-serif;
-  font-size: 1.5rem;  /* más grande */
-  color: rgb(0, 0, 0);
+  font-size: 1.8rem;  /* más grande */
+  color: black;
   margin: 0;
   text-align: center;
   margin-top: -8px; /* Ajusta el valor según lo que necesites */
@@ -53,17 +53,9 @@ body, html {
 .volu-notif,
 .volu-user {
   text-decoration: none;
-  color: rgb(7, 7, 7);
-  font-weight: 900;
-  font-size: 1.1rem;  /* un poco más grandes */
-}
-
-.volu-notif {
-  font-size: 1.9rem;
-}
-
-.volu-user {
- font-size: 1.5rem;
+  color: black;
+  font-weight: 800;
+  font-size: 1.2rem;  /* un poco más grandes */
 }
 
 .volu-user-img {

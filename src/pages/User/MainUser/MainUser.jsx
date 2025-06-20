@@ -140,16 +140,16 @@ export default function MainUser() {
           <h1 className="titulo">EQUILIBRIUM</h1>
         </div>
         <div className="encabezado-derecha">
-          <Link to="/chat-user" className={({ isActive }) => isActive ? "nav active" : "nav"}>
+          <Link to="/chat-user" className="nav">
             CHATS
           </Link>
-          <Link to="/help-user" className={({ isActive }) => isActive ? "nav active" : "nav"}>
+          <Link to="/help-user" className="nav">
             AYUDA
           </Link>
           <Link to="/notificacion" className="campana">
              <img src={notificacioneImg} alt="Notificaciones" className="campana-img" />
           </Link>
-          <Link to="/profile-user" className={({ isActive }) => isActive ? "nav active" : "nav"}>
+          <Link to="/profile-user" className="usuario">
             {user?.username || "Usuario"}
           </Link>
           <img
