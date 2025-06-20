@@ -5,8 +5,9 @@ import "react-calendar/dist/Calendar.css";
 import { useAppointments } from "../../../context/AppointmentContext";
 
 export default function CalendarViewUs() {
-  const { appointments } = useAppointments();
+  const { appointments, lastUpdate } = useAppointments();
   const [date, setDate] = useState(new Date());
+  const [appointmentsForDate, setAppointmentsForDate] = useState([]);
 
   const getDateOnlyTimestamp = (dateObj) => {
     return new Date(dateObj.getFullYear(), dateObj.getMonth(), dateObj.getDate()).getTime();
@@ -17,11 +18,13 @@ export default function CalendarViewUs() {
     return getDateOnlyTimestamp(d);
   };
 
-  const selectedDayTs = getDateOnlyTimestamp(date);
-
-  const appointmentsForDate = appointments.filter(
-    (appt) => normalizeISODate(appt.scheduledAt) === selectedDayTs
-  );
+  useEffect(() => {
+    const filtered = appointments.filter(appt =>
+      new Date(appt.scheduledAt).toDateString() === date.toDateString()
+    );
+    setAppointmentsForDate(filtered);
+  }, [appointments, date, lastUpdate])
+  
 
   return (
     <div className="calendar-container">

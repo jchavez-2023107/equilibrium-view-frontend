@@ -40,7 +40,16 @@ export function disconnectSocket() {
 }
 
 export function onSocketEvent(eventName, callback) {
-  if (!socket) return;
+  if (!socket) {
+    const interval = setInterval(() => {
+      if (socket && socket.connected) {
+        socket.on(eventName, callback);
+        clearInterval(interval);
+      }
+    }, 200); // Reintenta cada 200ms hasta que el socket esté listo
+    return;
+  }
+
   socket.on(eventName, callback);
 }
 

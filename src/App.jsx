@@ -1,7 +1,9 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Suspense, lazy, useEffect } from "react";
 import { SocketProvider } from "./context/SocketContext";
-import { connectSocket, disconnectSocket } from "./services/socket";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useAppointmentNotifications } from './hooks/useAppointmentNotifications'
 
 // --- Lazy imports ---
 const Home = lazy(() => import("./pages/Home/Home"));
@@ -49,25 +51,16 @@ const AppointmentListUs = lazy(() => import("./pages/User/Appointment/Appointmen
 const AppointmentFormUser = lazy(() => import("./pages/User/Appointment/AppointmentForm.User"))
 const TrashViewUs = lazy(() => import("./pages/User/Appointment/TrashView.User"))
 
-const Notification = lazy(() => import("./pages/Notification/Notification"));
+const Notifications = lazy(() => import("./pages/Notification/Notification"));
 
 
 function App() {
-  useEffect(() => {
-  // Siempre conecta con token de localStorage
-  const token = localStorage.getItem("token");
-  if (token && token.length > 50) {
-    connectSocket(token);
-  } else {
-    disconnectSocket();
-  }
-  return () => disconnectSocket();
-}, []);
-
+useAppointmentNotifications()
 
   return (
     <SocketProvider>
       <Router>
+        
         <Suspense fallback={<div>Cargando...</div>}>
           <Routes>
             <Route path="/" element={<Home />} />
@@ -85,7 +78,7 @@ function App() {
           <Route path="/citas-new-user" element={<AppointmentFormUser/>}></Route>
           <Route path="/citas-trash-user" element={<TrashViewUs/>}></Route>
         </Route>
-            <Route path="/notificacion" element={<Notification />} />
+            <Route path="/notificacion" element={<Notifications />} />
 
             {/* VOLUNTEER */}
             <Route path="/chat-vol" element={<ChatVolPage />} />
@@ -106,6 +99,7 @@ function App() {
           </Routes>
         </Suspense>
       </Router>
+      <ToastContainer />
     </SocketProvider>
   );
 }

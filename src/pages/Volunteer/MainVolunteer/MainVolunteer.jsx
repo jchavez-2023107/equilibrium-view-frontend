@@ -10,7 +10,7 @@ import "./MainVol.css";
 import ModalProfile from "../../ModalProfile/ModalProfile";
 import { fetchMyProfile } from "../../../services/api";
 import { useAuth } from "../../../context/AuthContext";
-import ChatVolPage from "../Chat/ChatVolPage";
+import { getSocket, onSocketEvent } from "../../../services/socket";
 
 Chart.register(ArcElement, Tooltip, Legend);
 
@@ -28,6 +28,8 @@ export default function MainVolunteer() {
 
   const fraseDelDia = frases[new Date().getDay()];
   const today = new Date().toLocaleDateString();
+
+  const [notificationCount, setNotificationCount] = useState(0);
 
   const [selectedEmotion, setSelectedEmotion] = useState(null);
   const [emotionsData, setEmotionsData] = useState({
@@ -98,6 +100,23 @@ export default function MainVolunteer() {
     }
   }, [isProfileOpen]);
 
+  useEffect(() => {
+    const socket = getSocket();
+    if (!socket) return;
+
+    const handleNewNotification = (notification) => {
+      console.log("🔔 Nueva notificación recibida:", notification);
+      setNotificationCount((prev) => prev + 1);
+    };
+
+    onSocketEvent("notification:new", handleNewNotification);
+
+    return () => {
+      socket.off("notification:new", handleNewNotification);
+    };
+  }, []);
+
+
   const handleEmotionClick = (emotion) => {
     const stored = JSON.parse(localStorage.getItem("emociones")) || {};
     if (!stored[emotion]) stored[emotion] = 0;
@@ -141,9 +160,11 @@ export default function MainVolunteer() {
           <Link to="/help-vol" className="volu-nav">
             Ayuda
           </Link>
-          <Link to="/notificacion" className="volu-notif">
-            🔔
-          </Link>
+          <Link to="/notificacion" className="volu-notif"> 🔔
+          {notificationCount > 0 && (
+            <span className="notif-badge">🔔{notificationCount}</span>
+          )}
+        </Link>
           <Link to="/profile-vol" className="volu-user">
             {user?.username || "Usuario"}
           </Link>

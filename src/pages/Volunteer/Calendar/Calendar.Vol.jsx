@@ -1,27 +1,28 @@
-// src/components/CalendarViewVol.jsx
 import React, { useState, useEffect } from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import { useAppointments } from "../../../context/AppointmentContext";
 
 export default function CalendarViewVol() {
-  const { appointments } = useAppointments();
+  const { appointments, lastUpdate } = useAppointments();
   const [date, setDate] = useState(new Date());
+  const [appointmentsForDate, setAppointmentsForDate] = useState([]);
 
-  const getDateOnlyTimestamp = (dateObj) => {
-    return new Date(dateObj.getFullYear(), dateObj.getMonth(), dateObj.getDate()).getTime();
-  };
+  const getDateOnlyTimestamp = (dateObj) =>
+    new Date(dateObj.getFullYear(), dateObj.getMonth(), dateObj.getDate()).getTime();
 
   const normalizeISODate = (isoStr) => {
     const d = new Date(isoStr);
     return getDateOnlyTimestamp(d);
   };
 
-  const selectedDayTs = getDateOnlyTimestamp(date);
-
-  const appointmentsForDate = appointments.filter(
-    (appt) => normalizeISODate(appt.scheduledAt) === selectedDayTs
-  );
+  // 🔁 Recalcula cuando cambia fecha seleccionada o las citas
+    useEffect(() => {
+      const filtered = appointments.filter(appt =>
+        new Date(appt.scheduledAt).toDateString() === date.toDateString()
+      );
+      setAppointmentsForDate(filtered);
+    }, [appointments, date, lastUpdate]) // 👈 esto es la CLAVE
 
   return (
     <div className="calendar-container">
