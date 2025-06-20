@@ -1,8 +1,9 @@
 import React from 'react';
-import { useNotifications } from '../../hooks/useNotification'
+import { useNotifications } from '../../../hooks/useNotification'
 import './Notifications.css';
+import { Link } from 'react-router-dom';
 
-export default function Notifications() {
+export default function NotificationsUs() {
   const { notifications, loading, fetchNotifications } = useNotifications();
 
   return (
@@ -21,6 +22,9 @@ export default function Notifications() {
       {notifications.length > 0 && (
         <button onClick={fetchNotifications}>Recargar</button>
       )}
+      <Link to="/main-user">
+        <button>Cerrar</button>
+      </Link>
     </div>
   );
 }

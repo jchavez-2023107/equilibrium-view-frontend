@@ -101,7 +101,7 @@ export default function Login() {
           <button type="submit" className="login-button">Iniciar Sesión</button>
         </form>
           <div className="signup-container">
-          <a href="/register" className="signup-link-combined">
+          <a href="/register-user" className="signup-link-combined">
             ¿No tienes una cuenta?<br />
             <strong>Crea una</strong>
           </a>

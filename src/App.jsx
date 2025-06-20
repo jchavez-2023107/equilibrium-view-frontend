@@ -37,6 +37,7 @@ const LayoutVol = lazy(() =>
 const ChatVolPage = lazy(() => import("./pages/Volunteer/Chat/ChatVolPage"));
 const HelpVol = lazy(() => import("./pages/Volunteer/Help/Help.Vol"));
 const ProfileVol = lazy(() => import("./pages/Volunteer/Profile/ProfileVol"));
+const NotificationsVol = lazy(() => import("./pages/Volunteer/Notification/NotificationVol"))
 
 
 {/*USER */}
@@ -51,7 +52,7 @@ const AppointmentListUs = lazy(() => import("./pages/User/Appointment/Appointmen
 const AppointmentFormUser = lazy(() => import("./pages/User/Appointment/AppointmentForm.User"))
 const TrashViewUs = lazy(() => import("./pages/User/Appointment/TrashView.User"))
 
-const Notifications = lazy(() => import("./pages/Notification/Notification"));
+const NotificationsUs = lazy(() => import("./pages/User/Notification/NotificationUs"));
 
 
 function App() {
@@ -72,19 +73,21 @@ useAppointmentNotifications()
           <Route path="/profile-user" element={<ProfileUs/>}></Route>
           <Route path="/help-user" element={<HelpUs />} />
           <Route path="/chat-user" element={<ChatUserPage/>}></Route>
+          <Route path="/notificacion-user" element={<NotificationsUs />} />
         <Route element={<LayoutUs/>}>
           <Route path="/calendar-user" element={<CalendarViewUs/>}></Route>
           <Route path="/citas-lista-user" element={<AppointmentListUs/>}></Route>
           <Route path="/citas-new-user" element={<AppointmentFormUser/>}></Route>
           <Route path="/citas-trash-user" element={<TrashViewUs/>}></Route>
         </Route>
-            <Route path="/notificacion" element={<Notifications />} />
+            
 
             {/* VOLUNTEER */}
             <Route path="/chat-vol" element={<ChatVolPage />} />
             <Route path="/help-vol" element={<HelpVol />} />
             <Route path="/profile-vol" element={<ProfileVol />} />
             <Route path="/volunteer" element={<RegisterVolunteer />} />
+            <Route path="/notificacion-vol" element={<NotificationsVol />} />
             <Route
               path="/volunteer/complete/:id"
               element={<CompleteVolunteer />}

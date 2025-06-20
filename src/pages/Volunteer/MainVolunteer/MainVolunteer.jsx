@@ -160,7 +160,7 @@ export default function MainVolunteer() {
           <Link to="/help-vol" className="volu-nav">
             Ayuda
           </Link>
-          <Link to="/notificacion" className="volu-notif"> 🔔
+          <Link to="/notificacion-vol" className="volu-notif"> 🔔
           {notificationCount > 0 && (
             <span className="notif-badge">🔔{notificationCount}</span>
           )}

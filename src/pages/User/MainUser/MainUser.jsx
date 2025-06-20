@@ -161,7 +161,7 @@ export default function MainUser() {
           <Link to="/help-user" className="nav">
             Ayuda
           </Link>
-          <Link to="/notificacion" className="volu-notif"> 🔔
+          <Link to="/notificacion-user" className="volu-notif"> 🔔
           {notificationCount > 0 && (
             <span className="notif-badge">🔔{notificationCount}</span>
           )}
