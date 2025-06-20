@@ -2,15 +2,18 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Doughnut } from "react-chartjs-2";
 import { Chart, ArcElement, Tooltip, Legend } from "chart.js";
+import { NavLink } from "react-router-dom";
 import logo from "../../../assets/img/Logo.png";
 import userImage from "../../../assets/img/user.png";
 import volunteerImg from "../../../assets/img/volunteer.png";
 import calendarImg from "../../../assets/img/calendar.png";
+import notificacioneImg from "../../../assets/img/notificaciones.png";
 import "./MainUs.css";
 import ModalProfile from "../../ModalProfile/ModalProfile";
 import { fetchMyProfile } from "../../../services/api";
 import { useAuth } from "../../../context/AuthContext";
 import ChatUserPage from "../Chat/ChatUserPage";
+
 
 Chart.register(ArcElement, Tooltip, Legend);
 
@@ -134,25 +137,25 @@ export default function MainUser() {
           <Link to="/">
             <img src={logo} alt="Logo Equilibrium" className="logo" />
           </Link>
-          <h1 className="titulo">Equilibrium</h1>
+          <h1 className="titulo">EQUILIBRIUM</h1>
         </div>
         <div className="encabezado-derecha">
-          <Link to="/chat-user" className="nav">
-            Chats
+          <Link to="/chat-user" className={({ isActive }) => isActive ? "nav active" : "nav"}>
+            CHATS
           </Link>
-          <Link to="/help-user" className="nav">
-            Ayuda
+          <Link to="/help-user" className={({ isActive }) => isActive ? "nav active" : "nav"}>
+            AYUDA
           </Link>
           <Link to="/notificacion" className="campana">
-            🔔
+             <img src={notificacioneImg} alt="Notificaciones" className="campana-img" />
           </Link>
-          <Link to="/profile-user" className="volu-user">
+          <Link to="/profile-user" className={({ isActive }) => isActive ? "nav active" : "nav"}>
             {user?.username || "Usuario"}
           </Link>
           <img
             src={userImage}
             alt="Usuario"
-            className="volu-user-img"
+            className="user-img"
             style={{ cursor: "pointer" }}
             onClick={() => setIsProfileOpen(true)}
           />

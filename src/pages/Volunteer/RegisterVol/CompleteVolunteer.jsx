@@ -96,10 +96,12 @@ export default function CompleteVolunteer() {
               <textarea name="motivation" value={volunteerData.motivation} onChange={handleChange} placeholder="¿Qué te motiva?" required />
             </div>
 
-            <div className="input-group">
+            {/*
+              <div className="input-group">
               <span>⏱️</span>
               <input name="availability" value={volunteerData.availability} onChange={handleChange} placeholder="Disponibilidad horaria" required />
             </div>
+            */}
 
             <div className="input-group">
               <span>🔗</span>

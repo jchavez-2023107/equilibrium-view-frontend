@@ -28,16 +28,20 @@ body, html {
 }
 
 .volu-logo {
-  width: 42px;
+  width: 60px;
   margin-right: 0.5rem;
 }
 
 .volu-title {
   font-family: 'Montserrat', sans-serif;
-  font-size: 1.3rem;
-  color: white;
+  font-size: 1.5rem;  /* más grande */
+  color: rgb(0, 0, 0);
   margin: 0;
+  text-align: center;
+  margin-top: -8px; /* Ajusta el valor según lo que necesites */
+  font-weight: 800;
 }
+
 
 .volu-right {
   display: flex;
@@ -49,14 +53,22 @@ body, html {
 .volu-notif,
 .volu-user {
   text-decoration: none;
-  color: white;
-  font-weight: 500;
-  font-size: 0.95rem;
+  color: rgb(7, 7, 7);
+  font-weight: 900;
+  font-size: 1.1rem;  /* un poco más grandes */
+}
+
+.volu-notif {
+  font-size: 1.9rem;
+}
+
+.volu-user {
+ font-size: 1.5rem;
 }
 
 .volu-user-img {
-  width: 36px;
-  height: 36px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
 }
 
@@ -133,8 +145,8 @@ body, html {
 }
 
 .volu-card-contact img {
-  width: 60px;
-  height: 60px;
+  width: 90px;
+  height: 90px;
   margin-bottom: 0.8rem;
 }
 
@@ -207,7 +219,6 @@ body, html {
 .volu-estadistica canvas {
   width: 100%;
   max-width: 400px;
-  height: auto;
   margin: 0 auto;
 }
 
@@ -264,4 +275,11 @@ body, html {
   .volu-frase-dia {
     font-size: 1.2rem;
   }
+}
+
+/* Campana */
+.campana-img {
+  width: 35px;
+  height: 30px;
+  object-fit: contain;
 }

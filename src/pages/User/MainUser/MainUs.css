@@ -14,7 +14,7 @@ body, html {
   justify-content: space-between;
   align-items: center;
   background: #A078C9;
-  padding: 0.3rem 1rem;
+  padding: 0.4rem 1rem;
   position: sticky;
   top: 0;
   z-index: 100;
@@ -27,15 +27,18 @@ body, html {
 }
 
 .logo {
-  width: 36px;  /* más pequeño */
+  width: 60px;  /* más pequeño */
   margin-right: 0.5rem;
 }
 
 .titulo {
   font-family: 'Montserrat', sans-serif;
   font-size: 1.5rem;  /* más grande */
-  color: white;
+  color: rgb(0, 0, 0);
   margin: 0;
+  text-align: center;
+  margin-top: -15px; /* Ajusta el valor según lo que necesites */
+  font-weight: 800;
 }
 
 .encabezado-derecha {
@@ -44,19 +47,21 @@ body, html {
   gap: 1rem;
 }
 
-.nav, .campana, .usuario {
+.nav, 
+.campana, 
+.usuario {
   text-decoration: none;
-  color: white;
-  font-weight: 600;
+  color: rgb(7, 7, 7);
+  font-weight: 900;
   font-size: 1.1rem;  /* un poco más grandes */
 }
 
 .campana {
-  font-size: 1.4rem;
+  font-size: 1.9rem;
 }
 
 .usuario {
-  font-size: 1.05rem;
+  font-size: 1.5rem;
 }
 
 .imagen-usuario {
@@ -138,8 +143,8 @@ body, html {
 }
 
 .tarjeta-contacto img {
-  width: 60px;
-  height: 60px;
+  width: 90px;
+  height: 90px;
   margin-bottom: 0.8rem;
 }
 
@@ -251,4 +256,40 @@ body, html {
   .emojis { gap: 1rem; }
   .pie p { font-size: 1.1rem; }
   .frase-dia { font-size: 1.2rem; }
+}
+
+.user-img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+
+.campana-img {
+  width: 35px;
+  height: 30px;
+  object-fit: contain;
+}
+
+.nav {
+  text-decoration: none;
+  color: black;
+  font-weight: 600;
+  padding-bottom: 4px;
+  position: relative;
+}
+
+.nav.active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  height: 3px;
+  width: 100%;
+  background-color: #000000;
+  border-radius: 2px;
+}
+
+.volu-user {
+  font-size: 1.5rem;     /* 🔠 Tamaño de letra */
 }

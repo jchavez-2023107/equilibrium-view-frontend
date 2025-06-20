@@ -6,6 +6,7 @@ import logo from "../../../assets/img/Logo.png";
 import userImage from "../../../assets/img/user.png";
 import volunteerImg from "../../../assets/img/volunteer.png";
 import calendarImg from "../../../assets/img/calendar.png";
+import notificacioneImg from "../../../assets/img/notificaciones.png";
 import "./MainVol.css";
 import ModalProfile from "../../ModalProfile/ModalProfile";
 import { fetchMyProfile } from "../../../services/api";
@@ -132,17 +133,17 @@ export default function MainVolunteer() {
       <header className="volu-header">
         <div className="volu-left">
           <img src={logo} alt="Logo Equilibrium" className="volu-logo" />
-          <h1 className="volu-title">Equilibrium</h1>
+          <h1 className="volu-title">EQUILIBRIUM</h1>
         </div>
         <div className="volu-right">
           <Link to="/chat-vol" className="volu-nav">
-            Chats
+            CHATS
           </Link>
           <Link to="/help-vol" className="volu-nav">
-            Ayuda
+            AYUDA
           </Link>
           <Link to="/notificacion" className="volu-notif">
-            🔔
+              <img src={notificacioneImg} alt="Notificaciones" className="campana-img" />
           </Link>
           <Link to="/profile-vol" className="volu-user">
             {user?.username || "Usuario"}
