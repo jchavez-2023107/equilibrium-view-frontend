@@ -38,8 +38,8 @@ function HelpUs() {
           <Link to="/chat-user" className="nav-link">Chats</Link>
           <Link to="/chat-user" className="nav-link">Historial</Link>
           <Link to="/help-user" className="nav-link">Ayuda</Link>
-          <Link to="/notificacion" className="volu-notif"> <img src={notificacioneImg} alt="Notificaciones" className="campana-img" /></Link>
-          <Link to="/profile-user" className="volu-user">
+          <Link to="/notificacion-user" className="volu-notif"> <img src={notificacioneImg} alt="Notificaciones" className="campana-img" /></Link>
+          <Link to="/profile-user" className="username">
             {user?.username || 'Usuario'}
           </Link>
             <img
@@ -63,7 +63,7 @@ function HelpUs() {
              acompañada de síntomas físicos como fatiga constante, aislamiento social, 
              dificultad para concentrarse y problemas para dormir.
             </p>
-            <Link to="/trastornos/depresion" className="learn-more">APRENDE MÁS</Link>
+            <Link to="/depresion" className="learn-more">APRENDE MÁS</Link>
           </div>
 
           <div className="help-card">
@@ -73,7 +73,7 @@ function HelpUs() {
               cotidianas, acompañada de síntomas físicos como tensión muscular, inquietud,
               dificultad para concentrarse y problemas para dormir.
             </p>
-            <Link to="/trastornos/ansiedad" className="learn-more">APRENDE MÁS</Link>
+            <Link to="/trastornoAnsiedad" className="learn-more">APRENDE MÁS</Link>
           </div>
 
           <div className="help-card">
@@ -81,7 +81,7 @@ function HelpUs() {
             <p>
               Trastorno mental grave que altera la percepción de la realidad y afecta pensamientos, emociones y comportamientos. Puede incluir alucinaciones, delirios, pensamiento desorganizado y deterioro del funcionamiento social o laboral.
             </p>
-            <Link to="/trastornos/esquizofrenia" className="learn-more">APRENDE MÁS</Link>
+            <Link to="/esquizofrenia" className="learn-more">APRENDE MÁS</Link>
           </div>
 
           <div className="help-card">
@@ -91,7 +91,7 @@ function HelpUs() {
               y comportamientos repetitivos (compulsiones) que la persona siente la necesidad de realizar
               para aliviar esa ansiedad.
             </p>
-            <Link to="/trastornos/toc" className="learn-more">APRENDE MÁS</Link>
+            <Link to="/TOC" className="learn-more">APRENDE MÁS</Link>
           </div>
         </div>
       </main>

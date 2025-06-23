@@ -1,0 +1,121 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap');
+
+.depresion-page {
+  background-color: #f9f9f9;
+  font-family: 'Montserrat', sans-serif;
+  min-height: 100vh;
+}
+
+/* === HEADER UNIFICADO === */
+.encabezado {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #C18CE8;
+  padding: 0.8rem 1.5rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.encabezado-izquierda {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  width: 60px;
+  margin-right: 0.5rem;
+}
+
+.titulo {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.8rem;
+  color: black;
+  margin: 0;
+  text-align: center;
+  font-weight: 800;
+}
+
+.encabezado-derecha {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.nav {
+  text-decoration: none;
+  color: black;
+  font-weight: 900;
+  font-size: 1.2rem;
+  padding-bottom: 4px;
+  position: relative;
+}
+
+.nav.active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  height: 3px;
+  width: 100%;
+  background-color: black;
+  border-radius: 2px;
+}
+
+.usuario {
+  font-weight: bold;
+  font-size: 1.1rem;
+  color: black;
+}
+
+.user-img {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+}
+
+
+/* === CONTENIDO EDUCATIVO === */
+.depresion-container {
+  max-width: 850px;
+  margin: 4rem auto;
+  padding: 2rem 2.5rem;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+}
+
+.section-title {
+  color: #2e2e2e;
+  font-size: 1.9rem;
+  font-weight: 700;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #4A90E2;
+}
+
+.depresion-container p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #444;
+  margin-bottom: 1.4rem;
+}
+
+.depresion-container ul {
+  padding-left: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.depresion-container li {
+  font-size: 1.05rem;
+  color: #333;
+  margin-bottom: 0.6rem;
+  line-height: 1.6;
+}
+
+.depresion-container li strong {
+  color: #1e1e1e;
+}
