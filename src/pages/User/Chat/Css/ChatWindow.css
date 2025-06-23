@@ -1,10 +1,10 @@
 .chat-window {
+  flex: 1;
   display: flex;
   flex-direction: column;
-  flex: 1 1 auto;
-  height: 100%;
-  background: #fff;
-  border-left: 1px solid #ccc;
+  height: 100vh;
+  background: #f7f7f7;
+  overflow: hidden;
 }
 
 .chat-window.empty {
@@ -12,76 +12,83 @@
   justify-content: center;
   align-items: center;
   font-size: 18px;
-  color: #666;
+  color: #888;
+}
+.chat-header {
+  display: flex;
+  align-items: center;         /* ✅ centra verticalmente */
+  justify-content: space-between;
+  background: #ffab40;
+  border-bottom: 1px solid #ececec;
+  color: #fff;
+  font-weight: 600;
+  padding: 1rem 1.5rem;         /* 🆙 más padding vertical */
+  min-height: 80px;            /* 🆙 asegura altura mínima */
 }
 
-.chat-header {
-  padding: 10px 14px;
+.chat-header-left {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  border-bottom: 1px solid #ececec;
-  min-height: 52px;
+  gap: 13px;
 }
 
 .chat-avatar {
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  margin-right: 10px;
+  object-fit: cover;
+  margin-top: 35px; /* ⬅️ esto baja un poco la imagen */
 }
 
-.chat-header-left {
-  display: flex;
-  align-items: center;
-}
 
 .chat-close-btn {
-  background-color: #d9534f;
+  background-color: #ff7043;
   border: none;
   padding: 6px 10px;
   color: white;
   cursor: pointer;
   border-radius: 4px;
+  font-size: 0.85rem;
+  margin-top: 35px; /* ⬅️ esto baja un poco la imagen */
 }
 
 .chat-messages {
-  flex: 1 1 auto;
-  padding: 18px 14px 8px 14px;
+  flex: 1;
   overflow-y: auto;
-  min-height: 280px; /* 👈 Asegura espacio aunque no haya mensajes */
-  /* Puedes ajustar este valor a tu preferencia */
-  background: #f7f7f7;
+  padding: 18px 14px;
+  background: #eaeaea;
 }
 
 .chat-msg {
   max-width: 70%;
   margin: 6px 0;
-  padding: 8px 12px;
+  padding: 10px 12px;
   border-radius: 10px;
   position: relative;
+  font-size: 0.95rem;
+  line-height: 1.5;
 }
 
 .chat-msg.mine {
-  background-color: #d4f1c5;
+  background-color: #c6f6c3;
   align-self: flex-end;
   margin-left: auto;
 }
 
 .chat-msg.theirs {
-  background-color: #e9e9e9;
+  background-color: #ffffff;
   align-self: flex-start;
 }
 
 .msg-text {
   display: block;
-  font-size: 14px;
 }
 
 .msg-time {
-  font-size: 10px;
-  color: #888;
+  font-size: 0.75rem;
+  color: #666;
   text-align: right;
+  margin-top: 4px;
 }
 
 .chat-input-bar {
@@ -89,29 +96,39 @@
   align-items: center;
   padding: 12px 14px;
   border-top: 1px solid #ececec;
-  background: #fff;
+  background: #f3a229;
 }
 
 .chat-input-bar input {
-  flex: 1 1 auto;
-  padding: 9px 12px;
+  flex: 1;
+  padding: 10px;
   border: 1px solid #aaa;
-  border-radius: 4px;
-  font-size: 16px;
-  margin-right: 8px;
+  border-radius: 6px;
+  font-size: 1rem;
+  margin-right: 10px;
 }
 
 .chat-input-bar button {
-  padding: 9px 22px;
-  background: #007bff;
+  padding: 9px 20px;
+  background: #a76604;
   color: white;
   border: none;
-  border-radius: 4px;
-  font-size: 16px;
-  font-weight: 600;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-weight: bold;
   cursor: pointer;
 }
 
 .chat-input-bar button:hover {
-  background: #0056b3;
+  background: #fb8c00;
 }
+
+
+.chat-username {
+  color: #222;
+  font-weight: 600;
+  font-size: 1rem;
+  margin-top: 35px; /* ⬅️ esto baja un poco la imagen */
+  display: inline-block; /* importante si margin-top no surte efecto */
+}
+

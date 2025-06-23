@@ -3,6 +3,8 @@ import { useState } from 'react';
 import { useAuth } from '../../../context/AuthContext.jsx';
 import './Css/ChatSidebar.css';
 import { Link } from 'react-router-dom';
+import logo from '../../../assets/img/Logo.png';
+import userImage from "../../../assets/img/user.png";
 
 export default function ChatSidebarUser({ chats, volunteers, onChatSelect, onStartChat }) {
   const { user } = useAuth();
@@ -20,7 +22,7 @@ export default function ChatSidebarUser({ chats, volunteers, onChatSelect, onSta
   return (
     <aside className="chat-sidebar">
       <Link to={'/main-user'}>
-        <img src="/logo.png" alt="Logo" className="logo" />
+      <img src={logo} alt="Logo" className="logo" />
       </Link>
       <div className="sidebar-header">Chats</div>
 
@@ -43,7 +45,7 @@ export default function ChatSidebarUser({ chats, volunteers, onChatSelect, onSta
               )
               .map(c => (
                 <li key={c._id} onClick={() => onChatSelect(c)}>
-                  <img className="sidebar-avatar" src="/assets/img/user.png" alt="avatar" />
+                  <img className="sidebar-avatar"  src={userImage} alt="avatar" />
                   <span>{chatPartnerName(c)}</span>
                 </li>
               ))}
@@ -61,7 +63,7 @@ export default function ChatSidebarUser({ chats, volunteers, onChatSelect, onSta
               if (alreadyChatted) return null;
               return (
                 <li key={v._id} onClick={() => onStartChat(v)}>
-                  <img className="sidebar-avatar" src="/assets/img/user.png" alt="avatar" />
+                  <img className="sidebar-avatar"  src={userImage} alt="avatar" />
                   <span>{v.username}</span>
                 </li>
               );

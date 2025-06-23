@@ -1,0 +1,194 @@
+body {
+  margin: 0.2cm;
+  box-sizing: border-box;
+}
+
+/* ── Header ───────────────────────────────────────────────── */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #C18CE8;
+  padding: 1.2rem 2rem;
+  font-family: 'Montserrat', sans-serif;
+  color: white;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  width: 80px;
+  margin-right: 0.5rem;
+}
+
+.title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin: 0;
+  color: black;
+  margin-top: -5px; /* Ajusta el valor según lo que necesites */
+}
+
+.header-right button {
+  background: transparent;
+  color: white;
+  font-weight: 600;
+  border: 1px solid white;
+  padding: 0.4rem 0.8rem;
+  margin-left: 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s, color 0.3s;
+}
+
+.header-right button:hover {
+  background: white;
+  color: #9B59B6;
+}
+
+/* ── Contenedor Principal del Calendario ──────────────────── */
+.calendar-container {
+  max-width: 700px;
+  margin: 2rem auto;
+  padding: 1rem;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.calendar-title {
+  text-align: center;
+  font-size: 1.9rem;
+  color: #4A4A4A;
+  margin-bottom: 1rem;
+  font-weight: bold;
+}
+
+/* ── Calendario React Calendar ───────────────────────────── */
+.calendar-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.react-calendar {
+  border: none;
+  font-family: 'Montserrat', sans-serif;
+  background: white;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+  border-radius: 10px;
+}
+
+.react-calendar__navigation button {
+  color: #34495E;
+  min-width: 44px;
+  font-size: 1rem;
+  margin: 0.2rem;
+  background: transparent;
+}
+
+.react-calendar__month-view__weekdays {
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: #555;
+}
+
+.react-calendar__tile {
+  padding: 0.8rem 0;
+  font-size: 0.9rem;
+}
+
+.react-calendar__tile--now {
+  background: #E8DAEF;
+  border-radius: 6px;
+}
+
+.react-calendar__tile--active {
+  background: #9B59B6;
+  color: white;
+  border-radius: 6px;
+}
+
+/*──────────────────────────────────────────────────────────────*/
+
+/* ── Detalles de la cita ───────────────────────────────────── */
+.appointments-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.appointment-card {
+  background: white;
+  border-left: 4px solid #9B59B6;
+  border-radius: 6px;
+  padding: 1rem;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.appointment-card p,
+.appointment-card strong {
+  margin: 0.3rem 0;
+  font-size: 0.92rem;
+  color: #333;
+}
+
+.appointment-title {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+  color: #2C3E50;
+  font-weight: 700;
+}
+
+.appointment-date {
+  font-size: 0.95rem;
+  color: #555;
+  margin-top: 0.4rem;
+}
+
+/* Si quieres darle color al campo estado */
+.appointment-status strong + span {
+  color: #27AE60;
+  font-weight: 600;
+}
+
+/* ── Mensaje cuando no hay citas ──────────────────────────── */
+.no-appointments {
+  text-align: center;
+  font-size: 1.1rem;
+  color: #777;
+  margin-top: 1.5rem;
+}
+
+
+/* ── CALENDARIO REACT ──────────────────────────── */
+
+/* Agranda la fuente y los tiles del calendario */
+.react-calendar {
+  font-size: 1.5rem;           /* Tamaño general del texto */
+  padding: 2rem;
+  width: 100%;
+  max-width: 600px;            /* Ajusta el ancho máximo */
+  border-radius: 14px;
+}
+
+/* Celdas del calendario */
+.react-calendar__tile {
+  padding: 1.5rem 0;           /* Más espacio vertical */
+  font-size: 1.4rem;
+}
+
+/* Agranda la navegación (meses y flechas) */
+.react-calendar__navigation button {
+  font-size: 1.6rem;
+  padding: 0.8rem 1.2rem;
+}
+
+/* Agranda los días de la semana */
+.react-calendar__month-view__weekdays {
+  font-size: 1.3rem;
+}

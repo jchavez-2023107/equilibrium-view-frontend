@@ -5,7 +5,7 @@ import './Help.css';
 import { useAuth } from '../../../context/AuthContext'
 import ModalProfile from "../../ModalProfile/ModalProfile"; 
 import { useState } from "react";
-
+import notificacioneImg from "../../../assets/img/notificaciones.png";
 function HelpUs() {
   const {user} = useAuth()
 
@@ -21,7 +21,7 @@ function HelpUs() {
 
   const [birthDate, setBirthDate] = useState(null)
 
-  const openModal = () => setIsModalOpen(true)
+
   const closeModal = () => setIsModalOpen(false)
 
   return (
@@ -35,16 +35,18 @@ function HelpUs() {
           </Link>
         </div>
         <div className="right-section">
-          <Link to="/chat-emergencia" className="nav-link red">Emergencia</Link>
-          <Link to="/chat" className="nav-link">Historial</Link>
+          <Link to="/chat-user" className="nav-link">Chats</Link>
+          <Link to="/chat-user" className="nav-link">Historial</Link>
           <Link to="/help-user" className="nav-link">Ayuda</Link>
-          <Link to="/notificacion" className="notification-icon">🔔</Link>
-          <Link to="/profile-user" className="volu-user">{user?.username || 'Usuario'}</Link>
+          <Link to="/notificacion" className="volu-notif"> <img src={notificacioneImg} alt="Notificaciones" className="campana-img" /></Link>
+          <Link to="/profile-user" className="volu-user">
+            {user?.username || 'Usuario'}
+          </Link>
             <img
               src={userImage}
               alt="Usuario"
               className="user-image"
-              onClick={openModal}
+              onClick={() => setIsModalOpen(true)}
               style={{ cursor: 'pointer' }}
             />
         </div>

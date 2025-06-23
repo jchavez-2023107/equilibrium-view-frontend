@@ -20,7 +20,6 @@ body {
   align-items: center;
   background: #C18CE8;
   padding: 0.8rem 1.5rem;
-  position: sticky;
   top: 0;
   z-index: 10;
 }
@@ -56,9 +55,6 @@ body {
   text-transform: uppercase;
 }
 
-.nav-link.red {
-  color: red;
-}
 
 .username {
   font-weight: bold;
@@ -82,11 +78,13 @@ body {
 }
 
 .help-title {
+  text-align: center;
   font-size: 3rem;
   font-weight: 800;
   color: black;
   margin-bottom: 3rem;
 }
+
 
 /* Grid de 2 columnas exactas */
 .help-grid {
@@ -124,11 +122,16 @@ body {
 }
 
 .help-card h3 {
-  margin-top: 0;
+  text-align: center;
   font-size: 1.6rem;
   font-weight: bold;
   color: #222;
   margin-bottom: 1rem;
+  min-height: 3.5rem; /* ✅ Altura mínima consistente para todos los títulos */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 
 .help-card p {
@@ -136,10 +139,14 @@ body {
   line-height: 1.7;
   color: #444;
   margin-bottom: 1.2rem;
+  text-align: justify;
 }
 
+
+
 .learn-more {
-  display: inline-block;
+  display: block;         /* Cambiado de inline-block a block */
+  text-align: center;     /* ✅ Centrado */
   text-transform: uppercase;
   font-weight: bold;
   font-size: 1rem;
@@ -148,6 +155,7 @@ body {
   margin-top: 1rem;
   transition: color 0.3s;
 }
+
 
 .learn-more:hover {
   color: #357ABD;

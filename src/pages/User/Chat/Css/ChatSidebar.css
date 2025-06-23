@@ -1,18 +1,21 @@
 .chat-sidebar {
   width: 300px;
-  background-color: #f1f1f1;
+  background-color: #f5f5f5;
   border-right: 1px solid #ccc;
   display: flex;
   flex-direction: column;
-  padding: 10px 0 10px 0;
+  padding: 30px 0 10px; /* ⬇️ aumentamos espacio arriba */
   height: 100vh;
   min-width: 240px;
+  font-family: Arial, sans-serif;
+  
 }
 
+
 .logo {
-  width: 70px;
+  width: 60px;
   display: block;
-  margin: 0 auto 12px auto;
+  margin: 20px auto 10px auto;
 }
 
 .sidebar-header {
@@ -23,34 +26,34 @@
 }
 
 .sidebar-search {
-  padding: 0 16px 10px 16px;
+  padding: 4px 12px;
 }
 
 .sidebar-search input {
-  width: 100%;
-  padding: 8px;
+  width: 90%;
+  padding: 8px 10px;
   border-radius: 6px;
   border: 1px solid #ccc;
+  font-size: 0.9rem;
 }
 
 .sidebar-section {
   flex: 1 1 0;
   display: flex;
   flex-direction: column;
-  margin-bottom: 8px;
+  margin-bottom: 4px;
 }
 
 .sidebar-subtitle {
   font-weight: bold;
-  margin: 8px 16px 6px 16px;
-  font-size: 16px;
+  margin: 6px 16px 4px 16px;
+  font-size: 15px;
 }
 
 .sidebar-list-scroll {
-  flex: 1 1 0;
+  flex: 1;
   overflow-y: auto;
-  min-height: 0;
-  max-height: 160px; /* Puedes ajustar este valor según tu preferencia */
+  max-height: 200px;
   padding: 0 8px;
 }
 
@@ -63,10 +66,11 @@
 .sidebar-list li {
   display: flex;
   align-items: center;
-  padding: 8px 6px;
+  padding: 6px 6px;
+  margin-bottom: 15px; /* 🆕 espacio entre voluntarios */
   cursor: pointer;
   border-radius: 4px;
-  transition: background 0.15s;
+  transition: background 0.15s ease;
 }
 
 .sidebar-list li:hover {
@@ -74,9 +78,14 @@
 }
 
 .sidebar-avatar {
-  width: 32px;
-  height: 32px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
-  margin-right: 10px;
+  margin-right: 8px;
   object-fit: cover;
+}
+
+/* 🆕 Segunda sección: Voluntarios disponibles */
+.sidebar-section:nth-of-type(2) .sidebar-list-scroll {
+  max-height: 220px; /* antes: 120px — ahora muestra ~6 voluntarios */
 }

@@ -1,5 +1,7 @@
 .chat-page {
   display: flex;
   height: 100vh;
-  font-family: Arial, sans-serif;
+  font-family: 'Montserrat', sans-serif;
+  background: #f4f4f4;
+  overflow: hidden;
 }

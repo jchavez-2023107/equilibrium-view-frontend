@@ -74,16 +74,17 @@ function Home() {
           </div>
           {/* FOOTER AGRADECIMIENTOS */}
           <footer className="footer-thanks">
-            <p>
-              Agradecimientos a todos los programadores y compañeros que
+            <p className="footer-agradecimientos">
+              Agradecimientos a todos los programadores y compañeros que<br />
               hicieron realidad este proyecto:
-              <strong>
-                {" "}
-                Pablo Palacios, Diego Chupina, Andrés Oliva,
-                Pedro Bautista y Joel Chávez.
-              </strong>
             </p>
-            <p className="footer-copy">© 2025 Equilibrium. Todos los derechos reservados.</p>
+            <p className="footer-nombres">
+              Pablo Palacios, Diego Chupina, Andrés Oliva, Pedro Bautista y Joel Chávez.
+            </p>
+
+            <div className="footer-copy">
+              © 2025 Equilibrium. Todos los derechos reservados.
+            </div>
           </footer>
         </section>
       </main>
