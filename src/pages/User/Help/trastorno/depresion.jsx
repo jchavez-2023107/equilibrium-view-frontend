@@ -25,6 +25,7 @@ export default function DepresionPage() {
       </header>
 
       <main className="depresion-container">
+        <h1 className="main-topic-title">DEPRESIÓN</h1> {/* ✅ NUEVO TÍTULO PRINCIPAL */}
         <h2 className="section-title">¿Qué es la Depresión?</h2>
         <p>
           La depresión es un trastorno del estado de ánimo que afecta profundamente la forma en que las personas piensan, sienten y manejan sus actividades diarias. Va más allá de sentirse triste ocasionalmente: implica una sensación de vacío, desesperanza o apatía que persiste por semanas o incluso meses.

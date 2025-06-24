@@ -52,7 +52,7 @@ const AppointmentListUs = lazy(() => import("./pages/User/Appointment/Appointmen
 const AppointmentFormUser = lazy(() => import("./pages/User/Appointment/AppointmentForm.User"))
 const TrashViewUs = lazy(() => import("./pages/User/Appointment/TrashView.User"))
 const NotificationsUs = lazy(() => import("./pages/User/Notification/NotificationUs"));
-const Depresion = lazy(() => import("./pages/User/Help/trastorno/depresion"));
+const Depresion = lazy(() => import("./pages/User/Help/trastorno/Depresion"));
 const TrastornoAnsiedad = lazy(() => import("./pages/User/Help/trastorno/trastornoAnsiedad"));
 const Esquizofrenia = lazy(() => import("./pages/User/Help/trastorno/esquizofrenia"));
 const TOC = lazy(() => import("./pages/User/Help/trastorno/TOC"));
