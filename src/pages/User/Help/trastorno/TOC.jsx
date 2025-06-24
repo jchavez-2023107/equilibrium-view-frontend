@@ -27,6 +27,7 @@ export default function TOCPage() {
 
       {/* ✅ CONTENIDO EDUCATIVO */}
       <main className="depresion-container">
+        <h1 className="main-topic-title">TRASTORNO OBSESIVO-COMPULSIVO (TOC)</h1> {/* ✅ NUEVO TÍTULO PRINCIPAL */}
         <h2 className="section-title">¿Qué es el Trastorno Obsesivo-Compulsivo (TOC)?</h2>
         <p>
           El TOC es un trastorno de ansiedad que se caracteriza por pensamientos recurrentes, no deseados (obsesiones) y conductas repetitivas (compulsiones) que la persona se siente impulsada a realizar. Estas acciones interfieren significativamente en la vida cotidiana.

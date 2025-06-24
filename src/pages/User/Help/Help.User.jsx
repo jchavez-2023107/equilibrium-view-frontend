@@ -36,7 +36,6 @@ function HelpUs() {
         </div>
         <div className="right-section">
           <Link to="/chat-user" className="nav-link">Chats</Link>
-          <Link to="/chat-user" className="nav-link">Historial</Link>
           <Link to="/help-user" className="nav-link">Ayuda</Link>
           <Link to="/notificacion-user" className="volu-notif"> <img src={notificacioneImg} alt="Notificaciones" className="campana-img" /></Link>
           <Link to="/profile-user" className="username">

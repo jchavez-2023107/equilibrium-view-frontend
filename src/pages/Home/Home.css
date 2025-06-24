@@ -206,13 +206,13 @@ body {
 }
 
 .logo-img {
-  height: 60px;
+  height: 90px;
   width: auto;
 }
 
 .logo-text {
   font-family: 'Montserrat', sans-serif;
-  font-size: 1.5rem;  /* más grande */
+  font-size: 1.8rem;  /* más grande */
   color: rgb(0, 0, 0);
   margin: 0;
   text-align: center;

@@ -1,18 +1,20 @@
 .notifications-page {
-  max-width: 600px;
-  margin: 2rem auto;
+  width: 100%;
+  padding: 3rem 5rem;
   background-color: #ffffff;
-  border-radius: 12px;
-  padding: 2rem;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
   font-family: 'Arial', sans-serif;
+  box-sizing: border-box;
 }
+
 
 .notifications-page h2 {
   text-align: center;
   font-size: 2rem;
   color: #333;
-  margin-bottom: 1.5rem;
+  margin-top: 5rem; /* ⬅️ NUEVO */
+  margin-bottom: 2.5rem; /* ⬆️ MÁS ESPACIO INFERIOR TAMBIÉN */
 }
 
 .notifications-page ul {
@@ -44,7 +46,7 @@
 }
 
 .notifications-page button {
-  background-color: #6C63FF;
+  background-color: #C18CE8;
   color: white;
   border: none;
   padding: 0.6rem 1.2rem;
@@ -57,11 +59,70 @@
 }
 
 .notifications-page button:hover {
-  background-color: #5848d4;
+  background-color: #C18CE8;
 }
 
 .notifications-page p {
   text-align: center;
   color: #444;
   font-size: 1.1rem;
+}
+
+
+/* === HEADER UNIFICADO === */
+.encabezado {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #C18CE8;
+  padding: 1rem 2rem;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+  color: black;
+}
+
+.encabezado-izquierda {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.logo {
+  height: 50px;
+  width: auto;
+}
+
+.titulo {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.encabezado-derecha {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.nav {
+  color: black;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+.nav:hover {
+  color: #dcdcff;
+}
+
+.usuario {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.user-img {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  object-fit: cover;
 }

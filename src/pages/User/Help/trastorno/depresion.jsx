@@ -17,8 +17,8 @@ export default function DepresionPage() {
           <h1 className="titulo">EQUILIBRIUM</h1>
         </div>
         <div className="encabezado-derecha">
-          <Link to="/chat-user" className="nav">Chats</Link>
-          <Link to="/help-user" className="nav">Ayuda</Link>
+          <Link to="/chat-user" className="nav">CHATS</Link>
+          <Link to="/help-user" className="nav">AYUDA</Link>
           <span className="usuario">{user?.username || "Usuario"}</span>
           <img src={userImage} alt="Usuario" className="user-img" />
         </div>

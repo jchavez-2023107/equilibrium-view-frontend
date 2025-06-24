@@ -32,7 +32,7 @@ body {
 }
 
 .logo {
-  width: 50px;
+  width: 90px;
 }
 
 .title {
@@ -51,10 +51,15 @@ body {
 .nav-link {
   text-decoration: none;
   color: black;
-  font-weight: 600;
-  font-size: 1rem;
+  font-weight: 700;
+  font-size: 1.4rem;  /* ⬆️ Aumenta el tamaño */
   text-transform: uppercase;
   position: relative;
+}
+
+
+.nav-link:hover {
+  color: white; /* Cambia a un azul bonito */
 }
 
 

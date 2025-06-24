@@ -11,9 +11,14 @@ body {
   background-color: #C18CE8;
   padding: 1.2rem 2rem;
   font-family: 'Montserrat', sans-serif;
-  color: white;
+  color: rgb(0, 0, 0);
   box-shadow: 0 2px 6px rgba(0,0,0,0.15);
 }
+
+a {
+  text-decoration: none;
+}
+
 
 .header-left {
   display: flex;
@@ -30,7 +35,7 @@ body {
   font-weight: 700;
   margin: 0;
   color: black;
-  margin-top: -5px; /* Ajusta el valor según lo que necesites */
+  margin-top: -1px; /* Ajusta el valor según lo que necesites */
 }
 
 .header-right button {

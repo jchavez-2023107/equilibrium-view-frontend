@@ -11,7 +11,7 @@ function HeaderUs() {
         <Link to={'/main-user'}>
         <img src={logo} alt="Logo Equilibrium" className="logo" /></Link>
         <Link to={'/main-user'}>
-        <h1 className="title">EQUILIBRIUM</h1>   </Link>
+        <h1 className="title">EQUILIBRIUM</h1></Link>
         
       </div>
       <div className="header-right">

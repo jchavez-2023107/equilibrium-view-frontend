@@ -27,19 +27,20 @@ body, html {
 }
 
 .logo {
-  width: 60px;  /* más pequeño */
-  margin-right: 0.5rem;
+  width: 90px;  /* más pequeño */
+  margin-right: 1rem;
 }
 
 .titulo {
   font-family: 'Montserrat', sans-serif;
-  font-size: 1.8rem;  /* más grande */
+  font-size: 1.8rem;
   color: black;
   margin: 0;
   text-align: center;
-  margin-top: -15px; /* Ajusta el valor según lo que necesites */
+  padding-top: 5px; /* ⬅️ NUEVO: empuja hacia abajo */
   font-weight: 800;
 }
+
 
 .encabezado-derecha {
   display: flex;
@@ -52,8 +53,16 @@ body, html {
 .usuario {
   text-decoration: none;
   color: black;
-  font-weight: 900;
-  font-size: 1.2rem;  /* un poco más grandes */
+  font-weight: 800;
+  font-size: 1.4rem;  /* un poco más grandes */
+}
+
+.nav:hover {
+  color: white; /* Cambia a un azul bonito */
+}
+
+.usuario {
+  margin-top: -4px; /* 🔼 Súbelo un poco */
 }
 
 

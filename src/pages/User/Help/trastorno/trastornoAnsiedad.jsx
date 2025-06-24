@@ -27,6 +27,7 @@ export default function TrastornoAnsiedadPage() {
 
       {/* ✅ CONTENIDO EDUCATIVO */}
       <main className="depresion-container">
+        <h1 className="main-topic-title">TRASTORNO DE ANSIEDAD GENERALIZADA (TAG)</h1> {/* ✅ NUEVO TÍTULO PRINCIPAL */}
         <h2 className="section-title">¿Qué es el Trastorno de Ansiedad Generalizada (TAG)?</h2>
         <p>
           El TAG es un trastorno caracterizado por una preocupación excesiva y persistente por múltiples aspectos de la vida, como el trabajo, la salud o los problemas cotidianos. Estas preocupaciones son difíciles de controlar y generan un impacto importante en el bienestar.
