@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import { useAppointments } from "../../../context/AppointmentContext";
+import "./Calendar.Vol.css";
+import "../Appointment/Header.Vol.css"
 
 export default function CalendarViewVol() {
   const { appointments, lastUpdate } = useAppointments();

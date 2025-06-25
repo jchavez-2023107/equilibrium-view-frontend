@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap');
 
 body {
-  margin: 0;
+  margin: 0.2cm;
   padding: 0;
   background-color: #e9e9e9;
   font-family: 'Arial', sans-serif;
@@ -20,7 +20,6 @@ body {
   align-items: center;
   background: #C18CE8;
   padding: 0.8rem 1.5rem;
-  position: sticky;
   top: 0;
   z-index: 10;
 }
@@ -33,10 +32,11 @@ body {
 }
 
 .logo {
-  width: 50px;
+  width: 90px;
 }
 
 .title {
+  font-family: 'Montserrat', sans-serif;
   color: black;
   font-size: 1.8rem;
   font-weight: 800;
@@ -51,23 +51,28 @@ body {
 .nav-link {
   text-decoration: none;
   color: black;
-  font-weight: 600;
-  font-size: 1rem;
+  font-weight: 700;
+  font-size: 1.4rem;  /* ⬆️ Aumenta el tamaño */
   text-transform: uppercase;
+  position: relative;
 }
 
-.nav-link.red {
-  color: red;
+
+.nav-link:hover {
+  color: white; /* Cambia a un azul bonito */
 }
+
 
 .username {
+  text-decoration: none;
   font-weight: bold;
-  font-size: 1rem;
+  font-size: 1.2rem;   /* Aumenta tamaño */
+  color: #000000;     
 }
 
 .user-image {
-  width: 40px;
-  height: 40px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
 }
 
@@ -163,4 +168,12 @@ body {
 
 .learn-more:hover {
   color: #357ABD;
+}
+
+
+
+.campana-img {
+  width: 32px;     /* Puedes ajustar entre 28px - 40px según gusto */
+  height: 32px;
+  object-fit: contain;
 }

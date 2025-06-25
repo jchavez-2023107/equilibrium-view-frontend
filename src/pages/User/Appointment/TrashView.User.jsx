@@ -1,5 +1,6 @@
 import React from 'react';
 import { useAppointments } from '../../../context/AppointmentContext';
+import './TrashViewUs.css'; // Import your CSS styles
 
 export default function TrashViewUs() {
   const { deletedAppointments } = useAppointments();

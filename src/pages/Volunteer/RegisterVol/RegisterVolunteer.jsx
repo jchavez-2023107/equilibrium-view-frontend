@@ -161,15 +161,6 @@ export default function RegisterVolunteer() {
               Datos de Voluntario
             </div>
             {openSection === 'voluntario' && <>
-              <div className="input-group"><span>❓</span>
-                <select name="volunteerData.needs" value={form.volunteerData.needs} onChange={handleChange} required>
-                  <option value="">-- Necesidad --</option>
-                  <option value="CHAT">CHARLA</option>
-                  <option value="EMERGENCY">EMERGENCIA</option>
-                  <option value="APPOINTMENT">CITA</option>
-                </select>
-              </div>
-
               <div className="input-group day-checkboxes"><span>📅</span>
                 <div className="checkbox-list">
                   {["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"].map(day => (
@@ -196,6 +187,14 @@ export default function RegisterVolunteer() {
                 </select>
                 <select name="volunteerData.schedules.minutoHasta" value={form.volunteerData.schedules.minutoHasta} onChange={handleChange} required>
                   <option value="">Min</option>{minutos.map(m => <option key={m} value={m}>{m}</option>)}
+                </select>
+              </div>
+                   <div className="input-group"><span>❓</span>
+                <select name="volunteerData.needs" value={form.volunteerData.needs} onChange={handleChange} required>
+                  <option value="">-- Necesidad --</option>
+                  <option value="CHAT">CHARLA</option>
+                  <option value="EMERGENCY">EMERGENCIA</option>
+                  <option value="APPOINTMENT">CITA</option>
                 </select>
               </div>
             </>}

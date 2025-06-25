@@ -117,7 +117,7 @@ function ProfileUs() {
           />
         </div>
 
-        <div className="profile-field">
+        <div className="profile-field date-field ">
           <label>FECHA DE NACIMIENTO:</label>
           <div className="input-with-icon">
             <DatePicker

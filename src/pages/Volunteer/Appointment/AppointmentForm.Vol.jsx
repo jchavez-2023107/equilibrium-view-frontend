@@ -1,9 +1,10 @@
-// src/components/AppointmentFormVol.jsx
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAppointments } from '../../../context/AppointmentContext';
 import { useAuth } from '../../../context/AuthContext';
 import { fetchUsers } from '../../../services/api';
+import './AppointmentForm.Vol.css'; // Import your CSS styles
+
 
 export default function AppointmentFormVol() {
   const today = new Date().toISOString().substring(0, 10);
@@ -16,7 +17,7 @@ export default function AppointmentFormVol() {
   const [error, setError] = useState('');
   const navigate = useNavigate();
   const { createAppointment } = useAppointments();
-  const { user } = useAuth(); // ← contiene el voluntario logueado
+  const { user } = useAuth();
 
   useEffect(() => {
     async function loadUsers() {
@@ -46,13 +47,12 @@ export default function AppointmentFormVol() {
     }
 
     try {
-
       await createAppointment({
         title,
         description,
         scheduledAt: scheduledAt.toISOString(),
-        userId, // ← usuario seleccionado del formulario
-        volunteerId: user.uid // ← voluntario logueado
+        userId,
+        volunteerId: user.uid
       });
 
       navigate('/calendar-vol');

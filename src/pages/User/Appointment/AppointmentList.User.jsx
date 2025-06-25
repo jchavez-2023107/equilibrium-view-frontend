@@ -1,5 +1,6 @@
 import React from 'react';
 import { useAppointments } from '../../../context/AppointmentContext';
+import './AppointmentList.User.css'; // Asegúrate de tener un archivo CSS para estilos
 
 export default function AppointmentListUs() {
   const { appointments, deleteAppointment, loading } = useAppointments();

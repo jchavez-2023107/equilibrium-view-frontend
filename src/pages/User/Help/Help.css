@@ -64,6 +64,7 @@ body {
 
 
 .username {
+  text-decoration: none;
   font-weight: bold;
   font-size: 1.2rem;   /* Aumenta tamaño */
   color: #000000;      /* Cambia a un azul bonito */
@@ -167,4 +168,11 @@ body {
 
 .learn-more:hover {
   color: #357ABD;
+}
+
+
+.campana-img {
+  width: 32px;     /* Puedes ajustar entre 28px - 40px según gusto */
+  height: 32px;
+  object-fit: contain;
 }
