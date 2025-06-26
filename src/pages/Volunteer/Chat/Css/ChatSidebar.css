@@ -1,60 +1,59 @@
 .chat-sidebar {
   width: 300px;
-  background-color: #f5f5f5;
+  background-color: #F3E5F5; /* Lavanda claro */
   border-right: 1px solid #ccc;
   display: flex;
   flex-direction: column;
-  padding: 30px 0 10px; /* ⬇️ aumentamos espacio arriba */
+  padding: 30px 0 10px;
   height: 100vh;
-  min-width: 240px;
-  font-family: Arial, sans-serif;
-  
+  font-family: 'Montserrat', sans-serif;
+  overflow: hidden;
 }
 
-
 .logo {
-  width: 60px;
+  width: 65px;
   display: block;
-  margin: 20px auto 10px auto;
+  margin: 10px auto;
 }
 
 .sidebar-header {
-  font-size: 20px;
+  font-size: 22px;
   font-weight: bold;
   margin-bottom: 10px;
   text-align: center;
+  color: #4A148C;
 }
 
 .sidebar-search {
-  padding: 4px 12px;
+  padding: 0 16px 12px;
 }
 
 .sidebar-search input {
-  width: 90%;
-  padding: 8px 10px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  font-size: 0.9rem;
+  width: 95%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #CE93D8;
+  font-size: 0.95rem;
+  outline: none;
+  background-color: #fff;
 }
 
 .sidebar-section {
-  flex: 1 1 0;
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 4px;
+  padding: 0 14px;
 }
 
 .sidebar-subtitle {
   font-weight: bold;
-  margin: 6px 16px 4px 16px;
-  font-size: 15px;
+  margin-top: 1.5rem;
+  margin-bottom: 8px;
+  font-size: 20px;
+  color: #6A1B9A;
 }
 
 .sidebar-list-scroll {
-  flex: 1;
+  max-height: 230px;
   overflow-y: auto;
-  max-height: 200px;
-  padding: 0 8px;
+  padding-right: 8px;
 }
 
 .sidebar-list {
@@ -66,26 +65,30 @@
 .sidebar-list li {
   display: flex;
   align-items: center;
-  padding: 6px 6px;
-  margin-bottom: 15px; /* 🆕 espacio entre voluntarios */
+  padding: 8px;
+  margin-bottom: 8px;
+  border-radius: 6px;
   cursor: pointer;
-  border-radius: 4px;
-  transition: background 0.15s ease;
+  transition: background 0.2s ease;
 }
 
 .sidebar-list li:hover {
-  background-color: #e0e0e0;
+  background-color: #E1BEE7;
 }
 
 .sidebar-avatar {
-  width: 28px;
-  height: 28px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
-  margin-right: 8px;
+  margin-right: 10px;
+  border: 2px solid #BA68C8;
+  background-color: white;
   object-fit: cover;
 }
 
-/* 🆕 Segunda sección: Voluntarios disponibles */
-.sidebar-section:nth-of-type(2) .sidebar-list-scroll {
-  max-height: 220px; /* antes: 120px — ahora muestra ~6 voluntarios */
+.sidebar-list span {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #333;
+  text-transform: lowercase;
 }

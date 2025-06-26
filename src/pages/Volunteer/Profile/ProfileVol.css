@@ -65,6 +65,18 @@
   resize: none;
 }
 
+.date-field {
+  width: 100%;
+}
+
+.date-field .input-with-icon {
+  width: 100%;
+}
+
+.date-field .date-input {
+  padding: 0.7rem 1rem;
+  font-size: 1rem;
+}
 .profile-field textarea {
   min-height: 90px;
 }
@@ -86,7 +98,7 @@
 
 .calendar-icon {
   position: absolute;
-  right: 10px;
+  right: 230px;
   top: 50%;
   transform: translateY(-50%);
   color: #4A90E2;
@@ -150,6 +162,8 @@
 .edit-button:hover {
   background-color: #357ABD;
 }
+
+
 
 @media (max-width: 480px) {
   .profile-card {

@@ -24,7 +24,7 @@ export default function ChatSidebarUser({ chats, volunteers, onChatSelect, onSta
       <Link to={'/main-user'}>
       <img src={logo} alt="Logo" className="logo" />
       </Link>
-      <div className="sidebar-header">Chats</div>
+      <div className="sidebar-header">CHATS</div>
 
       <div className="sidebar-search">
         <input

@@ -3,7 +3,7 @@
   display: flex;
   flex-direction: column;
   height: 100vh;
-  background: #f7f7f7;
+  background: #F5F5FA;
   overflow: hidden;
 }
 
@@ -14,16 +14,17 @@
   font-size: 18px;
   color: #888;
 }
+
 .chat-header {
   display: flex;
-  align-items: center;         /* ✅ centra verticalmente */
+  align-items: center;
   justify-content: space-between;
-  background: #ffab40;
+  background: #C18CE8; /* lavanda emocional */
   border-bottom: 1px solid #ececec;
   color: #fff;
   font-weight: 600;
-  padding: 1rem 1.5rem;         /* 🆙 más padding vertical */
-  min-height: 80px;            /* 🆙 asegura altura mínima */
+  padding: 1rem 1.5rem;
+  min-height: 80px;
 }
 
 .chat-header-left {
@@ -37,26 +38,29 @@
   height: 36px;
   border-radius: 50%;
   object-fit: cover;
-  margin-top: 35px; /* ⬅️ esto baja un poco la imagen */
+  margin-top: 35px;
 }
 
-
 .chat-close-btn {
-  background-color: #ff7043;
+  background-color: #F76C6C; /* coral suave */
   border: none;
   padding: 6px 10px;
   color: white;
   cursor: pointer;
   border-radius: 4px;
   font-size: 0.85rem;
-  margin-top: 35px; /* ⬅️ esto baja un poco la imagen */
+  margin-top: 35px;
+}
+
+.chat-close-btn:hover {
+  background-color: #E53935; /* coral más fuerte al hover */
 }
 
 .chat-messages {
   flex: 1;
   overflow-y: auto;
   padding: 18px 14px;
-  background: #eaeaea;
+  background: #F5F5FA;
 }
 
 .chat-msg {
@@ -70,13 +74,13 @@
 }
 
 .chat-msg.mine {
-  background-color: #c6f6c3;
+  background-color: #A5D6A7; /* verde suave */
   align-self: flex-end;
   margin-left: auto;
 }
 
 .chat-msg.theirs {
-  background-color: #ffffff;
+  background-color: #E3F2FD; /* azul claro calmante */
   align-self: flex-start;
 }
 
@@ -93,10 +97,16 @@
 
 .chat-input-bar {
   display: flex;
+  align-items: center;
   padding: 12px 14px;
   border-top: 1px solid #ececec;
-  background: #f3a229;
+  background: #e1bbee;
+  height: auto;
+  width: 100%;
+  box-sizing: border-box;
+    margin-top: 0; /* importante: sin margen que separe del contenido superior */
 }
+
 
 .chat-input-bar input {
   flex: 1;
@@ -105,11 +115,12 @@
   border-radius: 6px;
   font-size: 1rem;
   margin-right: 10px;
+  background-color: #fff;
 }
 
 .chat-input-bar button {
   padding: 9px 20px;
-  background: #a76604;
+  background: #BA68C8; /* botón lila vibrante */
   color: white;
   border: none;
   border-radius: 6px;
@@ -119,15 +130,13 @@
 }
 
 .chat-input-bar button:hover {
-  background: #fb8c00;
+  background: #9C27B0; /* lila oscuro al hover */
 }
-
 
 .chat-username {
-  color: #222;
+  color: #2E2E2E;
   font-weight: 600;
   font-size: 1rem;
-  margin-top: 35px; /* ⬅️ esto baja un poco la imagen */
-  display: inline-block; /* importante si margin-top no surte efecto */
+  margin-top: 35px;
+  display: inline-block;
 }
-
