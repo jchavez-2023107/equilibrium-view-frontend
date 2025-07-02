@@ -65,6 +65,18 @@
   resize: none;
 }
 
+.date-field {
+  width: 100%;
+}
+
+.date-field .input-with-icon {
+  width: 100%;
+}
+
+.date-field .date-input {
+  padding: 0.7rem 1rem;
+  font-size: 1rem;
+}
 .profile-field textarea {
   min-height: 90px;
 }
@@ -86,7 +98,7 @@
 
 .calendar-icon {
   position: absolute;
-  right: 10px;
+  right: 230px;
   top: 50%;
   transform: translateY(-50%);
   color: #4A90E2;
@@ -110,9 +122,48 @@
   transition: background 0.3s;
 }
 
+.profile-header {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.header-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.header-logo {
+  width: 130px;
+  height: 130px;
+  margin-right: 150px;
+  object-fit: contain;
+  margin-left: 4rem;
+}
+
+.header-left {
+  margin-left: 1.5; /* empuja a la derecha */
+}
+
+.header-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2.6rem;
+  font-weight: 800;
+  color: #333;
+  margin: 0;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+
 .edit-button:hover {
   background-color: #357ABD;
 }
+
+
 
 @media (max-width: 480px) {
   .profile-card {

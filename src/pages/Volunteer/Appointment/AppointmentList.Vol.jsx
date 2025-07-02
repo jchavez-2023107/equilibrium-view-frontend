@@ -1,5 +1,6 @@
 import React from 'react';
 import { useAppointments } from '../../../context/AppointmentContext';
+import './AppointmentList.Vol.css'; // Import your CSS styles
 
 export default function AppointmentListVol() {
   const { appointments, deleteAppointment, loading } = useAppointments();

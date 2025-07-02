@@ -6,6 +6,7 @@ import logo from "../../../assets/img/Logo.png";
 import userImage from "../../../assets/img/user.png";
 import volunteerImg from "../../../assets/img/volunteer.png";
 import calendarImg from "../../../assets/img/calendar.png";
+import notificacioneImg from "../../../assets/img/notificaciones.png";
 import "./MainVol.css";
 import ModalProfile from "../../ModalProfile/ModalProfile";
 import { fetchMyProfile } from "../../../services/api";
@@ -147,39 +148,41 @@ export default function MainVolunteer() {
   };
 
   return (
-    <div className="volu-container">
-      <header className="volu-header">
-        <div className="volu-left">
-          <img src={logo} alt="Logo Equilibrium" className="volu-logo" />
-          <h1 className="volu-title">Equilibrium</h1>
+    <div className="contenedor">
+      <header className="encabezado">
+        <div className="encabezado-izquierda">
+          <Link to="/">
+           <img src={logo} alt="Logo Equilibrium" className="logo" />
+         </Link>
+          <h1 className="titulo">EQUILIBRIUM</h1>
         </div>
-        <div className="volu-right">
-          <Link to="/chat-vol" className="volu-nav">
-            Chats
+        <div className="encabezado-derecha">
+          <Link to="/chat-vol" className="nav">
+            CHATS
           </Link>
-          <Link to="/help-vol" className="volu-nav">
-            Ayuda
+          <Link to="/help-vol" className="nav">
+            AYUDA
           </Link>
-          <Link to="/notificacion-vol" className="volu-notif"> 🔔
+          <Link to="/notificacion-vol" className="campana"> <img src={notificacioneImg} alt="Notificaciones" className="campana-img" />
           {notificationCount > 0 && (
-            <span className="notif-badge">🔔{notificationCount}</span>
+            <span className="notif-badge"><img src={notificacioneImg} alt="Notificaciones" className="campana-img" />{notificationCount}</span>
           )}
         </Link>
-          <Link to="/profile-vol" className="volu-user">
+          <Link to="/profile-vol" className="usuario">
             {user?.username || "Usuario"}
           </Link>
           <img
             src={userImage}
             alt="Usuario"
-            className="volu-user-img"
+            className="user-img"
             style={{ cursor: "pointer" }}
             onClick={() => setIsProfileOpen(true)}
           />
         </div>
       </header>
 
-      <main className="volu-main">
-        <h2 className="volu-saludo">
+      <main className="contenido">
+        <h2 className="saludo">
           ¡Hola, {user?.username || "Usuario"}! Estamos felices de verte de
           nuevo.
           <br />
@@ -187,8 +190,8 @@ export default function MainVolunteer() {
           mental?
         </h2>
 
-        <div className="volu-cards">
-          <div className="volu-card">
+        <div className="tarjetas">
+          <div className="tarjeta">
             <h3>Última Sesión</h3>
             <p>Fecha: 10/06/2025</p>
             <p>Duración: 45 minutos</p>
@@ -198,20 +201,18 @@ export default function MainVolunteer() {
             </Link>
           </div>
 
-          <div className="volu-card">
+          <div className="tarjeta">
             <h3>Sesión Anterior</h3>
             <p>Fecha: 05/06/2025</p>
             <p>Duración: 40 minutos</p>
             <p>Usuario: Luis Rodríguez</p>
-            <Link to="/calendar-vol">
-              <button>Ver</button>
-            </Link>
+            <Link to="/calendar-vol"><button>Ver</button></Link>
           </div>
         </div>
 
-        <div className="volu-encuesta">
+        <div className="encuesta">
           <h3>¿Cómo te encuentras el día de hoy?</h3>
-          <div className="volu-emojis">
+          <div className="emojis">
             <button
               onClick={() => handleEmotionClick("triste")}
               className={selectedEmotion === "triste" ? "selected" : ""}
@@ -234,10 +235,10 @@ export default function MainVolunteer() {
         </div>
 
         {total > 0 && (
-          <div className="volu-estadistica">
+          <div className="estadistica">
             <h3>Estadística Emocional</h3>
             <Doughnut data={chartData} />
-            <p className="volu-mensaje-emocional">
+            <p className="mensaje-emocional">
               {mostFrequent === "feliz" &&
                 "¡Tu constancia emocional es admirable 😊"}
               {mostFrequent === "serio" && "Te invitamos a reflexionar 🧘"}
@@ -246,14 +247,14 @@ export default function MainVolunteer() {
           </div>
         )}
 
-        <div className="volu-cards">
-          <div className="volu-card-contact">
-            <img src={volunteerImg} alt="Profesional" />
+        <div className="tarjetas">
+          <div className="tarjeta-contacto">
+            <img src={volunteerImg} alt="Administrador" />
             <p>Contacta con un Administrador</p>
             <button>Contactar</button>
           </div>
 
-          <div className="volu-card-contact">
+          <div className="tarjeta-contacto">
             <img src={userImage} alt="Voluntario" />
             <p>Contacta con un usuario necesitado</p>
             <Link to="/chat-vol">
@@ -261,7 +262,7 @@ export default function MainVolunteer() {
             </Link>
           </div>
 
-          <div className="volu-card-contact">
+          <div className="tarjeta-contacto">
             <img src={calendarImg} alt="Agenda" />
             <p>Agenda una cita con un usuario</p>
             <Link to="/citas-new-vol">
@@ -271,11 +272,11 @@ export default function MainVolunteer() {
         </div>
       </main>
 
-      <footer className="volu-footer">
+      <footer className="pie">
         <p>
           <strong>FRASE DEL DÍA ❤️</strong>
         </p>
-        <p className="volu-frase-dia">{fraseDelDia}</p>
+        <p className="frase-dia">{fraseDelDia}</p>
       </footer>
 
       {isProfileOpen && (

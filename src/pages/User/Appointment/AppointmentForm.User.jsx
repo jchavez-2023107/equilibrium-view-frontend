@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { fetchUsers } from '../../../services/api';
 import { useAuth } from '../../../context/AuthContext';
 import { useAppointments } from '../../../context/AppointmentContext';
+import './AppointmentFormUser.css'; // Import your CSS styles
 
 export default function AppointmentFormUser() {
   const today = new Date().toISOString().substring(0, 10);

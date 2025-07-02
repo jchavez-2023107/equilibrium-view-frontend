@@ -30,9 +30,9 @@
 .vol-left-panel {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: left;
-  padding: 2rem;
+  padding:  13rem 3rem;
   background: transparent;
   box-shadow: none;
   border-radius: 0;
@@ -53,16 +53,20 @@
 }
 
 .welcome-message {
-  font-size: 2.2rem; /* 🔧 más grande */
+  font-size: 2.5rem;
   font-weight: 700;
-  margin: 0; /* 🔧 elimina espacios extra arriba o abajo */
+  margin: 0;
+  text-align: left;         /* 👈 Alineación a la izquierda */
+  text-indent: -1rem;     /* 👈 Empieza 1ª línea antes */
+  padding-left: 5rem;       /* 👈 Desplaza ambas líneas un poco */
+  line-height: 1.3;
 }
 
 
 .vol-right-panel {
   width: 320px;
   max-width: 90%;
-  background: rgba(85, 85, 85, 0.6);
+  background-color: rgba(105, 105, 105, 0.34);
   padding: 1.5rem;
   display: flex;
   flex-direction: column;

@@ -5,7 +5,7 @@ import './Help.css';
 import { useAuth } from '../../../context/AuthContext'
 import ModalProfile from "../../ModalProfile/ModalProfile"; 
 import { useState } from "react";
-
+import notificacioneImg from "../../../assets/img/notificaciones.png";
 function HelpUs() {
   const {user} = useAuth()
 
@@ -21,7 +21,7 @@ function HelpUs() {
 
   const [birthDate, setBirthDate] = useState(null)
 
-  const openModal = () => setIsModalOpen(true)
+
   const closeModal = () => setIsModalOpen(false)
 
   return (
@@ -35,16 +35,17 @@ function HelpUs() {
           </Link>
         </div>
         <div className="right-section">
-          <Link to="/chat-emergencia" className="nav-link red">Emergencia</Link>
-          <Link to="/chat" className="nav-link">Historial</Link>
+          <Link to="/chat-user" className="nav-link">Chats</Link>
           <Link to="/help-user" className="nav-link">Ayuda</Link>
-          <Link to="/notificacion" className="notification-icon">🔔</Link>
-          <Link to="/profile-user" className="volu-user">{user?.username || 'Usuario'}</Link>
+          <Link to="/notificacion-user" className="volu-notif"> <img src={notificacioneImg} alt="Notificaciones" className="campana-img" /></Link>
+          <Link to="/profile-user" className="username">
+            {user?.username || 'Usuario'}
+          </Link>
             <img
               src={userImage}
               alt="Usuario"
               className="user-image"
-              onClick={openModal}
+              onClick={() => setIsModalOpen(true)}
               style={{ cursor: 'pointer' }}
             />
         </div>
@@ -61,7 +62,7 @@ function HelpUs() {
              acompañada de síntomas físicos como fatiga constante, aislamiento social, 
              dificultad para concentrarse y problemas para dormir.
             </p>
-            <Link to="/trastornos/depresion" className="learn-more">APRENDE MÁS</Link>
+            <Link to="/depresion" className="learn-more">APRENDE MÁS</Link>
           </div>
 
           <div className="help-card">
@@ -71,7 +72,7 @@ function HelpUs() {
               cotidianas, acompañada de síntomas físicos como tensión muscular, inquietud,
               dificultad para concentrarse y problemas para dormir.
             </p>
-            <Link to="/trastornos/ansiedad" className="learn-more">APRENDE MÁS</Link>
+            <Link to="/trastornoAnsiedad" className="learn-more">APRENDE MÁS</Link>
           </div>
 
           <div className="help-card">
@@ -79,7 +80,7 @@ function HelpUs() {
             <p>
               Trastorno mental grave que altera la percepción de la realidad y afecta pensamientos, emociones y comportamientos. Puede incluir alucinaciones, delirios, pensamiento desorganizado y deterioro del funcionamiento social o laboral.
             </p>
-            <Link to="/trastornos/esquizofrenia" className="learn-more">APRENDE MÁS</Link>
+            <Link to="/esquizofrenia" className="learn-more">APRENDE MÁS</Link>
           </div>
 
           <div className="help-card">
@@ -89,7 +90,7 @@ function HelpUs() {
               y comportamientos repetitivos (compulsiones) que la persona siente la necesidad de realizar
               para aliviar esa ansiedad.
             </p>
-            <Link to="/trastornos/toc" className="learn-more">APRENDE MÁS</Link>
+            <Link to="/TOC" className="learn-more">APRENDE MÁS</Link>
           </div>
         </div>
       </main>

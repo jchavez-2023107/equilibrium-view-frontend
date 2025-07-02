@@ -1,57 +1,59 @@
 .chat-sidebar {
   width: 300px;
-  background-color: #f1f1f1;
+  background-color: #F3E5F5; /* Lavanda claro */
   border-right: 1px solid #ccc;
   display: flex;
   flex-direction: column;
-  padding: 10px 0 10px 0;
+  padding: 30px 0 10px;
   height: 100vh;
-  min-width: 240px;
+  font-family: 'Montserrat', sans-serif;
+  overflow: hidden;
 }
 
 .logo {
-  width: 70px;
+  width: 65px;
   display: block;
-  margin: 0 auto 12px auto;
+  margin: 10px auto;
 }
 
 .sidebar-header {
-  font-size: 20px;
+  font-size: 22px;
   font-weight: bold;
   margin-bottom: 10px;
   text-align: center;
+  color: #4A148C;
 }
 
 .sidebar-search {
-  padding: 0 16px 10px 16px;
+  padding: 0 16px 12px;
 }
 
 .sidebar-search input {
-  width: 100%;
-  padding: 8px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
+  width: 95%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #CE93D8;
+  font-size: 0.95rem;
+  outline: none;
+  background-color: #fff;
 }
 
 .sidebar-section {
-  flex: 1 1 0;
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 8px;
+  padding: 0 14px;
 }
 
 .sidebar-subtitle {
   font-weight: bold;
-  margin: 8px 16px 6px 16px;
-  font-size: 16px;
+  margin-top: 1.5rem;
+  margin-bottom: 8px;
+  font-size: 20px;
+  color: #6A1B9A;
 }
 
 .sidebar-list-scroll {
-  flex: 1 1 0;
+  max-height: 230px;
   overflow-y: auto;
-  min-height: 0;
-  max-height: 160px; /* Puedes ajustar este valor según tu preferencia */
-  padding: 0 8px;
+  padding-right: 8px;
 }
 
 .sidebar-list {
@@ -63,20 +65,30 @@
 .sidebar-list li {
   display: flex;
   align-items: center;
-  padding: 8px 6px;
+  padding: 8px;
+  margin-bottom: 8px;
+  border-radius: 6px;
   cursor: pointer;
-  border-radius: 4px;
-  transition: background 0.15s;
+  transition: background 0.2s ease;
 }
 
 .sidebar-list li:hover {
-  background-color: #e0e0e0;
+  background-color: #E1BEE7;
 }
 
 .sidebar-avatar {
-  width: 32px;
-  height: 32px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
   margin-right: 10px;
+  border: 2px solid #BA68C8;
+  background-color: white;
   object-fit: cover;
+}
+
+.sidebar-list span {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #333;
+  text-transform: lowercase;
 }

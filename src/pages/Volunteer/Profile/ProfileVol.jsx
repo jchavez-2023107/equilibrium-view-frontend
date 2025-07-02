@@ -3,6 +3,7 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { useEffect, useState } from 'react';
 import userImage from '../../../assets/img/user.png';
+import logo from "../../../assets/img/Logo.png";
 import './../Profile/ProfileVol.css';
 import { Link } from 'react-router-dom';
 import { fetchMyProfile, updateProfile } from '../../../services/api.js';
@@ -82,13 +83,13 @@ function ProfileVol() {
   if (loading) return <p className="profile-loading">Cargando perfil...</p>;
 
   return (
-    <div className="profile-container">
+  <div className="profile-container">
       <header>
         <div className="header-left">
-          <Link to={'/main-volunteer'}>
-            <img src="/logo.png" alt="Logo" className="logo" />
-            <h1 className="title">Equilibrium</h1>
-          </Link>
+           <Link to="/main-user" className="header-link">
+             <img src={logo} alt="Logo Equilibrium" className="header-logo" /></Link>
+              <Link to="/main-user">
+            <h1 className="header-title">EQUILIBRIUM</h1></Link>
         </div>
       </header>
 

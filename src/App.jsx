@@ -51,8 +51,11 @@ const CalendarViewUs = lazy(() => import("./pages/User/Calendar/Calendar.User"))
 const AppointmentListUs = lazy(() => import("./pages/User/Appointment/AppointmentList.User"))
 const AppointmentFormUser = lazy(() => import("./pages/User/Appointment/AppointmentForm.User"))
 const TrashViewUs = lazy(() => import("./pages/User/Appointment/TrashView.User"))
-
 const NotificationsUs = lazy(() => import("./pages/User/Notification/NotificationUs"));
+const Depresion = lazy(() => import("./pages/User/Help/trastorno/Depresion"));
+const TrastornoAnsiedad = lazy(() => import("./pages/User/Help/trastorno/trastornoAnsiedad"));
+const Esquizofrenia = lazy(() => import("./pages/User/Help/trastorno/esquizofrenia"));
+const TOC = lazy(() => import("./pages/User/Help/trastorno/TOC"));
 
 
 function App() {
@@ -74,6 +77,10 @@ useAppointmentNotifications()
           <Route path="/help-user" element={<HelpUs />} />
           <Route path="/chat-user" element={<ChatUserPage/>}></Route>
           <Route path="/notificacion-user" element={<NotificationsUs />} />
+          <Route path="/depresion" element={<Depresion />} />
+          <Route path="/trastornoAnsiedad" element={<TrastornoAnsiedad />} />
+          <Route path="/esquizofrenia" element={<Esquizofrenia />} />
+          <Route path="/TOC" element={<TOC />} />
         <Route element={<LayoutUs/>}>
           <Route path="/calendar-user" element={<CalendarViewUs/>}></Route>
           <Route path="/citas-lista-user" element={<AppointmentListUs/>}></Route>

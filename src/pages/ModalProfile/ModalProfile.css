@@ -1,12 +1,10 @@
-/* ModalProfile.css */
-
 .modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro */
+  background-color: rgba(0, 0, 0, 0.4);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -14,50 +12,118 @@
 }
 
 .modal-content {
-  background-color: #fff;
-  padding: 2rem;
-  border-radius: 12px;
-  width: 400px;
-  max-width: 90%;
-  position: relative;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  background: linear-gradient(135deg, #fce4ec 0%, #f3e5f5 50%, #ede7f6 100%);
+  padding: 1.5rem;
+  border-radius: 14px;
+  width: 450px;
+  max-width: 95%;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.25);
   animation: fadeIn 0.3s ease-in-out;
+  font-family: 'Montserrat', sans-serif;
+  box-sizing: border-box;
 }
 
-.modal-close {
+.close-button {
   position: absolute;
-  top: 8px;
-  right: 12px;
-  font-size: 18px;
+  top: 12px;
+  right: 16px;
+  font-size: 20px;
   border: none;
   background: none;
   cursor: pointer;
+  color: #6b0b6f;
 }
 
-.user-image {
-  width: 100px;
-  margin: 0 auto;
-  display: block;
+h2 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: #2e2e2e;
+  text-align: center;
+  font-size: 1.8rem;
+}
+
+.profile-image-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.2rem;
+}
+
+.profile-image {
+  width: 120px;
+  height: 120px;
   border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+  border: 2px solid #9C27B0;
+}
+
+.profile-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  gap: 10px;
+}
+
+.profile-row label {
+  flex: 1;
+  color: #444;
+  font-weight: 600;
+}
+
+.profile-row input,
+.profile-row textarea,
+.input-with-icon {
+  flex: 1.9;
+}
+
+.profile-row input,
+.profile-row textarea {
+  width: 100%;
+  padding: 0.5rem 0.7rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #fff;
+  color: #333;
+  font-size: 0.95rem;
+}
+
+.profile-row textarea {
+  height: 4.5rem;
+  resize: none;
 }
 
 .input-with-icon {
   position: relative;
+  display: flex;
+  align-items: center;
 }
 
 .date-input {
   width: 100%;
-  padding-left: 30px;
+  padding: 0.5rem 0.7rem 0.5rem 2.8rem; /* ⬅️ más espacio a la izquierda */
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #fff;
 }
 
 .calendar-icon {
   position: absolute;
-  top: 8px;
-  left: 8px;
+  font-size: 18px;       /* opcional: un poco más grande */
+  top: 50%;
+  right: 30px;            /* ⬅️ separa el ícono un poco más del borde */
+  transform: translateY(-50%);
   color: #888;
 }
 
+
 @keyframes fadeIn {
-  from { opacity: 0; transform: scale(0.95); }
-  to { opacity: 1; transform: scale(1); }
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }

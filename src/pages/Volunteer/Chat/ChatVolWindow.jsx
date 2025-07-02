@@ -3,6 +3,7 @@ import { useAuth } from '../../../context/AuthContext.jsx';
 import { sendMessage, fetchChatById } from '../../../services/api.js';
 import { getSocket } from '../../../services/socket';
 import './Css/ChatWindow.css';
+import userImage from "../../../assets/img/user.png";
 
 export default function ChatWindowVol({ chat, onClose }) {
   const { user } = useAuth();
@@ -61,8 +62,8 @@ export default function ChatWindowVol({ chat, onClose }) {
     <div className="chat-window">
       <div className="chat-header">
         <div className="chat-header-left">
-          <img src="/assets/img/user.png" alt="partner" className="chat-avatar"/>
-          <span>{partner.username}</span>
+          <img   src={userImage} alt="partner" className="chat-avatar"/>
+          <span  className="chat-username">{partner.username}</span>
         </div>
         <button className="chat-close-btn" onClick={handleClose}>Cerrar</button>
       </div>
