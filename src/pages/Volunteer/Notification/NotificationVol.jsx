@@ -32,12 +32,12 @@ export default function NotificationsVol() {
       {loading && <p>Cargando...</p>}
       {!loading && notifications.length === 0 && <p>No tienes notificaciones</p>}
       <ul>
-        {notifications.map(n => (
-          <li key={n._id} className={!n.isRead ? 'unread' : ''}>
-            {n.message}
-            <small>{new Date(n.createdAt).toLocaleString()}</small>
-          </li>
-        ))}
+      {notifications.map(n => (
+        <li key={n._id} className={!n.isRead ? 'unread' : ''}>
+          <strong>{n.relatedUser?.username || "Usuario"}:</strong> {n.message}
+          <small>{new Date(n.createdAt).toLocaleString()}</small>
+        </li>
+      ))}
       </ul>
       {notifications.length > 0 && (
         <button onClick={fetchNotifications}>Recargar</button>
