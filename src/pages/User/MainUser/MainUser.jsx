@@ -183,8 +183,8 @@ export default function MainUser() {
           </div>
 
           <div className="tarjeta">
-            <h3>Sesión Anterior</h3>
-            <p>Fecha: 05/06/2025</p>
+            <h3>Proxima Sesion</h3>
+            <p>Fecha: 05/07/2025</p>
             <p>Duración: 40 minutos</p>
             <p>Usuario: Luis Rodríguez</p>
             <Link to="/calendar-user"><button>Ver</button></Link>
